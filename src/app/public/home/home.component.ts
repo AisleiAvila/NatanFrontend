@@ -68,10 +68,14 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  requestService(service: Service): void {
-    this.router.navigate(["/client/request-service"], {
-      queryParams: { serviceId: service.id },
-    });
+  requestService(service?: Service): void {
+    if (service) {
+      this.router.navigate(["/client/request-service"], {
+        queryParams: { serviceId: service.id },
+      });
+    } else {
+      this.router.navigate(["/client/request-service"]);
+    }
   }
 
   viewAllServices(): void {
@@ -84,5 +88,9 @@ export class HomeComponent implements OnInit {
       "Olá! Gostaria de solicitar um orçamento."
     );
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+  }
+
+  goToContact(): void {
+    this.router.navigate(["/client/request-service"]);
   }
 }
