@@ -8,21 +8,24 @@ import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { LoginComponent } from "./login.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { LoginRoutingModule } from "./login-routing.module";
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule,
+    LoginRoutingModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     TranslateModule,
   ],
 })

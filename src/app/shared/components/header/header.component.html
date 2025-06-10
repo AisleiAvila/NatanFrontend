@@ -25,6 +25,9 @@
       <button mat-button routerLink="/home/contact" routerLinkActive="active">
         {{ translate("nav.contact") }}
       </button>
+      <button mat-button routerLink="/how-it-works" routerLinkActive="active">
+        {{ translate("header.how_it_works") }}
+      </button>
     </div>
 
     <!-- Right Section -->
@@ -100,6 +103,10 @@
         <button mat-menu-item routerLink="/home/contact">
           <mat-icon>contact_mail</mat-icon>
           <span>{{ translate("nav.contact") }}</span>
+        </button>
+        <button mat-menu-item routerLink="/how-it-works">
+          <mat-icon>info</mat-icon>
+          <span>{{ translate("header.how_it_works") }}</span>
         </button>
       </mat-menu>
     </div>

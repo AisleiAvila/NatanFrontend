@@ -344,6 +344,32 @@
     display: none;
   }
 
+  .service-card {
+    min-width: 320px;
+    max-width: 340px;
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    .services-carousel {
+      gap: 16px;
+    }
+    .service-card {
+      min-width: 260px;
+      max-width: 90vw;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .services-carousel {
+      gap: 12px;
+    }
+    .service-card {
+      min-width: 90vw;
+      max-width: 95vw;
+    }
+  }
+
   .carousel-arrow {
     background: #fff;
     border: none;
@@ -440,8 +466,10 @@
   border-radius: 20px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   padding: 40px 32px;
-  margin: 48px auto 0 auto;
-  max-width: 900px;
+  margin: 48px auto 64px auto;
+  max-width: 1200px;
+  width: 100vw;
+  min-width: 0;
 }
 
 .improved-about-content {
@@ -720,6 +748,109 @@
   display: flex;
   justify-content: center;
   padding: 3rem 0;
+}
+
+// Download App Section
+.download-app-section {
+  width: 100vw;
+  margin: 0 -16px 48px -16px;
+  display: flex;
+  justify-content: center;
+  background: #f5f5f5;
+  padding: 0;
+}
+
+.download-app-card {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 24px;
+  box-shadow: 0 6px 32px rgba(25, 118, 210, 0.1);
+  padding: 40px 32px;
+  background: linear-gradient(135deg, #fff 80%, #e3f2fd 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.download-app-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.download-app-text {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.download-app-text h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1976d2;
+}
+
+.store-cards {
+  display: flex;
+  gap: 24px;
+}
+
+.store-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  background: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.store-card:hover {
+  box-shadow: 0 6px 18px rgba(25, 118, 210, 0.16);
+}
+.google-play mat-icon {
+  color: #43a047;
+  font-size: 2rem;
+}
+.apple-store mat-icon {
+  color: #222;
+  font-size: 2rem;
+}
+
+.download-app-image {
+  flex: 1 1 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.download-app-image img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(25, 118, 210, 0.1);
+}
+
+@media (max-width: 900px) {
+  .download-app-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .download-app-text {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 // Responsive Design

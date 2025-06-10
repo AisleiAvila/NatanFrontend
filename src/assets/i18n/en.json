@@ -35,7 +35,8 @@
     "demo": {
       "title": "Demo Accounts",
       "subtitle": "Click on an account to automatically log in"
-    }
+    },
+    "logout_success": "Logged out successfully!"
   },
   "roles": {
     "client": "Client",
@@ -62,10 +63,10 @@
     "learn_more": "Learn More",
     "about": {
       "title": "About Natan Construction",
-      "description": "With years of experience in the market, we connect clients to qualified providers, ensuring quality and trust in every project.",
-      "feature1": "Verified Providers",
-      "feature2": "24/7 Support",
-      "feature3": "Satisfaction Guaranteed"
+      "description": "Natan Construction connects clients with experienced professionals, offering complete solutions in construction, renovation, and maintenance. We are committed to quality, transparency, and personalized service.",
+      "feature1": "Certified and Reviewed Professionals",
+      "feature2": "Fast Response & 24h Support",
+      "feature3": "Satisfaction Guarantee on All Services"
     },
     "cta": {
       "title": "Ready to Start Your Project?",
@@ -305,7 +306,7 @@
     "step3": {
       "title": "Service Details",
       "service_details": "Project Details",
-      "description": "Provide information about location and required work",
+      "intro": "Provide information about location and required work",
       "region": "Region",
       "location": "Location",
       "location_placeholder": "Complete address of service location",
@@ -386,5 +387,8 @@
     "close": "Close",
     "error_loading_data": "Error loading data",
     "error_occurred": "An error occurred"
+  },
+  "header": {
+    "how_it_works": "How it works?"
   }
 }

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { AuthService, User } from "../../core/services/auth.service";
 import { Observable } from "rxjs";
 import { TranslationService } from "../../core/services/translation.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-header",
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private snackBar: MatSnackBar
   ) {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
   }
@@ -48,6 +50,11 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.snackBar.open(
+      this.translate("auth.logout_success"),
+      this.translate("common.close"),
+      { duration: 3000 }
+    );
     this.router.navigate(["/"]);
   }
 

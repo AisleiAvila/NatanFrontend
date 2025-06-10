@@ -93,7 +93,13 @@
           <h2 class="about-title">
             {{ translate.translate("home.about.title") }}
           </h2>
-          <h4 class="about-subtitle">
+          <h4
+            class="about-subtitle"
+            *ngIf="
+              translate.translate('home.about.subtitle') !==
+              'home.about.subtitle'
+            "
+          >
             {{ translate.translate("home.about.subtitle") }}
           </h4>
           <p class="about-description">
@@ -116,5 +122,41 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Download App Section -->
+  <section class="download-app-section">
+    <mat-card class="download-app-card">
+      <div class="download-app-content">
+        <div class="download-app-text">
+          <h2>Faça o download do nosso aplicativo</h2>
+          <div class="store-cards">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.natan.app"
+              target="_blank"
+              rel="noopener"
+            >
+              <mat-card class="store-card google-play">
+                <mat-icon>android</mat-icon>
+                <span>Disponível na Google Play</span>
+              </mat-card>
+            </a>
+            <a
+              href="https://apps.apple.com/app/id0000000000"
+              target="_blank"
+              rel="noopener"
+            >
+              <mat-card class="store-card apple-store">
+                <mat-icon>apple</mat-icon>
+                <span>Disponível na Apple Store</span>
+              </mat-card>
+            </a>
+          </div>
+        </div>
+        <div class="download-app-image">
+          <img src="assets/images/App_Natan.png" alt="Celular App Natan" />
+        </div>
+      </div>
+    </mat-card>
   </section>
 </div>

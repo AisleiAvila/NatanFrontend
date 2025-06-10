@@ -36,7 +36,8 @@
     "demo": {
       "title": "Contas de Demonstração",
       "subtitle": "Clique numa conta para fazer login automaticamente"
-    }
+    },
+    "logout_success": "Sessão terminada com sucesso!"
   },
   "roles": {
     "client": "Cliente",
@@ -63,10 +64,10 @@
     "learn_more": "Saber Mais",
     "about": {
       "title": "Sobre a Natan Construtora",
-      "description": "Com anos de experiência no mercado, conectamos clientes a prestadores qualificados, garantindo qualidade e confiança em cada projeto.",
-      "feature1": "Prestadores Verificados",
-      "feature2": "Suporte 24/7",
-      "feature3": "Satisfação Garantida"
+      "description": "A Natan Construtora conecta clientes a profissionais experientes, oferecendo soluções completas em construção, remodelação e manutenção. Nosso compromisso é qualidade, transparência e atendimento personalizado.",
+      "feature1": "Profissionais Certificados e Avaliados",
+      "feature2": "Atendimento Rápido e Suporte 24h",
+      "feature3": "Garantia de Satisfação em Todos os Serviços"
     },
     "cta": {
       "title": "Pronto para Começar o seu Projeto?",
@@ -310,7 +311,7 @@
       "region": "Região",
       "location": "Localização",
       "location_placeholder": "Morada completa do local do serviço",
-      "description": "Descrição do Trabalho",
+      "job_description": "Descrição do Trabalho",
       "description_placeholder": "Descreva detalhadamente o trabalho necessário...",
       "preferred_dates": "Datas Preferenciais",
       "preferred_dates_help": "Selecione até 3 datas de preferência",
@@ -387,5 +388,8 @@
     "close": "Fechar",
     "error_loading_data": "Erro ao carregar dados",
     "error_occurred": "Ocorreu um erro"
+  },
+  "header": {
+    "how_it_works": "Como funciona?"
   }
 }

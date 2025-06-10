@@ -75,6 +75,13 @@
       </ng-container>
     </nav>
 
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+      <a routerLink="/how-it-works">
+        {{ translate("header.how_it_works") }}
+      </a>
+    </nav>
+
     <!-- User Actions -->
     <div class="user-actions">
       <!-- Language Toggle -->
@@ -117,14 +124,14 @@
       </div>
 
       <!-- Login Button (when not logged in) -->
-      <a
+      <button
         mat-raised-button
         color="accent"
-        routerLink="/auth/login"
         *ngIf="!currentUser"
+        (click)="goToLogin()"
       >
         {{ translate("nav.login") }}
-      </a>
+      </button>
     </div>
   </div>
 </mat-toolbar>
