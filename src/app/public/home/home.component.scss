@@ -189,27 +189,36 @@
   }
 
   .service-card {
-    border-radius: 12px;
+    border-radius: 18px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1),
+      box-shadow 0.3s cubic-bezier(0.4, 2, 0.6, 1);
+    background: linear-gradient(135deg, #fff 80%, #e3f2fd 100%);
+    box-shadow: 0 6px 24px rgba(25, 118, 210, 0.1);
+    border: 1.5px solid #e3f2fd;
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(25, 118, 210, 0.18);
+      border-color: #90caf9;
     }
 
     .service-image-container {
       position: relative;
-      height: 200px;
+      height: 180px;
       overflow: hidden;
+      border-bottom: 1px solid #e3f2fd;
 
       .service-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1);
+        border-radius: 0;
       }
 
       .service-overlay {
@@ -218,22 +227,22 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(25, 118, 210, 0.6);
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.3s cubic-bezier(0.4, 2, 0.6, 1);
 
         button {
           transform: translateY(20px);
-          transition: transform 0.3s ease;
+          transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1);
         }
       }
 
       &:hover {
         .service-image {
-          transform: scale(1.1);
+          transform: scale(1.08);
         }
 
         .service-overlay {
@@ -247,7 +256,11 @@
     }
 
     mat-card-content {
-      padding: 1.5rem;
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       .service-header {
         display: flex;
@@ -257,9 +270,10 @@
 
         h3 {
           margin: 0;
-          font-size: 1.5rem;
+          font-size: 1.35rem;
           color: #1976d2;
-          font-weight: 600;
+          font-weight: 700;
+          letter-spacing: 0.5px;
         }
 
         .service-price {
@@ -268,29 +282,35 @@
           align-items: flex-end;
 
           .price {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: #1976d2;
           }
 
           .duration {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.95rem;
+            color: #1976d2;
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 2px 8px;
+            margin-top: 2px;
           }
         }
       }
 
       .service-description {
-        color: #666;
-        margin-bottom: 1rem;
+        color: #444;
+        margin-bottom: 1.1rem;
         line-height: 1.6;
+        font-size: 1.05rem;
+        min-height: 48px;
       }
 
       .service-regions {
         display: flex;
         align-items: center;
-        color: #666;
-        font-size: 0.9rem;
+        color: #1976d2;
+        font-size: 0.98rem;
 
         mat-icon {
           font-size: 1.2rem;
@@ -298,6 +318,71 @@
           color: #1976d2;
         }
       }
+    }
+  }
+
+  .services-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin: 0 auto 2rem auto;
+  }
+
+  .services-carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+  }
+  .services-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-arrow {
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    margin: 0 8px;
+  }
+  .carousel-arrow:hover {
+    background: #e3f2fd;
+    box-shadow: 0 4px 16px rgba(25, 118, 210, 0.18);
+  }
+  .carousel-arrow.left {
+    left: 0;
+  }
+  .carousel-arrow.right {
+    right: 0;
+  }
+
+  @media (max-width: 900px) {
+    .services-carousel-wrapper {
+      padding: 0 8px;
+    }
+    .carousel-arrow {
+      width: 38px;
+      height: 38px;
+      font-size: 1.5rem;
+    }
+    .services-carousel {
+      gap: 16px;
     }
   }
 }
@@ -346,6 +431,87 @@
       height: auto;
       border-radius: 8px;
     }
+  }
+}
+
+// Improved About Section
+.improved-about-section {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 40px 32px;
+  margin: 48px auto 0 auto;
+  max-width: 900px;
+}
+
+.improved-about-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.improved-about-image {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-logo {
+  max-width: 120px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.improved-about-text {
+  flex: 1 1 300px;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.about-subtitle {
+  font-size: 1.2rem;
+  color: #1976d2;
+  margin-bottom: 1rem;
+}
+
+.about-description {
+  margin-bottom: 1.5rem;
+}
+
+.improved-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.improved-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 800px) {
+  .improved-about-content {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  .improved-about-image {
+    justify-content: center;
+  }
+  .improved-about-text {
+    width: 100%;
   }
 }
 

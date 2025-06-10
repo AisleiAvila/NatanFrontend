@@ -93,4 +93,18 @@ export class HomeComponent implements OnInit {
   goToContact(): void {
     this.router.navigate(["/client/request-service"]);
   }
+
+  scrollServices(direction: "left" | "right") {
+    const carousel = document.querySelector(
+      ".services-carousel"
+    ) as HTMLElement;
+    if (!carousel) return;
+    const card = carousel.querySelector(".service-card") as HTMLElement;
+    const scrollAmount = card ? card.offsetWidth + 24 : 320;
+    if (direction === "left") {
+      carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    } else {
+      carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  }
 }

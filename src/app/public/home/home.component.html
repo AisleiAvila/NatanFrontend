@@ -25,72 +25,94 @@
   <section id="services" class="services-section">
     <div class="container">
       <h2>{{ translate.translate("home.featured_services.title") }}</h2>
-      <p>{{ translate.translate("home.featured_services.subtitle") }}</p>
+      <!-- <p>{{ translate.translate("home.featured_services.subtitle") }}</p> -->
 
-      <div class="services-grid">
-        <mat-card class="service-card" *ngFor="let service of services">
-          <div class="service-image-container">
-            <img
-              [src]="service.image"
-              [alt]="service.name"
-              class="service-image"
-            />
-            <div class="service-overlay">
-              <button
-                mat-raised-button
-                color="primary"
-                (click)="requestService(service)"
-              >
-                {{ translate.translate("home.request_quote") }}
-              </button>
-            </div>
-          </div>
-          <mat-card-content>
-            <div class="service-header">
-              <h3>{{ service.name }}</h3>
-              <div class="service-price">
-                <span class="price">€{{ service.price }}/h</span>
-                <span class="duration">{{ service.duration }}min</span>
+      <div class="services-carousel-wrapper">
+        <button class="carousel-arrow left" (click)="scrollServices('left')">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <div class="services-carousel" #carousel>
+          <mat-card class="service-card" *ngFor="let service of services">
+            <div class="service-image-container">
+              <img
+                [src]="service.image"
+                [alt]="service.name"
+                class="service-image"
+              />
+              <div class="service-overlay">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="requestService(service)"
+                >
+                  {{ translate.translate("home.request_quote") }}
+                </button>
               </div>
             </div>
-            <p class="service-description">{{ service.description }}</p>
-            <div class="service-regions">
-              <mat-icon>location_on</mat-icon>
-              <span>{{ service.regions.join(", ") }}</span>
-            </div>
-          </mat-card-content>
-        </mat-card>
+            <mat-card-content>
+              <div class="service-header">
+                <h3>{{ service.name }}</h3>
+                <div class="service-price">
+                  <span class="price">€{{ service.price }}/h</span>
+                  <span class="duration">{{ service.duration }}min</span>
+                </div>
+              </div>
+              <p class="service-description">{{ service.description }}</p>
+              <div class="service-regions">
+                <mat-icon>location_on</mat-icon>
+                <span>{{ service.regions.join(", ") }}</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <button class="carousel-arrow right" (click)="scrollServices('right')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="about-section">
+  <section id="about" class="about-section improved-about-section">
     <div class="container">
-      <div class="about-content">
-        <div class="about-text">
-          <h2>{{ translate.translate("home.about.title") }}</h2>
-          <p>{{ translate.translate("home.about.description") }}</p>
-          <ul class="features-list">
+      <div class="about-content improved-about-content">
+        <div class="about-image improved-about-image">
+          <img
+            src="assets/images/Logo_Natan.png"
+            alt="Natan Construtora Logo"
+            class="about-logo"
+            style="
+              max-width: 120px;
+              margin-bottom: 16px;
+              border-radius: 12px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            "
+          />
+        </div>
+        <div class="about-text improved-about-text">
+          <h2 class="about-title">
+            {{ translate.translate("home.about.title") }}
+          </h2>
+          <h4 class="about-subtitle">
+            {{ translate.translate("home.about.subtitle") }}
+          </h4>
+          <p class="about-description">
+            <!-- Texto removido conforme solicitado -->
+          </p>
+          <ul class="features-list improved-features-list">
             <li>
-              <mat-icon>check_circle</mat-icon>
-              {{ translate.translate("home.about.feature1") }}
+              <mat-icon color="primary">check_circle</mat-icon>
+              <span>{{ translate.translate("home.about.feature1") }}</span>
             </li>
             <li>
-              <mat-icon>check_circle</mat-icon>
-              {{ translate.translate("home.about.feature2") }}
+              <mat-icon color="primary">check_circle</mat-icon>
+              <span>{{ translate.translate("home.about.feature2") }}</span>
             </li>
             <li>
-              <mat-icon>check_circle</mat-icon>
-              {{ translate.translate("home.about.feature3") }}
+              <mat-icon color="primary">check_circle</mat-icon>
+              <span>{{ translate.translate("home.about.feature3") }}</span>
             </li>
           </ul>
-        </div>
-        <div class="about-image">
-          <img
-            src="assets/images/hero-construction.svg"
-            alt="Natan Construtora"
-          />
         </div>
       </div>
     </div>
