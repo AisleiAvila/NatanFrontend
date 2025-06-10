@@ -1,12 +1,19 @@
 .request-service-container {
   min-height: 100vh;
   background: #f5f7fa;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 16px;
+  position: relative;
+  width: 100%;
 }
 
 // Header
@@ -14,28 +21,31 @@
   background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
   color: white;
   padding: 2rem 0;
-  
+  position: relative;
+  z-index: 1;
+  width: 100%;
+
   .header-content {
     display: flex;
     align-items: center;
     gap: 1rem;
-    
+
     .back-btn {
       background: rgba(255, 255, 255, 0.1);
       color: white;
-      
+
       &:hover {
         background: rgba(255, 255, 255, 0.2);
       }
     }
-    
+
     .header-text {
       h1 {
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
       }
-      
+
       p {
         font-size: 1.1rem;
         opacity: 0.9;
@@ -48,10 +58,14 @@
 // Stepper Content
 .stepper-content {
   padding: 3rem 0;
-  
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  flex: 1;
+
   mat-stepper {
     background: transparent;
-    
+
     .mat-stepper-header {
       padding: 1rem;
       border-radius: 8px;
@@ -65,16 +79,16 @@
   background: white;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
-  
+
   h2 {
     font-size: 1.8rem;
     font-weight: 600;
     color: #333;
     margin-bottom: 0.5rem;
   }
-  
+
   p {
     color: #666;
     margin-bottom: 2rem;
@@ -96,26 +110,26 @@
   transition: all 0.3s ease;
   position: relative;
   border: 2px solid transparent;
-  
+
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
-  
+
   &.selected {
     border-color: #1976d2;
     background: #f3f8ff;
   }
-  
+
   .service-image {
     position: relative;
-    
+
     img {
       height: 180px;
       object-fit: cover;
       width: 100%;
     }
-    
+
     .service-price {
       position: absolute;
       top: 1rem;
@@ -128,39 +142,39 @@
       font-size: 0.9rem;
     }
   }
-  
+
   h3 {
     font-size: 1.3rem;
     font-weight: 600;
     color: #333;
     margin-bottom: 0.5rem;
   }
-  
+
   p {
     color: #666;
     line-height: 1.5;
     margin-bottom: 1rem;
   }
-  
+
   .service-meta {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    
+
     span {
       display: flex;
       align-items: center;
       gap: 0.25rem;
       color: #666;
       font-size: 0.9rem;
-      
+
       mat-icon {
         font-size: 1rem;
         color: #ff9800;
       }
     }
   }
-  
+
   .service-radio {
     position: absolute;
     top: 1rem;
@@ -174,7 +188,7 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
-  
+
   .full-width {
     grid-column: 1 / -1;
   }
@@ -183,11 +197,11 @@
 // NIF Section
 .nif-section {
   margin: 1.5rem 0;
-  
+
   mat-checkbox {
     margin-bottom: 1rem;
   }
-  
+
   mat-form-field {
     width: 100%;
     max-width: 300px;
@@ -197,29 +211,29 @@
 // Preferred Dates Section
 .preferred-dates-section {
   margin: 2rem 0;
-  
+
   h4 {
     color: #333;
     margin-bottom: 0.5rem;
   }
-  
+
   p {
     color: #666;
     font-size: 0.9rem;
     margin-bottom: 1rem;
   }
-  
+
   .date-picker-section {
     margin-bottom: 1rem;
-    
+
     mat-form-field {
       max-width: 300px;
     }
   }
-  
+
   .selected-dates {
     margin-bottom: 1rem;
-    
+
     mat-chip {
       margin-right: 0.5rem;
       margin-bottom: 0.5rem;
@@ -230,68 +244,68 @@
 // File Upload Section
 .file-upload-section {
   margin: 2rem 0;
-  
+
   h4 {
     color: #333;
     margin-bottom: 0.5rem;
   }
-  
+
   p {
     color: #666;
     font-size: 0.9rem;
     margin-bottom: 1rem;
   }
-  
+
   .upload-area {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
-    
+
     button {
       border-radius: 8px;
-      
+
       mat-icon {
         margin-right: 8px;
       }
     }
-    
+
     .file-limit {
       color: #666;
       font-size: 0.8rem;
     }
   }
-  
+
   .uploaded-files {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 1rem;
-    
+
     .file-item {
       display: flex;
       align-items: center;
       gap: 1rem;
       padding: 0.5rem 0;
       border-bottom: 1px solid #f0f0f0;
-      
+
       &:last-child {
         border-bottom: none;
       }
-      
+
       mat-icon:first-child {
         color: #1976d2;
       }
-      
+
       .file-info {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        
+
         .file-name {
           font-weight: 500;
           color: #333;
         }
-        
+
         .file-size {
           font-size: 0.8rem;
           color: #666;
@@ -304,12 +318,12 @@
 // Terms Section
 .terms-section {
   margin: 2rem 0;
-  
+
   mat-checkbox {
     a {
       color: #1976d2;
       text-decoration: none;
-      
+
       &:hover {
         text-decoration: underline;
       }
@@ -323,24 +337,24 @@
   justify-content: space-between;
   gap: 1rem;
   margin-top: 2rem;
-  
+
   button {
     border-radius: 8px;
     padding: 12px 24px;
     font-weight: 600;
-    
+
     mat-icon {
       font-size: 1.1rem;
     }
-    
+
     &:first-child mat-icon {
       margin-right: 8px;
     }
-    
+
     &:last-child mat-icon {
       margin-left: 8px;
     }
-    
+
     mat-spinner {
       margin-right: 8px;
     }
@@ -356,23 +370,23 @@
       }
     }
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .step-actions {
     flex-direction: column;
-    
+
     button {
       width: 100%;
     }
   }
-  
+
   .upload-area {
     flex-direction: column;
     align-items: flex-start;

@@ -1,36 +1,29 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { SharedModule } from "../shared/shared.module";
+import { HomeModule } from "./home/home.module";
 
 // Components
-import { HomeComponent } from './home/home.component';
-import { ServicesComponent } from './services/services.component';
-import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from "./services/services.component";
+import { ContactComponent } from "./contact/contact.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent
+    path: "",
+    loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
   },
   {
-    path: 'services',
-    component: ServicesComponent
+    path: "services",
+    component: ServicesComponent,
   },
   {
-    path: 'contact',
-    component: ContactComponent
-  }
+    path: "contact",
+    component: ContactComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    ServicesComponent,
-    ContactComponent
-  ],
-  imports: [
-    SharedModule,
-    RouterModule.forChild(routes)
-  ]
+  declarations: [ServicesComponent, ContactComponent],
+  imports: [SharedModule, RouterModule.forChild(routes), HomeModule],
 })
-export class PublicModule { }
+export class PublicModule {}

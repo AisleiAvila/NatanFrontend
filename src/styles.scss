@@ -1,3 +1,25 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$primary-palette: mat.define-palette(mat.$indigo-palette);
+$accent-palette: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      accent: $accent-palette,
+      warn: $warn-palette,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($theme);
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -5,27 +27,71 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  overflow-y: auto;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #f5f5f5;
   color: #333;
+  position: relative;
+  min-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  width: 100%;
+  overflow-y: auto;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
+  position: relative;
+  width: 100%;
 }
 
 /* Utility classes */
-.text-center { text-align: center; }
-.text-primary { color: #1976d2; }
-.text-accent { color: #ff4081; }
-.mt-16 { margin-top: 16px; }
-.mb-16 { margin-bottom: 16px; }
+.text-center {
+  text-align: center;
+}
+.text-primary {
+  color: #1976d2;
+}
+.text-accent {
+  color: #ff4081;
+}
+.mt-16 {
+  margin-top: 16px;
+}
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

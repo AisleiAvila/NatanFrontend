@@ -1,157 +1,177 @@
 <div class="home-container">
   <!-- Hero Section -->
   <section class="hero-section">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="hero-title">{{ translate('home.hero.title') }}</h1>
-        <p class="hero-subtitle">{{ translate('home.hero.subtitle') }}</p>
+    <div class="container">
+      <div class="hero-content">
+        <h1>{{ translate.translate("home.hero.title") }}</h1>
+        <p>{{ translate.translate("home.hero.subtitle") }}</p>
         <div class="hero-actions">
-          <button mat-raised-button color="accent" class="cta-button" (click)="requestService()">
-            <mat-icon>build</mat-icon>
-            {{ translate('home.hero.request_service') }}
+          <button mat-raised-button color="primary" routerLink="/auth/register">
+            {{ translate.translate("home.hero.request_service") }}
           </button>
-          <button mat-stroked-button color="primary" class="secondary-button" (click)="openWhatsApp()">
-            <i class="fab fa-whatsapp"></i>
-            {{ translate('home.hero.whatsapp') }}
+          <button
+            mat-stroked-button
+            color="primary"
+            routerLink="/home/services"
+          >
+            {{ translate.translate("home.hero.whatsapp") }}
           </button>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://pixabay.com/get/g7ea7abc73e93ac2da4c5c77eb788219c7422fef45ae190c0bdc6ba36a90a0958ddadee6c49fe4fe480464c98d6d7bd8cc32627cc329a71c6a1478ba15ff91807_1280.jpg" 
-             alt="Construction Services" class="hero-img">
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="stats-section">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card" *ngFor="let stat of stats">
-          <mat-icon class="stat-icon">{{ stat.icon }}</mat-icon>
-          <div class="stat-value">{{ stat.value }}</div>
-          <div class="stat-label">{{ translate(stat.key) }}</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured Services Section -->
-  <section class="services-section">
+  <!-- Services Section -->
+  <section id="services" class="services-section">
     <div class="container">
-      <div class="section-header">
-        <h2>{{ translate('home.featured_services.title') }}</h2>
-        <p>{{ translate('home.featured_services.subtitle') }}</p>
-      </div>
+      <h2>{{ translate.translate("home.featured_services.title") }}</h2>
+      <p>{{ translate.translate("home.featured_services.subtitle") }}</p>
 
-      <div class="services-grid" *ngIf="!loading">
-        <mat-card class="service-card" *ngFor="let service of featuredServices">
-          <div class="service-image">
-            <img [src]="service.image" [alt]="service.name" mat-card-image>
-            <div class="service-price">€{{ service.price }}/h</div>
-          </div>
+      <div class="services-grid">
+        <mat-card class="service-card" *ngFor="let service of services">
+          <img [src]="service.image" [alt]="service.name" />
           <mat-card-content>
             <h3>{{ service.name }}</h3>
             <p>{{ service.description }}</p>
             <div class="service-meta">
-              <span class="duration">
-                <mat-icon>schedule</mat-icon>
-                {{ service.duration }}min
-              </span>
-              <span class="regions">
-                <mat-icon>location_on</mat-icon>
-                {{ service.regions.join(', ') }}
-              </span>
+              <span class="price">€{{ service.price }}/h</span>
+              <span class="duration">{{ service.duration }}min</span>
+            </div>
+            <div class="service-regions">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ service.regions.join(", ") }}</span>
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button color="primary" (click)="requestService()">
-              {{ translate('home.request_quote') }}
+            <button
+              mat-button
+              color="primary"
+              (click)="requestService(service)"
+            >
+              {{ translate.translate("home.request_quote") }}
             </button>
           </mat-card-actions>
         </mat-card>
       </div>
-
-      <div class="loading-container" *ngIf="loading">
-        <mat-spinner></mat-spinner>
-      </div>
-
-      <div class="section-actions">
-        <button mat-stroked-button color="primary" (click)="viewAllServices()">
-          {{ translate('home.view_all_services') }}
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
-      </div>
     </div>
   </section>
 
-  <!-- Service Areas Section -->
-  <section class="areas-section">
+  <!-- About Section -->
+  <section id="about" class="about-section">
     <div class="container">
-      <div class="section-header">
-        <h2>{{ translate('home.service_areas.title') }}</h2>
-        <p>{{ translate('home.service_areas.subtitle') }}</p>
-      </div>
-
-      <div class="areas-grid">
-        <div class="area-card" *ngFor="let area of serviceAreas" [style.--area-color]="area.color">
-          <div class="area-icon">
-            <mat-icon>{{ area.icon }}</mat-icon>
-          </div>
-          <h3>{{ area.name }}</h3>
-          <p>{{ translate(area.description) }}</p>
-          <button mat-button color="primary">
-            {{ translate('home.learn_more') }}
-          </button>
+      <div class="about-content">
+        <div class="about-text">
+          <h2>{{ translate.translate("home.about.title") }}</h2>
+          <p>{{ translate.translate("home.about.description") }}</p>
+          <ul class="features-list">
+            <li>
+              <mat-icon>check_circle</mat-icon>
+              {{ translate.translate("home.about.feature1") }}
+            </li>
+            <li>
+              <mat-icon>check_circle</mat-icon>
+              {{ translate.translate("home.about.feature2") }}
+            </li>
+            <li>
+              <mat-icon>check_circle</mat-icon>
+              {{ translate.translate("home.about.feature3") }}
+            </li>
+          </ul>
+        </div>
+        <div class="about-image">
+          <img
+            src="https://placehold.co/800x600/1976d2/ffffff?text=Natan+Construtora"
+            alt="Natan Construtora"
+          />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Company Info Section -->
-  <section class="company-section">
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
     <div class="container">
-      <div class="company-content">
-        <div class="company-text">
-          <h2>{{ translate('home.about.title') }}</h2>
-          <p>{{ translate('home.about.description') }}</p>
-          <div class="company-features">
-            <div class="feature">
-              <mat-icon color="accent">verified_user</mat-icon>
-              <span>{{ translate('home.about.feature1') }}</span>
-            </div>
-            <div class="feature">
-              <mat-icon color="accent">support_agent</mat-icon>
-              <span>{{ translate('home.about.feature2') }}</span>
-            </div>
-            <div class="feature">
-              <mat-icon color="accent">thumb_up</mat-icon>
-              <span>{{ translate('home.about.feature3') }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="company-image">
-          <img src="https://pixabay.com/get/g73cf4d8159b86097b91dc88eba21c1fbfaebea8ac47ad6a9592a71b352bc14534d04c87e59857862498a32b29be9cf864c62c79211f990db4aeccb474b9da004_1280.jpg" 
-               alt="Construction Workers" class="company-img">
-        </div>
-      </div>
-    </div>
-  </section>
+      <h2>{{ translate.translate("contact.title") }}</h2>
+      <p>{{ translate.translate("contact.subtitle") }}</p>
 
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2>{{ translate('home.cta.title') }}</h2>
-        <p>{{ translate('home.cta.subtitle') }}</p>
-        <div class="cta-actions">
-          <button mat-raised-button color="accent" class="cta-button" (click)="requestService()">
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
             <mat-icon>phone</mat-icon>
-            {{ translate('home.cta.get_quote') }}
-          </button>
-          <button mat-stroked-button color="primary" routerLink="/home/contact">
-            {{ translate('home.cta.contact_us') }}
-          </button>
+            <div>
+              <h3>{{ translate.translate("contact.info.phone") }}</h3>
+              <p>{{ translate.translate("contact.info.quick_contact") }}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <mat-icon>email</mat-icon>
+            <div>
+              <h3>{{ translate.translate("contact.info.email") }}</h3>
+              <p>{{ translate.translate("contact.info.instant_support") }}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <mat-icon>location_on</mat-icon>
+            <div>
+              <h3>{{ translate.translate("contact.info.address") }}</h3>
+              <p>{{ translate.translate("contact.info.business_hours") }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                translate.translate("contact.form.name")
+              }}</mat-label>
+              <input matInput formControlName="name" required />
+              <mat-error *ngIf="contactForm.get('name')?.errors?.['required']">
+                {{ translate.translate("validation.required") }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                translate.translate("contact.form.email")
+              }}</mat-label>
+              <input matInput type="email" formControlName="email" required />
+              <mat-error *ngIf="contactForm.get('email')?.errors?.['required']">
+                {{ translate.translate("validation.required") }}
+              </mat-error>
+              <mat-error *ngIf="contactForm.get('email')?.errors?.['email']">
+                {{ translate.translate("validation.email") }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                translate.translate("contact.form.message")
+              }}</mat-label>
+              <textarea
+                matInput
+                formControlName="message"
+                rows="4"
+                required
+              ></textarea>
+              <mat-error
+                *ngIf="contactForm.get('message')?.errors?.['required']"
+              >
+                {{ translate.translate("validation.required") }}
+              </mat-error>
+            </mat-form-field>
+
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!contactForm.valid"
+            >
+              {{ translate.translate("contact.form.send") }}
+            </button>
+          </form>
         </div>
       </div>
     </div>
