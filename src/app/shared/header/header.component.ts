@@ -63,4 +63,8 @@ export class HeaderComponent implements OnInit {
       this.router.navigate([`/${this.currentUser.role}/profile`]);
     }
   }
+
+  goToLogin(): void {
+    this.router.navigate(["/auth/login"]);
+  }
 }

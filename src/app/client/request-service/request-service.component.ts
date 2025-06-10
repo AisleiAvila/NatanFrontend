@@ -29,6 +29,8 @@ export class RequestServiceComponent implements OnInit {
 
   isSubmitting = false;
   isLinear = true;
+  showNextSteps = false;
+  showDetailsStep = false;
 
   // Configuration options
   regions = ["São Miguel", "Aveiro", "Coimbra"];
@@ -274,5 +276,16 @@ export class RequestServiceComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(["/client/dashboard"]);
+  }
+
+  goToNextStep(): void {
+    this.showNextSteps = true;
+    this.showDetailsStep = false;
+    this.stepper.next();
+  }
+
+  goToDetailsStep(): void {
+    this.showDetailsStep = true;
+    setTimeout(() => this.stepper.next(), 0);
   }
 }

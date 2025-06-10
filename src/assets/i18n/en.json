@@ -155,7 +155,7 @@
   },
   "client": {
     "welcome": "Welcome",
-    "dashboard_subtitle": "Track your requests and projects",
+    "dashboard_subtitle": "Track your service requests and quotes",
     "request_new_service": "New Request",
     "contact_support": "Support",
     "stats": {

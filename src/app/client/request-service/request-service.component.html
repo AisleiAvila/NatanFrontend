@@ -71,14 +71,14 @@
               </mat-error>
             </div>
 
-            <div class="step-actions">
+            <div class="step-actions" style="margin-bottom: 40px">
               <button
                 mat-raised-button
                 color="primary"
-                matStepperNext
                 [disabled]="!serviceSelectionForm.valid"
+                (click)="goToNextStep()"
               >
-                {{ translate("service_request.next") }}
+                {{ translate("services.request_quote") }}
                 <mat-icon>arrow_forward</mat-icon>
               </button>
             </div>
@@ -86,7 +86,10 @@
         </mat-step>
 
         <!-- Step 2: Client Information -->
-        <mat-step [stepControl]="clientInfoForm">
+        <mat-step
+          [stepControl]="clientInfoForm"
+          *ngIf="showNextSteps && !showDetailsStep"
+        >
           <form [formGroup]="clientInfoForm">
             <ng-template matStepLabel>{{
               translate("service_request.step2.title")
@@ -213,8 +216,8 @@
               <button
                 mat-raised-button
                 color="primary"
-                matStepperNext
                 [disabled]="!clientInfoForm.valid"
+                (click)="goToDetailsStep()"
               >
                 {{ translate("service_request.next") }}
                 <mat-icon>arrow_forward</mat-icon>
@@ -224,7 +227,7 @@
         </mat-step>
 
         <!-- Step 3: Service Details -->
-        <mat-step [stepControl]="serviceDetailsForm">
+        <mat-step [stepControl]="serviceDetailsForm" *ngIf="showDetailsStep">
           <form [formGroup]="serviceDetailsForm">
             <ng-template matStepLabel>{{
               translate("service_request.step3.title")

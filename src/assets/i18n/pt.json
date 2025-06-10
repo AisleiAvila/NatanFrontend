@@ -156,7 +156,7 @@
   },
   "client": {
     "welcome": "Bem-vindo",
-    "dashboard_subtitle": "Acompanhe os seus pedidos e projetos",
+    "dashboard_subtitle": "Acompanhe as suas solicitações de serviços e orçamentos",
     "request_new_service": "Novo Pedido",
     "contact_support": "Suporte",
     "stats": {

@@ -1,7 +1,7 @@
 // Components para a plataforma Natan Construtora
 
 function getServiceRequestForm() {
-    return `
+  return `
     <div style="min-height: 100vh; background: #f5f5f5; padding: 20px;">
         <div style="max-width: 800px; margin: 0 auto;">
             <div style="background: white; border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
@@ -149,17 +149,19 @@ function getServiceRequestForm() {
 }
 
 function getClientDashboard(user) {
-    const requests = natanApp.getServiceRequests();
-    const quotes = natanApp.quotes;
-    
-    return `
+  const requests = natanApp.getServiceRequests();
+  const quotes = natanApp.quotes;
+
+  return `
     <div style="min-height: 100vh; background: #f5f5f5;">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); color: white; padding: 20px 0;">
             <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
                     <h1 style="margin: 0; font-size: 1.8rem;">🏗️ Natan Construtora</h1>
-                    <p style="margin: 5px 0 0 0; opacity: 0.9;">Olá, ${user.name}!</p>
+                    <p style="margin: 5px 0 0 0; opacity: 0.9;">Olá, ${
+                      user.name
+                    }!</p>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <button onclick="showServiceRequestForm()" style="background: #ff5722; color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; font-weight: 600;">
@@ -181,19 +183,29 @@ function getClientDashboard(user) {
                 <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
                     <div style="font-size: 2.5rem; color: #ff9800; margin-bottom: 10px;">📋</div>
                     <h3 style="margin: 0; color: #333;">Solicitações Ativas</h3>
-                    <p style="font-size: 2rem; font-weight: 600; color: #ff9800; margin: 10px 0 0 0;">${requests.filter(r => r.status !== 'completed' && r.status !== 'cancelled').length}</p>
+                    <p style="font-size: 2rem; font-weight: 600; color: #ff9800; margin: 10px 0 0 0;">${
+                      requests.filter(
+                        (r) =>
+                          r.status !== "completed" && r.status !== "cancelled"
+                      ).length
+                    }</p>
                 </div>
                 
                 <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
                     <div style="font-size: 2.5rem; color: #2196f3; margin-bottom: 10px;">💰</div>
                     <h3 style="margin: 0; color: #333;">Orçamentos Pendentes</h3>
-                    <p style="font-size: 2rem; font-weight: 600; color: #2196f3; margin: 10px 0 0 0;">${quotes.filter(q => q.status === 'pending_approval').length}</p>
+                    <p style="font-size: 2rem; font-weight: 600; color: #2196f3; margin: 10px 0 0 0;">${
+                      quotes.filter((q) => q.status === "pending_approval")
+                        .length
+                    }</p>
                 </div>
                 
                 <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
                     <div style="font-size: 2.5rem; color: #4caf50; margin-bottom: 10px;">✅</div>
                     <h3 style="margin: 0; color: #333;">Serviços Concluídos</h3>
-                    <p style="font-size: 2rem; font-weight: 600; color: #4caf50; margin: 10px 0 0 0;">${requests.filter(r => r.status === 'completed').length}</p>
+                    <p style="font-size: 2rem; font-weight: 600; color: #4caf50; margin: 10px 0 0 0;">${
+                      requests.filter((r) => r.status === "completed").length
+                    }</p>
                 </div>
             </div>
 
@@ -248,36 +260,55 @@ function getClientDashboard(user) {
 }
 
 function generateRequestsList(requests, quotes) {
-    if (!requests.length) {
-        return `
+  if (!requests.length) {
+    return `
         <div style="text-align: center; padding: 40px; color: #666;">
             <div style="font-size: 4rem; margin-bottom: 20px;">📝</div>
             <h3>Nenhuma solicitação encontrada</h3>
             <p>Clique em "Novo Serviço" para solicitar seu primeiro orçamento</p>
         </div>
         `;
-    }
+  }
 
-    return requests.map(request => {
-        const quote = quotes.find(q => q.requestId === request.id);
-        const statusColor = natanApp.getStatusColor(request.status);
-        
-        return `
-        <div class="request-item" data-status="${request.status}" style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; margin-bottom: 15px; transition: all 0.3s;">
+  return requests
+    .map((request) => {
+      const quote = quotes.find((q) => q.requestId === request.id);
+      const statusColor = natanApp.getStatusColor(request.status);
+
+      return `
+        <div class="request-item" data-status="${
+          request.status
+        }" style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; margin-bottom: 15px; transition: all 0.3s;">
             <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;">
                 <div>
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
-                        <h3 style="margin: 0; color: #333;">${natanApp.services.find(s => s.id == request.serviceId)?.icon || '🔧'} ${request.serviceName}</h3>
+                        <h3 style="margin: 0; color: #333;">${
+                          natanApp.services.find(
+                            (s) => s.id == request.serviceId
+                          )?.icon || "🔧"
+                        } ${request.serviceName}</h3>
                         <span style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: 15px; font-size: 12px; font-weight: 600;">
                             ${getStatusText(request.status)}
                         </span>
                     </div>
                     
                     <div style="color: #666; line-height: 1.6;">
-                        <p style="margin: 5px 0;"><strong>Local:</strong> ${request.location}</p>
-                        <p style="margin: 5px 0;"><strong>Data:</strong> ${natanApp.formatDate(request.createdAt)}</p>
-                        <p style="margin: 5px 0;"><strong>Descrição:</strong> ${request.description}</p>
-                        ${quote ? `<p style="margin: 5px 0;"><strong>Orçamento:</strong> ${natanApp.formatCurrency(quote.total)}</p>` : ''}
+                        <p style="margin: 5px 0;"><strong>Local:</strong> ${
+                          request.location
+                        }</p>
+                        <p style="margin: 5px 0;"><strong>Data:</strong> ${natanApp.formatDate(
+                          request.createdAt
+                        )}</p>
+                        <p style="margin: 5px 0;"><strong>Descrição:</strong> ${
+                          request.description
+                        }</p>
+                        ${
+                          quote
+                            ? `<p style="margin: 5px 0;"><strong>Orçamento:</strong> ${natanApp.formatCurrency(
+                                quote.total
+                              )}</p>`
+                            : ""
+                        }
                     </div>
                 </div>
                 
@@ -287,24 +318,29 @@ function generateRequestsList(requests, quotes) {
             </div>
         </div>
         `;
-    }).join('');
+    })
+    .join("");
 }
 
 function getStatusText(status) {
-    const statusTexts = {
-        'pending': 'Pendente',
-        'quoted': 'Orçamento Enviado',
-        'approved': 'Aprovado',
-        'in_progress': 'Em Andamento',
-        'completed': 'Concluído',
-        'cancelled': 'Cancelado'
-    };
-    return statusTexts[status] || status;
+  const statusTexts = {
+    pending: "Pendente",
+    quoted: "Orçamento Enviado",
+    approved: "Aprovado",
+    in_progress: "Em Andamento",
+    completed: "Concluído",
+    cancelled: "Cancelado",
+  };
+  return statusTexts[status] || status;
 }
 
 function getRequestActions(request, quote) {
-    if (request.status === 'quoted' && quote && quote.status === 'pending_approval') {
-        return `
+  if (
+    request.status === "quoted" &&
+    quote &&
+    quote.status === "pending_approval"
+  ) {
+    return `
         <button onclick="approveQuote(${quote.id})" style="background: #4caf50; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; width: 100%;">
             ✅ Aprovar
         </button>
@@ -315,17 +351,17 @@ function getRequestActions(request, quote) {
             🔄 Revisar
         </button>
         `;
-    }
-    
-    if (request.status === 'completed' && !request.rating) {
-        return `
+  }
+
+  if (request.status === "completed" && !request.rating) {
+    return `
         <button onclick="rateService(${request.id})" style="background: #1976d2; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; width: 100%;">
             ⭐ Avaliar
         </button>
         `;
-    }
-    
-    return `
+  }
+
+  return `
     <button onclick="viewDetails(${request.id})" style="background: #666; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; width: 100%;">
         👁️ Ver Detalhes
     </button>
@@ -333,7 +369,7 @@ function getRequestActions(request, quote) {
 }
 
 function getAreasOfServicePage() {
-    return `
+  return `
     <div style="min-height: 100vh; background: #f5f5f5;">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); color: white; padding: 40px 0;">
@@ -435,7 +471,7 @@ function getAreasOfServicePage() {
 }
 
 function getServicesPage() {
-    return `
+  return `
     <div style="min-height: 100vh; background: #f5f5f5;">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); color: white; padding: 40px 0;">
@@ -449,15 +485,11 @@ function getServicesPage() {
             <!-- Filtros -->
             <div style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                 <h3 style="margin: 0 0 20px 0; color: #333;">🔍 Filtrar Serviços</h3>
-                
                 <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: end;">
-                    <!-- Filtro por Nome -->
                     <div>
                         <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Buscar por nome:</label>
                         <input type="text" id="serviceNameFilter" placeholder="Digite o nome do serviço..." onkeyup="filterServices()" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
                     </div>
-                    
-                    <!-- Filtro por Região -->
                     <div>
                         <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Região de atendimento:</label>
                         <select id="regionFilter" onchange="filterServices()" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
@@ -467,8 +499,6 @@ function getServicesPage() {
                             <option value="Coimbra">Coimbra</option>
                         </select>
                     </div>
-                    
-                    <!-- Botão Limpar -->
                     <div>
                         <button onclick="clearFilters()" style="background: #666; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;">
                             🗑️ Limpar
@@ -479,180 +509,258 @@ function getServicesPage() {
 
             <!-- Lista de Serviços -->
             <div id="servicesList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px;">
-                ${generateServicesList()}
+                ${generateServicesListSelectable()}
+            </div>
+
+            <!-- Botão Selecionar Orçamento -->
+            <div style="text-align: center; margin-top: 40px;">
+                <button id="selectQuoteBtn" disabled style="background: #1976d2; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 18px; cursor: pointer; font-weight: 600; opacity: 0.6; transition: opacity 0.2s;">
+                    📋 Selecionar Orçamento
+                </button>
             </div>
 
             <!-- Botão Voltar -->
-            <div style="text-align: center; margin-top: 40px;">
-                <button onclick="goHome()" style="background: #1976d2; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 16px; cursor: pointer; font-weight: 600;">
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="goHome()" style="background: #666; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 16px; cursor: pointer; font-weight: 600;">
                     🏠 Voltar ao Início
                 </button>
             </div>
         </div>
     </div>
-    `;
+    <script>
+    (function() {
+      let selectedServiceId = null;
+      let selectedServiceName = null;
+      const cards = document.querySelectorAll('.service-card');
+      const selectBtn = document.getElementById('selectQuoteBtn');
+      cards.forEach(card => {
+        card.addEventListener('click', function() {
+          cards.forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedServiceId = card.getAttribute('data-id');
+          selectedServiceName = card.getAttribute('data-name-original');
+          selectBtn.disabled = false;
+          selectBtn.style.opacity = 1;
+        });
+      });
+      selectBtn.addEventListener('click', function() {
+        if (selectedServiceId) {
+          requestServiceType(selectedServiceId, selectedServiceName);
+        }
+      });
+    })();
+    </script>
+  `;
 }
 
-function generateServicesList() {
-    const services = [
-        {
-            id: 1,
-            name: 'Serviços Elétricos',
-            icon: '⚡',
-            description: 'Instalação, manutenção e reparação de sistemas elétricos',
-            price: '€45/hora',
-            regions: ['São Miguel', 'Aveiro', 'Coimbra'],
-            specialties: ['Quadros elétricos', 'Iluminação', 'Tomadas e interruptores', 'Certificação elétrica'],
-            rating: 4.8,
-            reviews: 156
-        },
-        {
-            id: 2,
-            name: 'Encanamento',
-            icon: '🔧',
-            description: 'Instalação e reparação de canalizações e sistemas hidráulicos',
-            price: '€40/hora',
-            regions: ['São Miguel', 'Aveiro'],
-            specialties: ['Canalização', 'Torneiras', 'Autoclismos', 'Fugas de água'],
-            rating: 4.6,
-            reviews: 98
-        },
-        {
-            id: 3,
-            name: 'Pintura',
-            icon: '🎨',
-            description: 'Pintura interior e exterior com materiais de qualidade',
-            price: '€35/hora',
-            regions: ['São Miguel', 'Aveiro', 'Coimbra'],
-            specialties: ['Pintura interior', 'Pintura exterior', 'Preparação de superfícies', 'Texturizados'],
-            rating: 4.7,
-            reviews: 203
-        },
-        {
-            id: 4,
-            name: 'Construção Civil',
-            icon: '🏗️',
-            description: 'Obras de construção, ampliação e renovação',
-            price: '€55/hora',
-            regions: ['São Miguel', 'Coimbra'],
-            specialties: ['Alvenaria', 'Betão armado', 'Coberturas', 'Extensões'],
-            rating: 4.9,
-            reviews: 87
-        },
-        {
-            id: 5,
-            name: 'Carpintaria',
-            icon: '🪚',
-            description: 'Móveis sob medida e reparações em madeira',
-            price: '€42/hora',
-            regions: ['São Miguel', 'Aveiro'],
-            specialties: ['Móveis à medida', 'Portas e janelas', 'Armários', 'Reparações'],
-            rating: 4.5,
-            reviews: 74
-        },
-        {
-            id: 6,
-            name: 'Jardinagem',
-            icon: '🌿',
-            description: 'Manutenção e criação de espaços verdes',
-            price: '€30/hora',
-            regions: ['São Miguel', 'Aveiro', 'Coimbra'],
-            specialties: ['Poda', 'Plantação', 'Irrigação', 'Design paisagístico'],
-            rating: 4.4,
-            reviews: 132
-        }
-    ];
+function generateServicesListSelectable() {
+  const services = [
+    {
+      id: 1,
+      name: "Serviços Elétricos",
+      icon: "⚡",
+      description: "Instalação, manutenção e reparação de sistemas elétricos",
+      price: "€45/hora",
+      regions: ["São Miguel", "Aveiro", "Coimbra"],
+      specialties: [
+        "Quadros elétricos",
+        "Iluminação",
+        "Tomadas e interruptores",
+        "Certificação elétrica",
+      ],
+      rating: 4.8,
+      reviews: 156,
+    },
+    {
+      id: 2,
+      name: "Encanamento",
+      icon: "🔧",
+      description:
+        "Instalação e reparação de canalizações e sistemas hidráulicos",
+      price: "€40/hora",
+      regions: ["São Miguel", "Aveiro"],
+      specialties: ["Canalização", "Torneiras", "Autoclismos", "Fugas de água"],
+      rating: 4.6,
+      reviews: 98,
+    },
+    {
+      id: 3,
+      name: "Pintura",
+      icon: "🎨",
+      description: "Pintura interior e exterior com materiais de qualidade",
+      price: "€35/hora",
+      regions: ["São Miguel", "Aveiro", "Coimbra"],
+      specialties: [
+        "Pintura interior",
+        "Pintura exterior",
+        "Preparação de superfícies",
+        "Texturizados",
+      ],
+      rating: 4.7,
+      reviews: 203,
+    },
+    {
+      id: 4,
+      name: "Construção Civil",
+      icon: "🏗️",
+      description: "Obras de construção, ampliação e renovação",
+      price: "€55/hora",
+      regions: ["São Miguel", "Coimbra"],
+      specialties: ["Alvenaria", "Betão armado", "Coberturas", "Extensões"],
+      rating: 4.9,
+      reviews: 87,
+    },
+    {
+      id: 5,
+      name: "Carpintaria",
+      icon: "🪚",
+      description: "Móveis sob medida e reparações em madeira",
+      price: "€42/hora",
+      regions: ["São Miguel", "Aveiro"],
+      specialties: [
+        "Móveis à medida",
+        "Portas e janelas",
+        "Armários",
+        "Reparações",
+      ],
+      rating: 4.5,
+      reviews: 74,
+    },
+    {
+      id: 6,
+      name: "Jardinagem",
+      icon: "🌿",
+      description: "Manutenção e criação de espaços verdes",
+      price: "€30/hora",
+      regions: ["São Miguel", "Aveiro", "Coimbra"],
+      specialties: ["Poda", "Plantação", "Irrigação", "Design paisagístico"],
+      rating: 4.4,
+      reviews: 132,
+    },
+  ];
 
-    return services.map(service => `
-    <div class="service-card" data-name="${service.name.toLowerCase()}" data-regions="${service.regions.join(',').toLowerCase()}" style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer;" onclick="requestServiceType(${service.id}, '${service.name}')">
+  return services
+    .map(
+      (service) => `
+    <div class="service-card" data-id="${
+      service.id
+    }" data-name="${service.name.toLowerCase()}" data-name-original="${
+        service.name
+      }" data-regions="${service.regions
+        .join(",")
+        .toLowerCase()}" style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent;">
         <div style="text-align: center; margin-bottom: 20px;">
             <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1976d2, #42a5f5); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 2.5rem;">
                 ${service.icon}
             </div>
-            <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.3rem;">${service.name}</h3>
-            <p style="margin: 0; color: #666; line-height: 1.5;">${service.description}</p>
+            <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.3rem;">${
+              service.name
+            }</h3>
+            <p style="margin: 0; color: #666; line-height: 1.5;">${
+              service.description
+            }</p>
         </div>
-
         <div style="margin-bottom: 20px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <span style="font-weight: 600; color: #1976d2; font-size: 1.1rem;">${service.price}</span>
+                <span style="font-weight: 600; color: #1976d2; font-size: 1.1rem;">${
+                  service.price
+                }</span>
                 <div style="display: flex; align-items: center; gap: 5px;">
-                    <div style="color: #ffa726;">${'★'.repeat(Math.floor(service.rating))}${'☆'.repeat(5-Math.floor(service.rating))}</div>
-                    <span style="color: #666; font-size: 14px;">(${service.reviews})</span>
+                    <div style="color: #ffa726;">${"★".repeat(
+                      Math.floor(service.rating)
+                    )}${"☆".repeat(5 - Math.floor(service.rating))}</div>
+                    <span style="color: #666; font-size: 14px;">(${
+                      service.reviews
+                    })</span>
                 </div>
             </div>
-            
             <div style="margin-bottom: 15px;">
                 <strong style="color: #333; font-size: 14px;">Regiões atendidas:</strong>
                 <div style="display: flex; gap: 8px; margin-top: 5px; flex-wrap: wrap;">
-                    ${service.regions.map(region => `
+                    ${service.regions
+                      .map(
+                        (region) => `
                     <span style="background: #e3f2fd; color: #1976d2; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 600;">
                         ${region}
                     </span>
-                    `).join('')}
+                    `
+                      )
+                      .join("")}
                 </div>
             </div>
-            
             <div>
                 <strong style="color: #333; font-size: 14px;">Especialidades:</strong>
                 <div style="margin-top: 8px;">
-                    ${service.specialties.slice(0, 2).map(spec => `
+                    ${service.specialties
+                      .slice(0, 2)
+                      .map(
+                        (spec) => `
                     <div style="color: #666; font-size: 13px; margin: 2px 0;">• ${spec}</div>
-                    `).join('')}
-                    ${service.specialties.length > 2 ? `<div style="color: #1976d2; font-size: 13px; font-style: italic;">+ ${service.specialties.length - 2} mais...</div>` : ''}
+                    `
+                      )
+                      .join("")}
+                    ${
+                      service.specialties.length > 2
+                        ? `<div style="color: #1976d2; font-size: 13px; font-style: italic;">+ ${
+                            service.specialties.length - 2
+                          } mais...</div>`
+                        : ""
+                    }
                 </div>
             </div>
         </div>
-
-        <button onclick="event.stopPropagation(); requestServiceType(${service.id}, '${service.name}')" style="width: 100%; background: #1976d2; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: background 0.3s;">
-            📋 Solicitar Orçamento
-        </button>
     </div>
-    `).join('');
+    `
+    )
+    .join("");
 }
 
 function filterServices() {
-    const nameFilter = document.getElementById('serviceNameFilter').value.toLowerCase();
-    const regionFilter = document.getElementById('regionFilter').value.toLowerCase();
-    const serviceCards = document.querySelectorAll('.service-card');
-    
-    serviceCards.forEach(card => {
-        const serviceName = card.dataset.name;
-        const serviceRegions = card.dataset.regions;
-        
-        const nameMatch = !nameFilter || serviceName.includes(nameFilter);
-        const regionMatch = !regionFilter || serviceRegions.includes(regionFilter);
-        
-        if (nameMatch && regionMatch) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
+  const nameFilter = document
+    .getElementById("serviceNameFilter")
+    .value.toLowerCase();
+  const regionFilter = document
+    .getElementById("regionFilter")
+    .value.toLowerCase();
+  const serviceCards = document.querySelectorAll(".service-card");
+
+  serviceCards.forEach((card) => {
+    const serviceName = card.dataset.name;
+    const serviceRegions = card.dataset.regions;
+
+    const nameMatch = !nameFilter || serviceName.includes(nameFilter);
+    const regionMatch = !regionFilter || serviceRegions.includes(regionFilter);
+
+    if (nameMatch && regionMatch) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
 }
 
 function clearFilters() {
-    document.getElementById('serviceNameFilter').value = '';
-    document.getElementById('regionFilter').value = '';
-    filterServices();
+  document.getElementById("serviceNameFilter").value = "";
+  document.getElementById("regionFilter").value = "";
+  filterServices();
 }
 
 function requestServiceType(serviceId, serviceName) {
-    // Vai para o formulário de solicitação com serviço pré-selecionado
-    document.body.innerHTML = getServiceRequestForm();
-    initializeServiceForm();
-    
-    // Pré-selecionar o serviço
-    setTimeout(() => {
-        const serviceSelect = document.getElementById('serviceSelect');
-        if (serviceSelect) {
-            serviceSelect.value = serviceId;
-        }
-    }, 100);
+  // Vai para o formulário de solicitação com serviço pré-selecionado
+  document.body.innerHTML = getServiceRequestForm();
+  initializeServiceForm();
+
+  // Pré-selecionar o serviço
+  setTimeout(() => {
+    const serviceSelect = document.getElementById("serviceSelect");
+    if (serviceSelect) {
+      serviceSelect.value = serviceId;
+    }
+  }, 100);
 }
 
 function getContactPage() {
-    return `
+  return `
     <div style="min-height: 100vh; background: #f5f5f5;">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); color: white; padding: 40px 0;">
