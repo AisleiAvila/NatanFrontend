@@ -410,7 +410,7 @@
                 color="primary"
                 type="submit"
                 [disabled]="!serviceDetailsForm.valid || isSubmitting"
-                (click)="onSubmit(stepper)"
+                (click)="onSubmit()"
               >
                 <mat-spinner diameter="20" *ngIf="isSubmitting"></mat-spinner>
                 <mat-icon *ngIf="!isSubmitting">send</mat-icon>

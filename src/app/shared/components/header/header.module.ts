@@ -1,33 +1,29 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterModule, Routes } from "@angular/router";
-import { DashboardComponent } from "./dashboard.component";
-import { TranslateModule } from "@ngx-translate/core";
+import { RouterModule } from "@angular/router";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDividerModule } from "@angular/material/divider";
-
-const routes: Routes = [
-  {
-    path: "",
-    component: DashboardComponent,
-  },
-];
+import { HeaderComponent } from "./header.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [HeaderComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-    TranslateModule.forChild(),
+    RouterModule,
+    BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
     MatDividerModule,
+    TranslateModule,
   ],
+  exports: [HeaderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DashboardModule {}
+export class HeaderModule {}

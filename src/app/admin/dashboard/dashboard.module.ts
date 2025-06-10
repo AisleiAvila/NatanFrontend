@@ -7,23 +7,19 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { DashboardComponent } from "./dashboard.component";
 import { TranslateModule } from "@ngx-translate/core";
-import { CalendarComponent } from "./calendar/calendar.component";
 
 const routes: Routes = [
   {
     path: "",
-    loadChildren: () =>
-      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
-  },
-  {
-    path: "calendar",
-    component: CalendarComponent,
+    component: DashboardComponent,
   },
 ];
 
 @NgModule({
-  declarations: [CalendarComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -33,8 +29,9 @@ const routes: Routes = [
     MatChipsModule,
     MatMenuModule,
     MatDividerModule,
+    MatProgressBarModule,
     TranslateModule.forChild(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ProviderModule {}
+export class DashboardModule {}

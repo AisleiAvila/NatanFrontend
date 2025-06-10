@@ -1,9 +1,15 @@
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { SharedModule } from "../shared/shared.module";
+import { CommonModule } from "@angular/common";
 import { RequestServiceComponent } from "../client/request-service/request-service.component";
 import { HomeModule } from "./home/home.module";
 import { ContactModule } from "./contact/contact.module";
+import { TranslateModule } from "@ngx-translate/core";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatDividerModule } from "@angular/material/divider";
 
 const routes: Routes = [
   {
@@ -22,6 +28,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(routes), HomeModule],
+  declarations: [],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    HomeModule,
+    TranslateModule.forChild(),
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDividerModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PublicModule {}

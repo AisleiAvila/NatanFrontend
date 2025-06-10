@@ -1,29 +1,17 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
-
-// Components
-import { LoginComponent } from './login/login.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule, Routes } from "@angular/router";
+import { LoginModule } from "./login/login.module";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    path: "login",
+    loadChildren: () =>
+      import("./login/login.module").then((m) => m.LoginModule),
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  }
 ];
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
-  imports: [
-    SharedModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [CommonModule, RouterModule.forChild(routes), LoginModule],
 })
-export class AuthModule { }
+export class AuthModule {}

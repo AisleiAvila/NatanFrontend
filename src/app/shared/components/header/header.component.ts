@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService, User } from '../../../core/services/auth.service';
-import { TranslationService } from '../../../core/services/translation.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService, User } from "../../../core/services/auth.service";
+import { TranslationService } from "../../../core/services/translation.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
   currentUser: User | null = null;
   isAuthenticated = false;
-  currentLanguage = 'pt';
+  currentLanguage = "pt";
   availableLanguages = this.translationService.getAvailableLanguages();
 
   constructor(
@@ -21,15 +21,10 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-    });
+    this.currentUser = this.authService.currentUserValue;
+    this.isAuthenticated = !!this.authService.currentUserValue;
 
-    this.authService.isAuthenticated$.subscribe(isAuth => {
-      this.isAuthenticated = isAuth;
-    });
-
-    this.translationService.currentLanguage$.subscribe(lang => {
+    this.translationService.currentLanguage$.subscribe((lang) => {
       this.currentLanguage = lang;
     });
   }
@@ -53,6 +48,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToLogin(): void {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(["/auth/login"]);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -17,6 +17,7 @@ import { TranslationService } from "../../core/services/translation.service";
   styleUrls: ["./request-service.component.scss"],
 })
 export class RequestServiceComponent implements OnInit {
+  @ViewChild("stepper") stepper!: MatStepper;
   currentUser: User | null = null;
   services: Service[] = [];
   selectedService: Service | null = null;
@@ -195,8 +196,8 @@ export class RequestServiceComponent implements OnInit {
     return validTypes.includes(file.type);
   }
 
-  onSubmit(stepper: MatStepper): void {
-    if (this.isAllFormsValid()) {
+  onSubmit(): void {
+    if (this.serviceDetailsForm.valid) {
       this.isSubmitting = true;
 
       const requestData: Partial<ServiceRequest> = {
@@ -238,14 +239,6 @@ export class RequestServiceComponent implements OnInit {
     } else {
       this.markAllFormsAsTouched();
     }
-  }
-
-  private isAllFormsValid(): boolean {
-    return (
-      this.serviceSelectionForm.valid &&
-      this.clientInfoForm.valid &&
-      this.serviceDetailsForm.valid
-    );
   }
 
   private markAllFormsAsTouched(): void {

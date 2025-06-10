@@ -1,28 +1,22 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
-
-// Components
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule, Routes } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
 
 const routes: Routes = [
   {
-    path: '',
-    component: DashboardComponent
+    path: "",
+    loadChildren: () =>
+      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  }
 ];
 
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
   imports: [
-    SharedModule,
-    RouterModule.forChild(routes)
-  ]
+    CommonModule,
+    RouterModule.forChild(routes),
+    TranslateModule.forChild(),
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AdminModule { }
+export class AdminModule {}

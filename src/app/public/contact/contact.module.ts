@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -11,6 +11,10 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ContactComponent } from "./contact.component";
 import { LanguageSelectorModule } from "@shared/components/language-selector/language-selector.module";
+import { TranslateModule } from "@ngx-translate/core";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatDividerModule } from "@angular/material/divider";
 
 const routes: Routes = [
   {
@@ -33,6 +37,11 @@ const routes: Routes = [
     MatSnackBarModule,
     MatProgressSpinnerModule,
     LanguageSelectorModule,
+    TranslateModule.forChild(),
+    MatToolbarModule,
+    MatMenuModule,
+    MatDividerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ContactModule {}
