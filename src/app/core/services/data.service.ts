@@ -86,7 +86,7 @@ export class DataService {
         price: 50,
         duration: 120,
         regions: ["São Miguel", "Aveiro", "Coimbra"],
-        image: this.stockPhotos.construction[0],
+        image: this.placeholderImage("Hidráulica"),
       },
       {
         id: "2",
@@ -96,7 +96,7 @@ export class DataService {
         price: 60,
         duration: 150,
         regions: ["São Miguel", "Aveiro"],
-        image: this.stockPhotos.construction[1],
+        image: this.placeholderImage("Elétrica"),
       },
       {
         id: "3",
@@ -106,7 +106,7 @@ export class DataService {
         price: 200,
         duration: 480,
         regions: ["Aveiro", "Coimbra"],
-        image: this.stockPhotos.renovation[0],
+        image: this.placeholderImage("Reforma"),
       },
       {
         id: "4",
@@ -116,7 +116,7 @@ export class DataService {
         price: 35,
         duration: 240,
         regions: ["São Miguel", "Aveiro", "Coimbra"],
-        image: this.stockPhotos.construction[2],
+        image: this.placeholderImage("Pintura"),
       },
     ];
 

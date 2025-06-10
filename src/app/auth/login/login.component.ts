@@ -161,7 +161,7 @@ export class LoginComponent implements OnInit {
   }
 
   private redirectToUserDashboard(): void {
-    const user = this.authService.getCurrentUser();
+    const user = this.authService.currentUserValue;
     if (user) {
       switch (user.role) {
         case "client":

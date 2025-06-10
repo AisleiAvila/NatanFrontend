@@ -1,36 +1,44 @@
-<footer class="app-footer">
+<footer class="footer">
   <div class="footer-container">
     <div class="footer-content">
-      <div class="company-info">
+      <div class="footer-section">
         <h3>Natan Construtora</h3>
-        <p>{{ translate('footer.tagline') }}</p>
+        <p>{{ "footer.tagline" | translate }}</p>
       </div>
-      
-      <div class="footer-links">
-        <div class="link-group">
-          <h4>{{ translate('footer.services') }}</h4>
-          <ul>
-            <li><a href="#">{{ translate('services.electrical') }}</a></li>
-            <li><a href="#">{{ translate('services.plumbing') }}</a></li>
-            <li><a href="#">{{ translate('services.construction') }}</a></li>
-            <li><a href="#">{{ translate('services.renovation') }}</a></li>
-          </ul>
-        </div>
-        
-        <div class="link-group">
-          <h4>{{ translate('footer.company') }}</h4>
-          <ul>
-            <li><a href="#">{{ translate('footer.about') }}</a></li>
-            <li><a href="#">{{ translate('footer.contact') }}</a></li>
-            <li><a href="#">{{ translate('footer.privacy') }}</a></li>
-            <li><a href="#">{{ translate('footer.terms') }}</a></li>
-          </ul>
-        </div>
+
+      <div class="footer-section">
+        <h3>{{ "footer.services" | translate }}</h3>
+        <ul>
+          <li>{{ "services.construction" | translate }}</li>
+          <li>{{ "services.maintenance" | translate }}</li>
+          <li>{{ "services.renovation" | translate }}</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>{{ "footer.company" | translate }}</h3>
+        <ul>
+          <li>
+            <a routerLink="/about">{{ "footer.about" | translate }}</a>
+          </li>
+          <li>
+            <a routerLink="/contact">{{ "footer.contact" | translate }}</a>
+          </li>
+          <li>
+            <a routerLink="/privacy">{{ "footer.privacy" | translate }}</a>
+          </li>
+          <li>
+            <a routerLink="/terms">{{ "footer.terms" | translate }}</a>
+          </li>
+        </ul>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
-      <p>&copy; {{ currentYear }} Natan Construtora. {{ translate('footer.rights') }}</p>
+      <p>
+        &copy; {{ currentYear }} Natan Construtora.
+        {{ "footer.rights" | translate }}
+      </p>
     </div>
   </div>
 </footer>

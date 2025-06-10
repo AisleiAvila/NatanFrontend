@@ -8,6 +8,6 @@
   <rect width="800" height="400" class="background"/>
   <g transform="translate(350, 150)">
     <path d="M50,0 L100,50 L0,50 Z" class="icon"/>
-    <text x="0" y="80" class="text" font-size="24" text-anchor="middle">ConstruTech</text>
+    <text x="0" y="80" class="text" font-size="24" text-anchor="middle">Natan Construtora</text>
   </g>
 </svg> 

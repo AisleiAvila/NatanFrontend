@@ -7,7 +7,7 @@
       </button>
       <h1 class="app-title" routerLink="/">
         <mat-icon>construction</mat-icon>
-        Natan Construtora
+        <span class="company-name">Natan Construtora</span>
       </h1>
     </div>
 
@@ -16,40 +16,60 @@
       <ng-container [ngSwitch]="currentUser.role">
         <!-- Client Navigation -->
         <div *ngSwitchCase="'client'">
-          <a mat-button routerLink="/client/dashboard" routerLinkActive="active">
-            {{ translate('nav.dashboard') }}
+          <a
+            mat-button
+            routerLink="/client/dashboard"
+            routerLinkActive="active"
+          >
+            {{ translate("nav.dashboard") }}
           </a>
-          <a mat-button routerLink="/client/request-service" routerLinkActive="active">
-            {{ translate('nav.request_service') }}
+          <a
+            mat-button
+            routerLink="/client/request-service"
+            routerLinkActive="active"
+          >
+            {{ translate("nav.request_service") }}
           </a>
-          <a mat-button routerLink="/client/my-requests" routerLinkActive="active">
-            {{ translate('nav.my_requests') }}
+          <a
+            mat-button
+            routerLink="/client/my-requests"
+            routerLinkActive="active"
+          >
+            {{ translate("nav.my_requests") }}
           </a>
         </div>
 
         <!-- Provider Navigation -->
         <div *ngSwitchCase="'provider'">
-          <a mat-button routerLink="/provider/dashboard" routerLinkActive="active">
-            {{ translate('nav.dashboard') }}
+          <a
+            mat-button
+            routerLink="/provider/dashboard"
+            routerLinkActive="active"
+          >
+            {{ translate("nav.dashboard") }}
           </a>
-          <a mat-button routerLink="/provider/calendar" routerLinkActive="active">
-            {{ translate('nav.calendar') }}
+          <a
+            mat-button
+            routerLink="/provider/calendar"
+            routerLinkActive="active"
+          >
+            {{ translate("nav.calendar") }}
           </a>
           <a mat-button routerLink="/provider/quotes" routerLinkActive="active">
-            {{ translate('nav.quotes') }}
+            {{ translate("nav.quotes") }}
           </a>
         </div>
 
         <!-- Admin Navigation -->
         <div *ngSwitchCase="'admin'">
           <a mat-button routerLink="/admin/dashboard" routerLinkActive="active">
-            {{ translate('nav.dashboard') }}
+            {{ translate("nav.dashboard") }}
           </a>
           <a mat-button routerLink="/admin/users" routerLinkActive="active">
-            {{ translate('nav.users') }}
+            {{ translate("nav.users") }}
           </a>
           <a mat-button routerLink="/admin/services" routerLinkActive="active">
-            {{ translate('nav.services') }}
+            {{ translate("nav.services") }}
           </a>
         </div>
       </ng-container>
@@ -58,14 +78,22 @@
     <!-- User Actions -->
     <div class="user-actions">
       <!-- Language Toggle -->
-      <button mat-icon-button (click)="toggleLanguage()" class="language-toggle">
+      <button
+        mat-icon-button
+        (click)="toggleLanguage()"
+        class="language-toggle"
+      >
         <mat-icon>language</mat-icon>
         <span class="language-text">{{ currentLanguage.toUpperCase() }}</span>
       </button>
 
       <!-- User Menu -->
       <div class="user-menu" *ngIf="currentUser">
-        <button mat-button [matMenuTriggerFor]="userDropdown" class="user-button">
+        <button
+          mat-button
+          [matMenuTriggerFor]="userDropdown"
+          class="user-button"
+        >
           <mat-icon>account_circle</mat-icon>
           <span>{{ currentUser.name }}</span>
           <mat-icon>arrow_drop_down</mat-icon>
@@ -74,23 +102,28 @@
         <mat-menu #userDropdown="matMenu">
           <button mat-menu-item (click)="navigateToProfile()">
             <mat-icon>person</mat-icon>
-            {{ translate('nav.profile') }}
+            {{ translate("nav.profile") }}
           </button>
           <button mat-menu-item>
             <mat-icon>settings</mat-icon>
-            {{ translate('nav.settings') }}
+            {{ translate("nav.settings") }}
           </button>
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="logout()">
             <mat-icon>logout</mat-icon>
-            {{ translate('nav.logout') }}
+            {{ translate("nav.logout") }}
           </button>
         </mat-menu>
       </div>
 
       <!-- Login Button (when not logged in) -->
-      <a mat-raised-button color="accent" routerLink="/auth/login" *ngIf="!currentUser">
-        {{ translate('nav.login') }}
+      <a
+        mat-raised-button
+        color="accent"
+        routerLink="/auth/login"
+        *ngIf="!currentUser"
+      >
+        {{ translate("nav.login") }}
       </a>
     </div>
   </div>

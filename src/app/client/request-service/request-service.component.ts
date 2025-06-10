@@ -74,7 +74,7 @@ export class RequestServiceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getCurrentUser();
+    this.currentUser = this.authService.currentUserValue;
     this.loadServices();
     this.prefillClientInfo();
     this.checkPreselectedService();
@@ -200,7 +200,7 @@ export class RequestServiceComponent implements OnInit {
       this.isSubmitting = true;
 
       const requestData: Partial<ServiceRequest> = {
-        clientId: this.currentUser?.id,
+        clientId: this.currentUser?.id.toString(),
         serviceId: this.serviceSelectionForm.value.serviceId,
         serviceName: this.selectedService?.name,
         description: this.serviceDetailsForm.value.description,

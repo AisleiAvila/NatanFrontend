@@ -2,11 +2,14 @@
   "nav": {
     "home": "Início",
     "services": "Serviços",
-    "contact": "Contacto",
-    "dashboard": "Painel"
+    "contact": "Contato",
+    "dashboard": "Painel",
+    "about": "Sobre",
+    "login": "Entrar"
   },
   "auth": {
     "login": "Entrar",
+    "register": "Cadastrar",
     "logout": "Sair",
     "login_title": "Iniciar Sessão",
     "login_subtitle": "Entre na sua conta para aceder ao painel",
@@ -84,11 +87,11 @@
     "no_results_message": "Tente ajustar os seus critérios de pesquisa",
     "view_details": "Ver Detalhes",
     "request_quote": "Pedir Orçamento",
-    "plumbing": "Canalizações",
-    "electrical": "Eletricidade",
-    "renovation": "Renovações",
-    "painting": "Pintura",
-    "construction": "Construção Civil",
+    "construction": "Construção",
+    "maintenance": "Manutenção",
+    "renovation": "Reforma",
+    "electrical": "Elétrica",
+    "plumbing": "Hidráulica",
     "cta": {
       "title": "Não encontrou o que procura?",
       "description": "Contacte-nos diretamente e ajudaremos a encontrar a solução ideal",
@@ -361,15 +364,15 @@
   },
   "footer": {
     "company_description": "Sua plataforma confiável para serviços de construção e manutenção",
-    "services": "Serviços",
+    "services": "Nossos Serviços",
     "service_areas": "Áreas de Atendimento",
-    "contact": "Contacto",
+    "contact": "Contato",
     "business_hours": "Segunda a Sexta: 9h às 18h",
     "rights": "Todos os direitos reservados",
-    "privacy": "Política de Privacidade",
-    "terms": "Termos de Serviço",
-    "tagline": "Construção de Qualidade, Confiança Garantida",
-    "company": "ConstruTech",
+    "privacy": "Privacidade",
+    "terms": "Termos de Uso",
+    "tagline": "Soluções completas em construção e manutenção",
+    "company": "Empresa",
     "about": "Sobre Nós"
   },
   "validation": {
