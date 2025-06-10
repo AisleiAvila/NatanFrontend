@@ -1,0 +1,108 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  .brand-icon {
+    font-size: 28px;
+    color: #ff9800;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+  }
+}
+
+.nav-section {
+  display: flex;
+  gap: 8px;
+  
+  button {
+    color: white;
+    font-weight: 500;
+    
+    &.active {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-btn {
+  .flag {
+    font-size: 1.2rem;
+  }
+}
+
+.user-section {
+  .user-btn {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.user-info {
+  padding: 16px;
+  text-align: center;
+  
+  .user-name {
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .user-role {
+    margin: 4px 0 0 0;
+    font-size: 0.875rem;
+    color: #666;
+    text-transform: capitalize;
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 8px;
+  }
+  
+  .brand-name {
+    font-size: 1.2rem;
+  }
+  
+  .nav-section {
+    display: none;
+  }
+}

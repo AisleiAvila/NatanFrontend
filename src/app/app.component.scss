@@ -1,0 +1,14 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 64px; // Account for fixed header
+  
+  @media (max-width: 768px) {
+    padding-top: 56px; // Smaller header on mobile
+  }
+}

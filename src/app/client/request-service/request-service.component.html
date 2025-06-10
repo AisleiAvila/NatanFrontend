@@ -1,0 +1,274 @@
+<div class="request-service-container">
+  <!-- Header -->
+  <div class="request-header">
+    <div class="container">
+      <div class="header-content">
+        <button mat-icon-button (click)="goBack()" class="back-btn">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-text">
+          <h1>{{ translate('service_request.title') }}</h1>
+          <p>{{ translate('service_request.subtitle') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stepper Content -->
+  <div class="stepper-content">
+    <div class="container">
+      <mat-stepper [linear]="isLinear" #stepper orientation="horizontal">
+        
+        <!-- Step 1: Service Selection -->
+        <mat-step [stepControl]="serviceSelectionForm">
+          <form [formGroup]="serviceSelectionForm">
+            <ng-template matStepLabel>{{ translate('service_request.step1.title') }}</ng-template>
+            
+            <div class="step-content">
+              <h2>{{ translate('service_request.step1.select_service') }}</h2>
+              <p>{{ translate('service_request.step1.description') }}</p>
+              
+              <div class="services-grid">
+                <mat-card class="service-option" 
+                         *ngFor="let service of services"
+                         [class.selected]="serviceSelectionForm.value.serviceId === service.id"
+                         (click)="serviceSelectionForm.patchValue({serviceId: service.id}); onServiceSelected(service.id)">
+                  <div class="service-image">
+                    <img [src]="service.image" [alt]="service.name">
+                    <div class="service-price">€{{ service.price }}/h</div>
+                  </div>
+                  <mat-card-content>
+                    <h3>{{ service.name }}</h3>
+                    <p>{{ service.description }}</p>
+                    <div class="service-meta">
+                      <span class="duration">
+                        <mat-icon>schedule</mat-icon>
+                        {{ service.duration }}min
+                      </span>
+                      <span class="regions">
+                        <mat-icon>location_on</mat-icon>
+                        {{ service.regions.join(', ') }}
+                      </span>
+                    </div>
+                  </mat-card-content>
+                  <mat-radio-button [value]="service.id" formControlName="serviceId" class="service-radio">
+                  </mat-radio-button>
+                </mat-card>
+              </div>
+              
+              <mat-error *ngIf="serviceSelectionForm.get('serviceId')?.errors?.['required'] && serviceSelectionForm.get('serviceId')?.touched">
+                {{ translate('validation.required') }}
+              </mat-error>
+            </div>
+            
+            <div class="step-actions">
+              <button mat-raised-button color="primary" matStepperNext 
+                      [disabled]="!serviceSelectionForm.valid">
+                {{ translate('service_request.next') }}
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Step 2: Client Information -->
+        <mat-step [stepControl]="clientInfoForm">
+          <form [formGroup]="clientInfoForm">
+            <ng-template matStepLabel>{{ translate('service_request.step2.title') }}</ng-template>
+            
+            <div class="step-content">
+              <h2>{{ translate('service_request.step2.client_info') }}</h2>
+              <p>{{ translate('service_request.step2.description') }}</p>
+              
+              <div class="form-grid">
+                <!-- Name -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('service_request.step2.name') }}</mat-label>
+                  <input matInput formControlName="name" placeholder="{{ translate('service_request.step2.name_placeholder') }}">
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error>{{ getFieldError('name', clientInfoForm) }}</mat-error>
+                </mat-form-field>
+
+                <!-- Email -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('service_request.step2.email') }}</mat-label>
+                  <input matInput type="email" formControlName="email" placeholder="{{ translate('service_request.step2.email_placeholder') }}">
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error>{{ getFieldError('email', clientInfoForm) }}</mat-error>
+                </mat-form-field>
+
+                <!-- Phone -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('service_request.step2.phone') }}</mat-label>
+                  <input matInput type="tel" formControlName="phone" placeholder="{{ translate('service_request.step2.phone_placeholder') }}">
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error>{{ getFieldError('phone', clientInfoForm) }}</mat-error>
+                </mat-form-field>
+
+                <!-- WhatsApp -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('service_request.step2.whatsapp') }}</mat-label>
+                  <input matInput type="tel" formControlName="whatsapp" placeholder="{{ translate('service_request.step2.whatsapp_placeholder') }}">
+                  <i class="fab fa-whatsapp" matSuffix style="color: #25d366;"></i>
+                  <mat-error>{{ getFieldError('whatsapp', clientInfoForm) }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- NIF Section -->
+              <div class="nif-section">
+                <mat-checkbox formControlName="includeNifInQuote">
+                  {{ translate('service_request.step2.include_nif') }}
+                </mat-checkbox>
+                
+                <mat-form-field appearance="outline" *ngIf="clientInfoForm.value.includeNifInQuote">
+                  <mat-label>{{ translate('service_request.step2.nif') }}</mat-label>
+                  <input matInput formControlName="nif" placeholder="{{ translate('service_request.step2.nif_placeholder') }}">
+                  <mat-icon matSuffix>receipt</mat-icon>
+                  <mat-error>{{ getFieldError('nif', clientInfoForm) }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="step-actions">
+              <button mat-stroked-button matStepperPrevious>
+                <mat-icon>arrow_back</mat-icon>
+                {{ translate('service_request.previous') }}
+              </button>
+              <button mat-raised-button color="primary" matStepperNext 
+                      [disabled]="!clientInfoForm.valid">
+                {{ translate('service_request.next') }}
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Step 3: Service Details -->
+        <mat-step [stepControl]="serviceDetailsForm">
+          <form [formGroup]="serviceDetailsForm">
+            <ng-template matStepLabel>{{ translate('service_request.step3.title') }}</ng-template>
+            
+            <div class="step-content">
+              <h2>{{ translate('service_request.step3.service_details') }}</h2>
+              <p>{{ translate('service_request.step3.description') }}</p>
+              
+              <div class="form-grid">
+                <!-- Region -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('service_request.step3.region') }}</mat-label>
+                  <mat-select formControlName="region">
+                    <mat-option *ngFor="let region of regions" [value]="region">
+                      {{ region }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>{{ getFieldError('region', serviceDetailsForm) }}</mat-error>
+                </mat-form-field>
+
+                <!-- Location -->
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>{{ translate('service_request.step3.location') }}</mat-label>
+                  <input matInput formControlName="location" placeholder="{{ translate('service_request.step3.location_placeholder') }}">
+                  <mat-icon matSuffix>location_on</mat-icon>
+                  <mat-error>{{ getFieldError('location', serviceDetailsForm) }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Description -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ translate('service_request.step3.description') }}</mat-label>
+                <textarea matInput formControlName="description" rows="4" 
+                         placeholder="{{ translate('service_request.step3.description_placeholder') }}"></textarea>
+                <mat-error>{{ getFieldError('description', serviceDetailsForm) }}</mat-error>
+              </mat-form-field>
+
+              <!-- Preferred Dates -->
+              <div class="preferred-dates-section">
+                <h4>{{ translate('service_request.step3.preferred_dates') }}</h4>
+                <p>{{ translate('service_request.step3.preferred_dates_help') }}</p>
+                
+                <div class="date-picker-section">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ translate('service_request.step3.select_date') }}</mat-label>
+                    <input matInput [matDatepicker]="picker" 
+                           [min]="minDate" [max]="maxDate"
+                           (dateChange)="addPreferredDate($event.value)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                
+                <div class="selected-dates" *ngIf="preferredDates.length > 0">
+                  <mat-chip-set>
+                    <mat-chip *ngFor="let date of preferredDates; let i = index" 
+                             [removable]="true" (removed)="removePreferredDate(i)">
+                      {{ date | date:'dd/MM/yyyy' }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-set>
+                </div>
+                
+                <mat-error *ngIf="serviceDetailsForm.get('preferredDates')?.errors?.['required'] && serviceDetailsForm.get('preferredDates')?.touched">
+                  {{ translate('service_request.step3.dates_required') }}
+                </mat-error>
+              </div>
+
+              <!-- File Upload -->
+              <div class="file-upload-section">
+                <h4>{{ translate('service_request.step3.photos_videos') }}</h4>
+                <p>{{ translate('service_request.step3.photos_help') }}</p>
+                
+                <div class="upload-area">
+                  <input type="file" #fileInput multiple accept="image/*,video/*" 
+                         (change)="onFileSelected($event)" style="display: none;">
+                  <button mat-stroked-button (click)="fileInput.click()" 
+                          [disabled]="uploadedFiles.length >= maxFiles">
+                    <mat-icon>cloud_upload</mat-icon>
+                    {{ translate('service_request.step3.upload_files') }}
+                  </button>
+                  <span class="file-limit">{{ translate('service_request.step3.file_limit') }}</span>
+                </div>
+                
+                <div class="uploaded-files" *ngIf="uploadedFiles.length > 0">
+                  <div class="file-item" *ngFor="let file of uploadedFiles; let i = index">
+                    <mat-icon>{{ file.type.startsWith('image/') ? 'image' : 'videocam' }}</mat-icon>
+                    <span class="file-info">
+                      <span class="file-name">{{ file.name }}</span>
+                      <span class="file-size">{{ formatFileSize(file.size) }}</span>
+                    </span>
+                    <button mat-icon-button (click)="removeFile(i)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Terms Agreement -->
+              <div class="terms-section">
+                <mat-checkbox formControlName="agreeToTerms">
+                  {{ translate('service_request.step3.agree_terms') }}
+                  <a href="#" target="_blank">{{ translate('service_request.step3.terms_link') }}</a>
+                </mat-checkbox>
+                <mat-error *ngIf="serviceDetailsForm.get('agreeToTerms')?.errors?.['requiredTrue'] && serviceDetailsForm.get('agreeToTerms')?.touched">
+                  {{ translate('service_request.step3.terms_required') }}
+                </mat-error>
+              </div>
+            </div>
+            
+            <div class="step-actions">
+              <button mat-stroked-button matStepperPrevious>
+                <mat-icon>arrow_back</mat-icon>
+                {{ translate('service_request.previous') }}
+              </button>
+              <button mat-raised-button color="accent" (click)="onSubmit(stepper)"
+                      [disabled]="!serviceDetailsForm.valid || isSubmitting">
+                <mat-spinner diameter="20" *ngIf="isSubmitting"></mat-spinner>
+                <mat-icon *ngIf="!isSubmitting">send</mat-icon>
+                {{ isSubmitting ? translate('service_request.submitting') : translate('service_request.submit') }}
+              </button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</div>

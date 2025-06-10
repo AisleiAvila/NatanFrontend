@@ -1,0 +1,215 @@
+<div class="contact-container">
+  <!-- Header Section -->
+  <section class="contact-header">
+    <div class="container">
+      <h1>{{ translate('contact.title') }}</h1>
+      <p>{{ translate('contact.subtitle') }}</p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="contact-content">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="contact-form-section">
+          <mat-card class="form-card">
+            <mat-card-header>
+              <mat-card-title>{{ translate('contact.form.title') }}</mat-card-title>
+              <mat-card-subtitle>{{ translate('contact.form.subtitle') }}</mat-card-subtitle>
+            </mat-card-header>
+            
+            <mat-card-content>
+              <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+                <!-- Name Field -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('contact.form.name') }}</mat-label>
+                  <input matInput formControlName="name" placeholder="{{ translate('contact.form.name_placeholder') }}">
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error>{{ getFieldError('name') }}</mat-error>
+                </mat-form-field>
+
+                <!-- Email Field -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('contact.form.email') }}</mat-label>
+                  <input matInput type="email" formControlName="email" placeholder="{{ translate('contact.form.email_placeholder') }}">
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error>{{ getFieldError('email') }}</mat-error>
+                </mat-form-field>
+
+                <!-- Phone Field -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('contact.form.phone') }}</mat-label>
+                  <input matInput type="tel" formControlName="phone" placeholder="{{ translate('contact.form.phone_placeholder') }}">
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error>{{ getFieldError('phone') }}</mat-error>
+                </mat-form-field>
+
+                <!-- Subject Field -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('contact.form.subject') }}</mat-label>
+                  <mat-select formControlName="subject">
+                    <mat-option value="general">{{ translate('contact.form.subjects.general') }}</mat-option>
+                    <mat-option value="quote">{{ translate('contact.form.subjects.quote') }}</mat-option>
+                    <mat-option value="support">{{ translate('contact.form.subjects.support') }}</mat-option>
+                    <mat-option value="complaint">{{ translate('contact.form.subjects.complaint') }}</mat-option>
+                  </mat-select>
+                  <mat-error>{{ getFieldError('subject') }}</mat-error>
+                </mat-form-field>
+
+                <!-- Preferred Contact Method -->
+                <div class="form-section">
+                  <label class="section-label">{{ translate('contact.form.preferred_contact') }}</label>
+                  <mat-radio-group formControlName="preferredContact" class="radio-group">
+                    <mat-radio-button value="email">{{ translate('contact.form.contact_email') }}</mat-radio-button>
+                    <mat-radio-button value="phone">{{ translate('contact.form.contact_phone') }}</mat-radio-button>
+                    <mat-radio-button value="whatsapp">{{ translate('contact.form.contact_whatsapp') }}</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <!-- Message Field -->
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ translate('contact.form.message') }}</mat-label>
+                  <textarea matInput formControlName="message" rows="4" 
+                           placeholder="{{ translate('contact.form.message_placeholder') }}"></textarea>
+                  <mat-error>{{ getFieldError('message') }}</mat-error>
+                </mat-form-field>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                  <button mat-raised-button color="accent" type="submit" 
+                          [disabled]="isSubmitting" class="submit-btn">
+                    <mat-spinner diameter="20" *ngIf="isSubmitting"></mat-spinner>
+                    <mat-icon *ngIf="!isSubmitting">send</mat-icon>
+                    {{ isSubmitting ? translate('contact.form.sending') : translate('contact.form.send') }}
+                  </button>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info-section">
+          <!-- Quick Contact -->
+          <mat-card class="info-card">
+            <mat-card-header>
+              <mat-card-title>{{ translate('contact.info.quick_contact') }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="contact-methods">
+                <button mat-stroked-button class="contact-method" (click)="callPhone()">
+                  <mat-icon>phone</mat-icon>
+                  <div class="method-info">
+                    <div class="method-label">{{ translate('contact.info.phone') }}</div>
+                    <div class="method-value">{{ contactInfo.phone }}</div>
+                  </div>
+                </button>
+
+                <button mat-stroked-button class="contact-method" (click)="sendEmail()">
+                  <mat-icon>email</mat-icon>
+                  <div class="method-info">
+                    <div class="method-label">{{ translate('contact.info.email') }}</div>
+                    <div class="method-value">{{ contactInfo.email }}</div>
+                  </div>
+                </button>
+
+                <button mat-raised-button color="accent" class="contact-method whatsapp-btn" (click)="openWhatsApp()">
+                  <i class="fab fa-whatsapp"></i>
+                  <div class="method-info">
+                    <div class="method-label">{{ translate('contact.info.whatsapp') }}</div>
+                    <div class="method-value">{{ translate('contact.info.instant_support') }}</div>
+                  </div>
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Business Hours -->
+          <mat-card class="info-card">
+            <mat-card-header>
+              <mat-card-title>{{ translate('contact.info.business_hours') }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="hours-info">
+                <div class="hours-item">
+                  <span class="day">{{ translate('contact.info.weekdays') }}</span>
+                  <span class="time">{{ contactInfo.businessHours.weekdays }}</span>
+                </div>
+                <div class="hours-item">
+                  <span class="day">{{ translate('contact.info.saturday') }}</span>
+                  <span class="time">{{ contactInfo.businessHours.saturday }}</span>
+                </div>
+                <div class="hours-item">
+                  <span class="day">{{ translate('contact.info.sunday') }}</span>
+                  <span class="time">{{ contactInfo.businessHours.sunday }}</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Address -->
+          <mat-card class="info-card">
+            <mat-card-header>
+              <mat-card-title>{{ translate('contact.info.address') }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="address-info">
+                <p>{{ contactInfo.address }}</p>
+                <button mat-stroked-button color="primary" (click)="openGoogleMaps()">
+                  <mat-icon>map</mat-icon>
+                  {{ translate('contact.info.view_map') }}
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="service-areas-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>{{ translate('contact.service_areas.title') }}</h2>
+        <p>{{ translate('contact.service_areas.subtitle') }}</p>
+      </div>
+
+      <div class="areas-grid">
+        <mat-card class="area-card" *ngFor="let area of serviceAreas">
+          <div class="area-icon">
+            <mat-icon>{{ area.icon }}</mat-icon>
+          </div>
+          <mat-card-content>
+            <h3>{{ area.name }}</h3>
+            <p>{{ area.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Contact -->
+  <section class="emergency-section">
+    <div class="container">
+      <mat-card class="emergency-card">
+        <div class="emergency-content">
+          <div class="emergency-icon">
+            <mat-icon>emergency</mat-icon>
+          </div>
+          <div class="emergency-text">
+            <h3>{{ translate('contact.emergency.title') }}</h3>
+            <p>{{ translate('contact.emergency.description') }}</p>
+          </div>
+          <div class="emergency-actions">
+            <button mat-raised-button color="warn" (click)="callPhone()">
+              <mat-icon>phone</mat-icon>
+              {{ translate('contact.emergency.call_now') }}
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,87 @@
+<mat-toolbar class="app-header" color="primary">
+  <div class="header-container">
+    <!-- Logo and Brand -->
+    <div class="brand-section" (click)="router.navigate(['/home'])" style="cursor: pointer;">
+      <mat-icon class="brand-icon">construction</mat-icon>
+      <span class="brand-name">Natan Construtora</span>
+    </div>
+
+    <!-- Navigation Menu -->
+    <div class="nav-section d-none d-md-flex">
+      <button mat-button routerLink="/home" routerLinkActive="active">
+        {{ translate('nav.home') }}
+      </button>
+      <button mat-button routerLink="/home/services" routerLinkActive="active">
+        {{ translate('nav.services') }}
+      </button>
+      <button mat-button routerLink="/home/contact" routerLinkActive="active">
+        {{ translate('nav.contact') }}
+      </button>
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+      <!-- Language Selector -->
+      <button mat-icon-button [matMenuTriggerFor]="languageMenu" class="language-btn">
+        <span class="flag">{{ currentLanguage === 'pt' ? '🇵🇹' : '🇬🇧' }}</span>
+      </button>
+      <mat-menu #languageMenu="matMenu">
+        <button mat-menu-item 
+                *ngFor="let lang of availableLanguages" 
+                (click)="changeLanguage(lang.code)">
+          <span class="flag">{{ lang.flag }}</span>
+          <span>{{ lang.name }}</span>
+        </button>
+      </mat-menu>
+
+      <!-- User Section -->
+      <div class="user-section" *ngIf="!isAuthenticated">
+        <button mat-raised-button color="accent" (click)="goToLogin()">
+          <mat-icon>login</mat-icon>
+          {{ translate('auth.login') }}
+        </button>
+      </div>
+
+      <div class="user-section" *ngIf="isAuthenticated && currentUser">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
+          <mat-icon>account_circle</mat-icon>
+          <span class="d-none d-md-inline">{{ currentUser.name }}</span>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <div class="user-info">
+            <p class="user-name">{{ currentUser.name }}</p>
+            <p class="user-role">{{ translate('roles.' + currentUser.role) }}</p>
+          </div>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="navigateToRole()">
+            <mat-icon>dashboard</mat-icon>
+            <span>{{ translate('nav.dashboard') }}</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>{{ translate('auth.logout') }}</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      <!-- Mobile Menu -->
+      <button mat-icon-button class="d-md-none" [matMenuTriggerFor]="mobileMenu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #mobileMenu="matMenu">
+        <button mat-menu-item routerLink="/home">
+          <mat-icon>home</mat-icon>
+          <span>{{ translate('nav.home') }}</span>
+        </button>
+        <button mat-menu-item routerLink="/home/services">
+          <mat-icon>build</mat-icon>
+          <span>{{ translate('nav.services') }}</span>
+        </button>
+        <button mat-menu-item routerLink="/home/contact">
+          <mat-icon>contact_mail</mat-icon>
+          <span>{{ translate('nav.contact') }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

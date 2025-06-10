@@ -1,0 +1,97 @@
+<mat-toolbar color="primary" class="app-header">
+  <div class="header-container">
+    <!-- Logo and Brand -->
+    <div class="brand-section">
+      <button mat-icon-button class="menu-toggle" *ngIf="currentUser">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h1 class="app-title" routerLink="/">
+        <mat-icon>construction</mat-icon>
+        Natan Construtora
+      </h1>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav-links" *ngIf="currentUser">
+      <ng-container [ngSwitch]="currentUser.role">
+        <!-- Client Navigation -->
+        <div *ngSwitchCase="'client'">
+          <a mat-button routerLink="/client/dashboard" routerLinkActive="active">
+            {{ translate('nav.dashboard') }}
+          </a>
+          <a mat-button routerLink="/client/request-service" routerLinkActive="active">
+            {{ translate('nav.request_service') }}
+          </a>
+          <a mat-button routerLink="/client/my-requests" routerLinkActive="active">
+            {{ translate('nav.my_requests') }}
+          </a>
+        </div>
+
+        <!-- Provider Navigation -->
+        <div *ngSwitchCase="'provider'">
+          <a mat-button routerLink="/provider/dashboard" routerLinkActive="active">
+            {{ translate('nav.dashboard') }}
+          </a>
+          <a mat-button routerLink="/provider/calendar" routerLinkActive="active">
+            {{ translate('nav.calendar') }}
+          </a>
+          <a mat-button routerLink="/provider/quotes" routerLinkActive="active">
+            {{ translate('nav.quotes') }}
+          </a>
+        </div>
+
+        <!-- Admin Navigation -->
+        <div *ngSwitchCase="'admin'">
+          <a mat-button routerLink="/admin/dashboard" routerLinkActive="active">
+            {{ translate('nav.dashboard') }}
+          </a>
+          <a mat-button routerLink="/admin/users" routerLinkActive="active">
+            {{ translate('nav.users') }}
+          </a>
+          <a mat-button routerLink="/admin/services" routerLinkActive="active">
+            {{ translate('nav.services') }}
+          </a>
+        </div>
+      </ng-container>
+    </nav>
+
+    <!-- User Actions -->
+    <div class="user-actions">
+      <!-- Language Toggle -->
+      <button mat-icon-button (click)="toggleLanguage()" class="language-toggle">
+        <mat-icon>language</mat-icon>
+        <span class="language-text">{{ currentLanguage.toUpperCase() }}</span>
+      </button>
+
+      <!-- User Menu -->
+      <div class="user-menu" *ngIf="currentUser">
+        <button mat-button [matMenuTriggerFor]="userDropdown" class="user-button">
+          <mat-icon>account_circle</mat-icon>
+          <span>{{ currentUser.name }}</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+
+        <mat-menu #userDropdown="matMenu">
+          <button mat-menu-item (click)="navigateToProfile()">
+            <mat-icon>person</mat-icon>
+            {{ translate('nav.profile') }}
+          </button>
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            {{ translate('nav.settings') }}
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            {{ translate('nav.logout') }}
+          </button>
+        </mat-menu>
+      </div>
+
+      <!-- Login Button (when not logged in) -->
+      <a mat-raised-button color="accent" routerLink="/auth/login" *ngIf="!currentUser">
+        {{ translate('nav.login') }}
+      </a>
+    </div>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,206 @@
+<div class="client-dashboard">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="welcome-section">
+          <h1>{{ translate('client.welcome') }}, {{ currentUser?.name }}!</h1>
+          <p>{{ translate('client.dashboard_subtitle') }}</p>
+        </div>
+        <div class="header-actions">
+          <button mat-raised-button color="accent" (click)="requestNewService()">
+            <mat-icon>add</mat-icon>
+            {{ translate('client.request_new_service') }}
+          </button>
+          <button mat-stroked-button color="primary" (click)="openWhatsApp()">
+            <i class="fab fa-whatsapp"></i>
+            {{ translate('client.contact_support') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon total">
+              <mat-icon>assignment</mat-icon>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ stats.totalRequests }}</div>
+              <div class="stat-label">{{ translate('client.stats.total_requests') }}</div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon pending">
+              <mat-icon>schedule</mat-icon>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ stats.pendingRequests }}</div>
+              <div class="stat-label">{{ translate('client.stats.pending_requests') }}</div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon quotes">
+              <mat-icon>receipt</mat-icon>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ stats.activeQuotes }}</div>
+              <div class="stat-label">{{ translate('client.stats.active_quotes') }}</div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon completed">
+              <mat-icon>done_all</mat-icon>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">{{ stats.completedRequests }}</div>
+              <div class="stat-label">{{ translate('client.stats.completed_requests') }}</div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Requests Section -->
+  <section class="requests-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>{{ translate('client.recent_requests') }}</h2>
+        <button mat-button color="primary" *ngIf="serviceRequests.length > 3">
+          {{ translate('client.view_all') }}
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-container" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <p>{{ translate('common.loading') }}</p>
+      </div>
+
+      <!-- Requests List -->
+      <div class="requests-list" *ngIf="!loading && serviceRequests.length > 0">
+        <mat-card class="request-card" *ngFor="let request of serviceRequests.slice(0, 5)">
+          <div class="request-header">
+            <div class="request-info">
+              <h3>{{ request.serviceName }}</h3>
+              <p class="request-date">{{ translate('client.requested_on') }} {{ formatDate(request.createdAt) }}</p>
+            </div>
+            <div class="request-status">
+              <mat-chip [style.background-color]="statusColors[request.status]" 
+                       [style.color]="'white'">
+                <mat-icon>{{ getStatusIcon(request.status) }}</mat-icon>
+                {{ translate('status.' + request.status) }}
+              </mat-chip>
+            </div>
+          </div>
+
+          <mat-card-content>
+            <div class="request-details">
+              <div class="detail-item">
+                <mat-icon>location_on</mat-icon>
+                <span>{{ request.location }}</span>
+              </div>
+              <div class="detail-item">
+                <mat-icon>description</mat-icon>
+                <span>{{ request.description | slice:0:100 }}{{ request.description.length > 100 ? '...' : '' }}</span>
+              </div>
+              <div class="detail-item" *ngIf="request.providerName">
+                <mat-icon>person</mat-icon>
+                <span>{{ translate('client.assigned_to') }}: {{ request.providerName }}</span>
+              </div>
+            </div>
+
+            <!-- Quote Information -->
+            <div class="quote-section" *ngIf="request.quote && request.status === 'quoted'">
+              <mat-divider></mat-divider>
+              <div class="quote-header">
+                <h4>{{ translate('client.quote_received') }}</h4>
+                <div class="quote-amount">
+                  €{{ request.quote.totalAmount.toFixed(2) }}
+                  <span class="vat-info" *ngIf="request.quote.includeVat">
+                    ({{ translate('client.includes_vat') }})
+                  </span>
+                </div>
+              </div>
+              <p class="quote-description">{{ request.quote.description }}</p>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button color="primary" (click)="viewRequestDetails(request)">
+              <mat-icon>visibility</mat-icon>
+              {{ translate('client.view_details') }}
+            </button>
+            
+            <!-- Quote Actions -->
+            <div class="quote-actions" *ngIf="request.status === 'quoted'">
+              <button mat-raised-button color="primary" (click)="approveQuote(request)">
+                <mat-icon>check</mat-icon>
+                {{ translate('client.approve_quote') }}
+              </button>
+              <button mat-stroked-button color="warn" (click)="rejectQuote(request)">
+                <mat-icon>close</mat-icon>
+                {{ translate('client.reject_quote') }}
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!loading && serviceRequests.length === 0">
+        <mat-icon class="empty-icon">assignment</mat-icon>
+        <h3>{{ translate('client.no_requests_title') }}</h3>
+        <p>{{ translate('client.no_requests_message') }}</p>
+        <button mat-raised-button color="accent" (click)="requestNewService()">
+          <mat-icon>add</mat-icon>
+          {{ translate('client.request_first_service') }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Actions Section -->
+  <section class="quick-actions-section">
+    <div class="container">
+      <mat-card class="quick-actions-card">
+        <div class="quick-actions-content">
+          <div class="actions-text">
+            <h3>{{ translate('client.quick_actions.title') }}</h3>
+            <p>{{ translate('client.quick_actions.subtitle') }}</p>
+          </div>
+          <div class="actions-buttons">
+            <button mat-raised-button color="accent" (click)="requestNewService()">
+              <mat-icon>build</mat-icon>
+              {{ translate('client.request_service') }}
+            </button>
+            <button mat-stroked-button color="primary" routerLink="/home/services">
+              <mat-icon>search</mat-icon>
+              {{ translate('client.browse_services') }}
+            </button>
+            <button mat-stroked-button color="primary" routerLink="/home/contact">
+              <mat-icon>contact_support</mat-icon>
+              {{ translate('client.contact_us') }}
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+</div>

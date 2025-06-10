@@ -1,0 +1,382 @@
+{
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "contact": "Contacto",
+    "dashboard": "Painel"
+  },
+  "auth": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "login_title": "Iniciar Sessão",
+    "login_subtitle": "Entre na sua conta para aceder ao painel",
+    "magic_link_title": "Link Mágico",
+    "magic_link_subtitle": "Receba um link de acesso por email",
+    "email": "Email",
+    "password": "Palavra-passe",
+    "email_placeholder": "o-seu-email@exemplo.com",
+    "password_placeholder": "A sua palavra-passe",
+    "login_success": "Login efetuado com sucesso!",
+    "login_error": "Erro no login. Verifique as suas credenciais.",
+    "logging_in": "A entrar...",
+    "use_magic_link": "Usar Link Mágico",
+    "use_password": "Usar Palavra-passe",
+    "send_magic_link": "Enviar Link",
+    "magic_link_sent": "Link mágico enviado para o seu email!",
+    "magic_link_error": "Erro ao enviar link mágico",
+    "sending": "A enviar...",
+    "back_to_home": "Voltar ao Início",
+    "need_help": "Precisa de Ajuda?",
+    "welcome_message": "Bem-vindo à plataforma de construção mais confiável",
+    "demo": {
+      "title": "Contas de Demonstração",
+      "subtitle": "Clique numa conta para fazer login automaticamente"
+    }
+  },
+  "roles": {
+    "client": "Cliente",
+    "provider": "Prestador",
+    "admin": "Administrador"
+  },
+  "home": {
+    "hero": {
+      "title": "Construção de Qualidade, Confiança Garantida",
+      "subtitle": "Conectamos clientes a prestadores qualificados para todos os seus projetos de construção e renovação",
+      "request_service": "Solicitar Serviço",
+      "whatsapp": "WhatsApp"
+    },
+    "featured_services": {
+      "title": "Serviços em Destaque",
+      "subtitle": "Oferecemos uma ampla gama de serviços de construção e renovação"
+    },
+    "request_quote": "Pedir Orçamento",
+    "view_all_services": "Ver Todos os Serviços",
+    "service_areas": {
+      "title": "Áreas de Atendimento",
+      "subtitle": "Prestamos serviços nas seguintes regiões"
+    },
+    "learn_more": "Saber Mais",
+    "about": {
+      "title": "Sobre a Natan Construtora",
+      "description": "Com anos de experiência no mercado, conectamos clientes a prestadores qualificados, garantindo qualidade e confiança em cada projeto.",
+      "feature1": "Prestadores Verificados",
+      "feature2": "Suporte 24/7",
+      "feature3": "Satisfação Garantida"
+    },
+    "cta": {
+      "title": "Pronto para Começar o seu Projeto?",
+      "subtitle": "Receba orçamentos gratuitos de prestadores qualificados",
+      "get_quote": "Obter Orçamento",
+      "contact_us": "Contacte-nos"
+    }
+  },
+  "services": {
+    "title": "Nossos Serviços",
+    "subtitle": "Encontre o serviço perfeito para o seu projeto",
+    "search_placeholder": "Pesquisar serviços...",
+    "filter_region": "Filtrar por região",
+    "filter_category": "Filtrar por categoria",
+    "all_regions": "Todas as regiões",
+    "all_categories": "Todas as categorias",
+    "clear_filters": "Limpar Filtros",
+    "showing_results": "A mostrar {{count}} de {{total}} serviços",
+    "no_results_title": "Nenhum serviço encontrado",
+    "no_results_message": "Tente ajustar os seus critérios de pesquisa",
+    "view_details": "Ver Detalhes",
+    "request_quote": "Pedir Orçamento",
+    "plumbing": "Canalizações",
+    "electrical": "Eletricidade",
+    "renovation": "Renovações",
+    "painting": "Pintura",
+    "cta": {
+      "title": "Não encontrou o que procura?",
+      "description": "Contacte-nos diretamente e ajudaremos a encontrar a solução ideal",
+      "request_service": "Solicitar Serviço",
+      "contact_us": "Contactar"
+    }
+  },
+  "contact": {
+    "title": "Contacte-nos",
+    "subtitle": "Estamos aqui para ajudar com o seu projeto",
+    "form": {
+      "title": "Envie-nos uma Mensagem",
+      "subtitle": "Responderemos dentro de 24 horas",
+      "name": "Nome",
+      "email": "Email",
+      "phone": "Telefone",
+      "subject": "Assunto",
+      "message": "Mensagem",
+      "name_placeholder": "O seu nome",
+      "email_placeholder": "o-seu-email@exemplo.com",
+      "phone_placeholder": "+351 9XX XXX XXX",
+      "message_placeholder": "Descreva o seu projeto ou questão...",
+      "preferred_contact": "Método de contacto preferido",
+      "contact_email": "Email",
+      "contact_phone": "Telefone",
+      "contact_whatsapp": "WhatsApp",
+      "send": "Enviar Mensagem",
+      "sending": "A enviar...",
+      "success_message": "Mensagem enviada com sucesso! Entraremos em contacto em breve.",
+      "subjects": {
+        "general": "Informação Geral",
+        "quote": "Pedido de Orçamento",
+        "support": "Suporte Técnico",
+        "complaint": "Reclamação"
+      }
+    },
+    "info": {
+      "quick_contact": "Contacto Rápido",
+      "phone": "Telefone",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "instant_support": "Suporte Instantâneo",
+      "business_hours": "Horário de Funcionamento",
+      "weekdays": "Segunda a Sexta",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "address": "Morada",
+      "view_map": "Ver no Mapa"
+    },
+    "service_areas": {
+      "title": "Áreas de Atendimento",
+      "subtitle": "Prestamos serviços nestas regiões"
+    },
+    "emergency": {
+      "title": "Emergência?",
+      "description": "Para situações urgentes, contacte-nos diretamente",
+      "call_now": "Ligar Agora"
+    }
+  },
+  "client": {
+    "welcome": "Bem-vindo",
+    "dashboard_subtitle": "Acompanhe os seus pedidos e projetos",
+    "request_new_service": "Novo Pedido",
+    "contact_support": "Suporte",
+    "stats": {
+      "total_requests": "Total de Pedidos",
+      "pending_requests": "Pendentes",
+      "active_quotes": "Orçamentos Ativos",
+      "completed_requests": "Concluídos"
+    },
+    "recent_requests": "Pedidos Recentes",
+    "view_all": "Ver Todos",
+    "requested_on": "Solicitado em",
+    "assigned_to": "Atribuído a",
+    "quote_received": "Orçamento Recebido",
+    "includes_vat": "inclui IVA",
+    "view_details": "Ver Detalhes",
+    "approve_quote": "Aprovar",
+    "reject_quote": "Recusar",
+    "quote_approved": "Orçamento aprovado com sucesso!",
+    "quote_rejected": "Orçamento recusado",
+    "no_requests_title": "Ainda não tem pedidos",
+    "no_requests_message": "Comece por solicitar um serviço",
+    "request_first_service": "Primeiro Pedido",
+    "quick_actions": {
+      "title": "Ações Rápidas",
+      "subtitle": "O que gostaria de fazer?"
+    },
+    "request_service": "Solicitar Serviço",
+    "browse_services": "Explorar Serviços",
+    "contact_us": "Contactar"
+  },
+  "provider": {
+    "welcome": "Bem-vindo",
+    "dashboard_subtitle": "Gerencie os seus serviços e agenda",
+    "available": "Disponível",
+    "unavailable": "Indisponível",
+    "availability_enabled": "Disponibilidade ativada",
+    "availability_disabled": "Disponibilidade desativada",
+    "view_calendar": "Ver Calendário",
+    "stats": {
+      "total_assigned": "Serviços Atribuídos",
+      "completed_today": "Concluídos Hoje",
+      "avg_rating": "Avaliação Média",
+      "total_earnings": "Ganhos Totais"
+    },
+    "today_schedule": "Agenda de Hoje",
+    "pending_requests": "Pedidos Pendentes",
+    "pending": "pendente(s)",
+    "requested_on": "Solicitado em",
+    "open_maps": "Abrir no Maps",
+    "view_details": "Ver Detalhes",
+    "start_service": "Iniciar Serviço",
+    "complete_service": "Concluir Serviço",
+    "no_schedule_today": "Sem agendamentos hoje",
+    "no_schedule_message": "Aproveite para descansar ou verificar pedidos pendentes",
+    "client_photos": "Fotos do Cliente",
+    "preferred_dates": "Datas Preferidas",
+    "decline": "Recusar",
+    "accept": "Aceitar",
+    "request_accepted": "Pedido aceite com sucesso!",
+    "request_declined": "Pedido recusado",
+    "service_started": "Serviço iniciado!",
+    "service_completed": "Serviço concluído!",
+    "quick_actions": {
+      "title": "Ações Rápidas",
+      "subtitle": "Acesso rápido às funcionalidades principais"
+    },
+    "service_history": "Histórico de Serviços",
+    "my_ratings": "Minhas Avaliações",
+    "calendar": {
+      "title": "Calendário de Serviços",
+      "subtitle": "Visualize e gerencie a sua agenda",
+      "week_view": "Vista Semanal",
+      "month_view": "Vista Mensal",
+      "today": "Hoje",
+      "appointments": "agendamento(s)",
+      "no_appointments": "Sem agendamentos neste dia",
+      "client_photos": "Fotos do Cliente"
+    }
+  },
+  "admin": {
+    "welcome": "Bem-vindo",
+    "dashboard_subtitle": "Painel de controlo e gestão da plataforma",
+    "export_report": "Exportar Relatório",
+    "system_settings": "Configurações",
+    "metrics": {
+      "monthly_revenue": "Receita Mensal",
+      "total_requests": "Total de Pedidos",
+      "pending": "pendentes",
+      "active_providers": "Prestadores Ativos",
+      "online_now": "online agora",
+      "satisfaction_rate": "Taxa de Satisfação",
+      "new_clients": "novos clientes"
+    },
+    "charts": {
+      "revenue_trend": "Tendência de Receitas",
+      "last_6_months": "Últimos 6 meses",
+      "requests_status": "Estado dos Pedidos",
+      "current_distribution": "Distribuição atual",
+      "services_popularity": "Popularidade dos Serviços",
+      "requests_by_service": "Pedidos por serviço"
+    },
+    "recent_requests": "Pedidos Recentes",
+    "view_all_requests": "Ver Todos os Pedidos",
+    "table": {
+      "id": "ID",
+      "service": "Serviço",
+      "client": "Cliente",
+      "status": "Estado",
+      "date": "Data",
+      "actions": "Ações"
+    },
+    "view_details": "Ver Detalhes",
+    "assign_provider": "Atribuir Prestador",
+    "provider_assigned": "Prestador atribuído com sucesso!",
+    "recent_activities": "Atividades Recentes",
+    "quick_actions": "Ações Rápidas",
+    "add_provider": "Adicionar Prestador",
+    "add_service": "Adicionar Serviço",
+    "send_notification": "Enviar Notificação",
+    "view_analytics": "Ver Análises",
+    "revenue": "Receita",
+    "requests_count": "Nº de Pedidos"
+  },
+  "service_request": {
+    "title": "Solicitar Serviço",
+    "subtitle": "Descreva o seu projeto e receba orçamentos",
+    "step1": {
+      "title": "Selecionar Serviço",
+      "select_service": "Escolha o Tipo de Serviço",
+      "description": "Selecione o serviço que melhor se adequa ao seu projeto"
+    },
+    "step2": {
+      "title": "Informações de Contacto",
+      "client_info": "Os Seus Dados",
+      "description": "Dados necessários para contacto e orçamento",
+      "name": "Nome Completo",
+      "email": "Email",
+      "phone": "Telefone",
+      "whatsapp": "WhatsApp",
+      "name_placeholder": "O seu nome completo",
+      "email_placeholder": "o-seu-email@exemplo.com",
+      "phone_placeholder": "+351 9XX XXX XXX",
+      "whatsapp_placeholder": "+351 9XX XXX XXX (opcional)",
+      "include_nif": "Incluir NIF no orçamento (para fatura)",
+      "nif": "NIF",
+      "nif_placeholder": "123456789"
+    },
+    "step3": {
+      "title": "Detalhes do Serviço",
+      "service_details": "Detalhes do Projeto",
+      "description": "Forneça informações sobre o local e trabalho necessário",
+      "region": "Região",
+      "location": "Localização",
+      "location_placeholder": "Morada completa do local do serviço",
+      "description": "Descrição do Trabalho",
+      "description_placeholder": "Descreva detalhadamente o trabalho necessário...",
+      "preferred_dates": "Datas Preferenciais",
+      "preferred_dates_help": "Selecione até 3 datas de preferência",
+      "select_date": "Selecionar Data",
+      "dates_required": "Deve selecionar pelo menos uma data",
+      "photos_videos": "Fotos/Vídeos (Opcional)",
+      "photos_help": "Adicione fotos para ajudar a entender o trabalho necessário",
+      "upload_files": "Carregar Ficheiros",
+      "file_limit": "Máx. 3 ficheiros, 5MB cada",
+      "agree_terms": "Concordo com os",
+      "terms_link": "termos de serviço",
+      "terms_required": "Deve aceitar os termos de serviço"
+    },
+    "next": "Seguinte",
+    "previous": "Anterior",
+    "submit": "Enviar Pedido",
+    "submitting": "A enviar...",
+    "success_message": "Pedido enviado com sucesso! Receberá um orçamento em breve.",
+    "error_message": "Erro ao enviar pedido. Tente novamente.",
+    "max_files_error": "Máximo de 3 ficheiros permitido",
+    "file_size_error": "Ficheiro demasiado grande (máx. 5MB)",
+    "file_type_error": "Tipo de ficheiro não suportado"
+  },
+  "status": {
+    "pending": "Pendente",
+    "quoted": "Orçamentado",
+    "approved": "Aprovado",
+    "in_progress": "Em Progresso",
+    "completed": "Concluído",
+    "cancelled": "Cancelado"
+  },
+  "calendar": {
+    "days": {
+      "sunday": "Dom",
+      "monday": "Seg",
+      "tuesday": "Ter",
+      "wednesday": "Qua",
+      "thursday": "Qui",
+      "friday": "Sex",
+      "saturday": "Sáb"
+    }
+  },
+  "stats": {
+    "projects_completed": "Projetos Concluídos",
+    "avg_rating": "Avaliação Média",
+    "support": "Suporte",
+    "professionals": "Profissionais"
+  },
+  "service_areas": {
+    "sao_miguel_desc": "Cobertura completa da região de São Miguel",
+    "aveiro_desc": "Sede principal com todos os serviços disponíveis",
+    "coimbra_desc": "Serviços especializados na região de Coimbra"
+  },
+  "footer": {
+    "company_description": "A sua parceira de confiança para todos os projetos de construção e renovação",
+    "services": "Serviços",
+    "service_areas": "Áreas de Atendimento",
+    "contact": "Contacto",
+    "rights_reserved": "Todos os direitos reservados",
+    "privacy_policy": "Política de Privacidade",
+    "terms_of_service": "Termos de Serviço",
+    "business_hours": "Seg-Sex: 08:00-18:00"
+  },
+  "validation": {
+    "required": "Este campo é obrigatório",
+    "email": "Insira um email válido",
+    "minlength": "Texto demasiado curto"
+  },
+  "common": {
+    "loading": "A carregar...",
+    "close": "Fechar",
+    "error_loading_data": "Erro ao carregar dados",
+    "error_occurred": "Ocorreu um erro"
+  }
+}

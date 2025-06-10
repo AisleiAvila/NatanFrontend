@@ -1,0 +1,31 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-primary { color: #1976d2; }
+.text-accent { color: #ff4081; }
+.mt-16 { margin-top: 16px; }
+.mb-16 { margin-bottom: 16px; }

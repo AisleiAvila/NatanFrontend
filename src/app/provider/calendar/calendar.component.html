@@ -1,0 +1,206 @@
+<div class="calendar-container">
+  <!-- Header Section -->
+  <div class="calendar-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="header-left">
+          <h1>{{ translate('provider.calendar.title') }}</h1>
+          <p>{{ translate('provider.calendar.subtitle') }}</p>
+        </div>
+        <div class="header-actions">
+          <button mat-stroked-button (click)="toggleViewMode()">
+            <mat-icon>{{ viewMode === 'month' ? 'view_week' : 'view_module' }}</mat-icon>
+            {{ viewMode === 'month' ? translate('provider.calendar.week_view') : translate('provider.calendar.month_view') }}
+          </button>
+          <button mat-raised-button color="primary" (click)="goToToday()">
+            <mat-icon>today</mat-icon>
+            {{ translate('provider.calendar.today') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar Navigation -->
+  <div class="calendar-nav">
+    <div class="container">
+      <div class="nav-content">
+        <div class="nav-controls">
+          <button mat-icon-button (click)="previousMonth()">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <h2 class="current-month">
+            {{ monthNames[currentMonth.getMonth()] }} {{ currentMonth.getFullYear() }}
+          </h2>
+          <button mat-icon-button (click)="nextMonth()">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+        
+        <div class="calendar-legend">
+          <div class="legend-item">
+            <div class="legend-color approved"></div>
+            <span>{{ translate('status.approved') }}</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color in_progress"></div>
+            <span>{{ translate('status.in_progress') }}</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color completed"></div>
+            <span>{{ translate('status.completed') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar Content -->
+  <div class="calendar-content">
+    <div class="container">
+      <div class="calendar-grid-container">
+        <!-- Calendar Grid -->
+        <div class="calendar-section">
+          <!-- Loading State -->
+          <div class="loading-container" *ngIf="loading">
+            <mat-spinner></mat-spinner>
+            <p>{{ translate('common.loading') }}</p>
+          </div>
+
+          <!-- Calendar Grid -->
+          <div class="calendar-grid" *ngIf="!loading">
+            <!-- Week Day Headers -->
+            <div class="calendar-header-row">
+              <div class="calendar-day-header" *ngFor="let day of weekDays">
+                {{ translate('calendar.days.' + day.toLowerCase()) }}
+              </div>
+            </div>
+
+            <!-- Calendar Weeks -->
+            <div class="calendar-weeks">
+              <div class="calendar-week" *ngFor="let week of calendarWeeks">
+                <div class="calendar-day" 
+                     *ngFor="let day of week.days"
+                     [class.other-month]="!day.isCurrentMonth"
+                     [class.today]="day.isToday"
+                     [class.selected]="selectedDate && isSameDay(day.date, selectedDate)"
+                     [class.has-requests]="day.requests.length > 0"
+                     (click)="selectDate(day)">
+                  
+                  <div class="day-number">{{ day.date.getDate() }}</div>
+                  
+                  <div class="day-requests" *ngIf="day.requests.length > 0">
+                    <div class="request-indicator" 
+                         *ngFor="let request of day.requests.slice(0, 3)"
+                         [style.background-color]="statusColors[request.status]"
+                         [title]="request.serviceName + ' - ' + request.clientInfo.name">
+                      <span class="request-time">{{ formatTime(request.preferredDates[0]) }}</span>
+                    </div>
+                    <div class="more-requests" *ngIf="day.requests.length > 3">
+                      +{{ day.requests.length - 3 }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selected Day Details -->
+        <div class="day-details-section" *ngIf="selectedDate">
+          <mat-card class="day-details-card">
+            <mat-card-header>
+              <mat-card-title>
+                {{ selectedDate | date:'fullDate' }}
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{ selectedDayRequests.length }} {{ translate('provider.calendar.appointments') }}
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <!-- No appointments -->
+              <div class="no-appointments" *ngIf="selectedDayRequests.length === 0">
+                <mat-icon>event_available</mat-icon>
+                <p>{{ translate('provider.calendar.no_appointments') }}</p>
+              </div>
+
+              <!-- Appointments List -->
+              <div class="appointments-list" *ngIf="selectedDayRequests.length > 0">
+                <div class="appointment-item" *ngFor="let request of selectedDayRequests">
+                  <div class="appointment-header">
+                    <div class="appointment-time">
+                      <mat-icon>schedule</mat-icon>
+                      <span>{{ formatTime(request.preferredDates[0]) }}</span>
+                    </div>
+                    <mat-chip [style.background-color]="statusColors[request.status]" 
+                             [style.color]="'white'" class="status-chip">
+                      <mat-icon>{{ getStatusIcon(request.status) }}</mat-icon>
+                      {{ translate('status.' + request.status) }}
+                    </mat-chip>
+                  </div>
+
+                  <div class="appointment-content">
+                    <h4>{{ request.serviceName }}</h4>
+                    <div class="appointment-details">
+                      <div class="detail-row">
+                        <mat-icon>person</mat-icon>
+                        <span>{{ request.clientInfo.name }}</span>
+                        <a [href]="'tel:' + request.clientInfo.phone" class="phone-link">
+                          <mat-icon>phone</mat-icon>
+                        </a>
+                      </div>
+                      <div class="detail-row">
+                        <mat-icon>location_on</mat-icon>
+                        <span>{{ request.location }}</span>
+                        <button mat-icon-button (click)="openGoogleMaps(request.location)" 
+                                class="maps-btn">
+                          <mat-icon>map</mat-icon>
+                        </button>
+                      </div>
+                      <div class="detail-row" *ngIf="request.description">
+                        <mat-icon>description</mat-icon>
+                        <span>{{ request.description | slice:0:100 }}{{ request.description.length > 100 ? '...' : '' }}</span>
+                      </div>
+                    </div>
+
+                    <!-- Photos -->
+                    <div class="appointment-photos" *ngIf="request.photos.length > 0">
+                      <h5>{{ translate('provider.calendar.client_photos') }}</h5>
+                      <div class="photos-grid">
+                        <img *ngFor="let photo of request.photos.slice(0, 4)" 
+                             [src]="photo" [alt]="'Client photo'" 
+                             class="client-photo">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="appointment-actions">
+                    <button mat-button color="primary" *ngIf="request.status === 'approved'">
+                      <mat-icon>visibility</mat-icon>
+                      {{ translate('provider.view_details') }}
+                    </button>
+                    <button mat-raised-button color="accent" 
+                            *ngIf="request.status === 'approved'" 
+                            (click)="startService(request)">
+                      <mat-icon>play_arrow</mat-icon>
+                      {{ translate('provider.start_service') }}
+                    </button>
+                    <button mat-raised-button color="primary" 
+                            *ngIf="request.status === 'in_progress'" 
+                            (click)="completeService(request)">
+                      <mat-icon>check</mat-icon>
+                      {{ translate('provider.complete_service') }}
+                    </button>
+                  </div>
+
+                  <mat-divider></mat-divider>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
