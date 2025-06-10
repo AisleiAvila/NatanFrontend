@@ -5,7 +5,9 @@
     "contact": "Contato",
     "dashboard": "Painel",
     "about": "Sobre",
-    "login": "Entrar"
+    "login": "Entrar",
+    "request_service": "Solicitar Serviço",
+    "my_requests": "Meus Pedidos"
   },
   "auth": {
     "login": "Entrar",

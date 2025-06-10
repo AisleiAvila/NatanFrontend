@@ -4,7 +4,10 @@
     "services": "Services",
     "contact": "Contact",
     "dashboard": "Dashboard",
-    "login": "Login"
+    "about": "About",
+    "login": "Login",
+    "request_service": "Request Service",
+    "my_requests": "My Requests"
   },
   "auth": {
     "login": "Login",
