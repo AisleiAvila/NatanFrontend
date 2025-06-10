@@ -1,5 +1,8 @@
 .home-container {
   width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+  position: relative;
 }
 
 .container {
@@ -8,12 +11,38 @@
   padding: 0 16px;
 }
 
+// Header
+.home-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 1rem 0;
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    .logo-image {
+      height: 40px;
+      width: auto;
+    }
+  }
+}
+
 // Hero Section
 .hero-section {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), #1976d2;
   color: white;
   padding: 120px 0;
   text-align: center;
+  margin-top: 0;
 
   h1 {
     font-size: 3rem;

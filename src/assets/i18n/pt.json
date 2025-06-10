@@ -88,6 +88,7 @@
     "electrical": "Eletricidade",
     "renovation": "Renovações",
     "painting": "Pintura",
+    "construction": "Construção Civil",
     "cta": {
       "title": "Não encontrou o que procura?",
       "description": "Contacte-nos diretamente e ajudaremos a encontrar a solução ideal",
@@ -359,14 +360,17 @@
     "coimbra_desc": "Serviços especializados na região de Coimbra"
   },
   "footer": {
-    "company_description": "A sua parceira de confiança para todos os projetos de construção e renovação",
+    "company_description": "Sua plataforma confiável para serviços de construção e manutenção",
     "services": "Serviços",
     "service_areas": "Áreas de Atendimento",
     "contact": "Contacto",
-    "rights_reserved": "Todos os direitos reservados",
-    "privacy_policy": "Política de Privacidade",
-    "terms_of_service": "Termos de Serviço",
-    "business_hours": "Seg-Sex: 08:00-18:00"
+    "business_hours": "Segunda a Sexta: 9h às 18h",
+    "rights": "Todos os direitos reservados",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "tagline": "Construção de Qualidade, Confiança Garantida",
+    "company": "ConstruTech",
+    "about": "Sobre Nós"
   },
   "validation": {
     "required": "Este campo é obrigatório",

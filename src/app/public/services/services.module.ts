@@ -1,39 +1,39 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatMenuModule } from "@angular/material/menu";
-import { HomeComponent } from "./home.component";
+import { MatSelectModule } from "@angular/material/select";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { ServicesComponent } from "./services.component";
 import { LanguageSelectorModule } from "@shared/components/language-selector/language-selector.module";
 
 const routes: Routes = [
   {
     path: "",
-    component: HomeComponent,
+    component: ServicesComponent,
   },
 ];
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [ServicesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
+    FormsModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule,
-    MatMenuModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
     LanguageSelectorModule,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomeModule {}
+export class ServicesModule {}

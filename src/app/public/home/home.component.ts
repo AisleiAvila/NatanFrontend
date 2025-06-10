@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { TranslationService } from "@core/services/translation.service";
 import { DataService, Service } from "@core/services/data.service";
@@ -46,21 +44,11 @@ export class HomeComponent implements OnInit {
 
   services: Service[] = [];
 
-  contactForm: FormGroup;
-
   constructor(
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar,
     private router: Router,
     public translate: TranslationService,
     private dataService: DataService
-  ) {
-    this.contactForm = this.fb.group({
-      name: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-      message: ["", Validators.required],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.translate.initTranslation();
@@ -84,18 +72,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate(["/client/request-service"], {
       queryParams: { serviceId: service.id },
     });
-  }
-
-  onSubmit(): void {
-    if (this.contactForm.valid) {
-      // TODO: Implementar envio do formulário
-      this.snackBar.open(
-        this.translate.translate("home.contact.form.success"),
-        "OK",
-        { duration: 3000 }
-      );
-      this.contactForm.reset();
-    }
   }
 
   viewAllServices(): void {

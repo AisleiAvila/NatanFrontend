@@ -6,97 +6,94 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-header",
   template: `
-    <header class="main-header">
-      <div class="container">
-        <div class="header-content">
-          <div class="logo">
-            <a routerLink="/">
-              <img src="assets/images/logo.png" alt="Natan Construtora" />
-            </a>
-          </div>
-
-          <nav class="main-nav" *ngIf="!isAuthPage">
-            <a routerLink="/home/services">{{ translate("home.services") }}</a>
-            <a routerLink="/home/about">{{ translate("home.about") }}</a>
-            <a routerLink="/home/contact">{{ translate("home.contact") }}</a>
-          </nav>
-
-          <div class="header-actions">
-            <app-language-selector></app-language-selector>
-
-            <ng-container *ngIf="!isAuthPage">
-              <button
-                mat-raised-button
-                color="primary"
-                routerLink="/auth/login"
-                *ngIf="!isLoggedIn"
-              >
-                {{ translate("home.login") }}
-              </button>
-              <button
-                mat-raised-button
-                color="accent"
-                routerLink="/client/dashboard"
-                *ngIf="isLoggedIn"
-              >
-                {{ translate("home.dashboard") }}
-              </button>
-            </ng-container>
-          </div>
+    <header class="app-header">
+      <div class="header-container">
+        <div class="logo">
+          <a routerLink="/">
+            <img
+              src="assets/images/Logo_Natan.png"
+              alt="Natan Construtora"
+              class="logo-image"
+            />
+          </a>
+        </div>
+        <nav class="main-nav">
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            {{ translate("nav.home") }}
+          </a>
+          <a routerLink="/services" routerLinkActive="active">
+            {{ translate("nav.services") }}
+          </a>
+          <a routerLink="/contact" routerLinkActive="active">
+            {{ translate("nav.contact") }}
+          </a>
+        </nav>
+        <div class="header-actions">
+          <app-language-selector></app-language-selector>
+          <button mat-button color="primary" routerLink="/auth/login">
+            {{ translate("auth.login") }}
+          </button>
         </div>
       </div>
     </header>
   `,
   styles: [
     `
-      .main-header {
-        background: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      .app-header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         z-index: 1000;
+      }
 
-        .header-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 0;
+      .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        .logo-image {
+          height: 50px;
+          width: auto;
+          object-fit: contain;
         }
+      }
 
-        .logo {
-          a {
-            display: block;
+      .main-nav {
+        display: flex;
+        gap: 2rem;
+
+        a {
+          text-decoration: none;
+          color: #424242;
+          font-weight: 500;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #1976d2;
           }
 
-          img {
-            height: 40px;
-            width: auto;
+          &.active {
+            color: #1976d2;
           }
         }
+      }
 
-        .main-nav {
-          display: flex;
-          gap: 2rem;
-
-          a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-
-            &:hover {
-              color: #1976d2;
-            }
-          }
-        }
-
-        .header-actions {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
     `,
   ],

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .background { fill: #f5f5f5; }
+    .icon { fill: #1976d2; }
+    .text { font-family: Arial, sans-serif; fill: #424242; }
+  </style>
+  <rect width="800" height="400" class="background"/>
+  <g transform="translate(350, 150)">
+    <path d="M50,0 L100,50 L0,50 Z" class="icon"/>
+    <text x="0" y="80" class="text" font-size="24" text-anchor="middle">ConstruTech</text>
+  </g>
+</svg> 

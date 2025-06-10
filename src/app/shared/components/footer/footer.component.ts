@@ -1,23 +1,27 @@
-import { Component } from '@angular/core';
-import { TranslationService } from '../../../core/services/translation.service';
+import { Component, OnInit } from "@angular/core";
+import { TranslationService } from "../../../core/services/translation.service";
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  selector: "app-footer",
+  templateUrl: "./footer.component.html",
+  styleUrls: ["./footer.component.scss"],
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   currentYear = new Date().getFullYear();
+  translate: TranslationService;
 
-  constructor(private translationService: TranslationService) {}
-
-  translate(key: string): string {
-    return this.translationService.translate(key);
+  constructor(private translationService: TranslationService) {
+    this.translate = translationService;
   }
 
+  ngOnInit(): void {}
+
   openWhatsApp(): void {
-    const phoneNumber = '+351912345678';
-    const message = encodeURIComponent('Olá! Gostaria de saber mais sobre os vossos serviços.');
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    const phone = "+351912345678";
+    const message = "Olá! Gostaria de mais informações sobre os serviços.";
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
   }
 }

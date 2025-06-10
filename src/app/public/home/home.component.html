@@ -1,4 +1,20 @@
 <div class="home-container">
+  <!-- Header com seletor de idioma -->
+  <header class="home-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img
+            src="assets/images/logo.svg"
+            alt="ConstruTech"
+            class="logo-image"
+          />
+        </div>
+        <app-language-selector></app-language-selector>
+      </div>
+    </div>
+  </header>
+
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="container">
@@ -9,12 +25,8 @@
           <button mat-raised-button color="primary" routerLink="/auth/register">
             {{ translate.translate("home.hero.request_service") }}
           </button>
-          <button
-            mat-stroked-button
-            color="primary"
-            routerLink="/home/services"
-          >
-            {{ translate.translate("home.hero.whatsapp") }}
+          <button mat-stroked-button color="primary" routerLink="/contact">
+            {{ translate.translate("contact.title") }}
           </button>
         </div>
       </div>
@@ -79,99 +91,7 @@
           </ul>
         </div>
         <div class="about-image">
-          <img
-            src="https://placehold.co/800x600/1976d2/ffffff?text=Natan+Construtora"
-            alt="Natan Construtora"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <h2>{{ translate.translate("contact.title") }}</h2>
-      <p>{{ translate.translate("contact.subtitle") }}</p>
-
-      <div class="contact-content">
-        <div class="contact-info">
-          <div class="contact-item">
-            <mat-icon>phone</mat-icon>
-            <div>
-              <h3>{{ translate.translate("contact.info.phone") }}</h3>
-              <p>{{ translate.translate("contact.info.quick_contact") }}</p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <mat-icon>email</mat-icon>
-            <div>
-              <h3>{{ translate.translate("contact.info.email") }}</h3>
-              <p>{{ translate.translate("contact.info.instant_support") }}</p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <mat-icon>location_on</mat-icon>
-            <div>
-              <h3>{{ translate.translate("contact.info.address") }}</h3>
-              <p>{{ translate.translate("contact.info.business_hours") }}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-form">
-          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline">
-              <mat-label>{{
-                translate.translate("contact.form.name")
-              }}</mat-label>
-              <input matInput formControlName="name" required />
-              <mat-error *ngIf="contactForm.get('name')?.errors?.['required']">
-                {{ translate.translate("validation.required") }}
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>{{
-                translate.translate("contact.form.email")
-              }}</mat-label>
-              <input matInput type="email" formControlName="email" required />
-              <mat-error *ngIf="contactForm.get('email')?.errors?.['required']">
-                {{ translate.translate("validation.required") }}
-              </mat-error>
-              <mat-error *ngIf="contactForm.get('email')?.errors?.['email']">
-                {{ translate.translate("validation.email") }}
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>{{
-                translate.translate("contact.form.message")
-              }}</mat-label>
-              <textarea
-                matInput
-                formControlName="message"
-                rows="4"
-                required
-              ></textarea>
-              <mat-error
-                *ngIf="contactForm.get('message')?.errors?.['required']"
-              >
-                {{ translate.translate("validation.required") }}
-              </mat-error>
-            </mat-form-field>
-
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              [disabled]="!contactForm.valid"
-            >
-              {{ translate.translate("contact.form.send") }}
-            </button>
-          </form>
+          <img src="assets/images/hero-construction.svg" alt="ConstruTech" />
         </div>
       </div>
     </div>

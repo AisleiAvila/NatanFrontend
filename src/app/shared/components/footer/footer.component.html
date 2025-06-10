@@ -4,10 +4,10 @@
     <div class="footer-section">
       <div class="footer-brand">
         <mat-icon class="brand-icon">construction</mat-icon>
-        <h3>Natan Construtora</h3>
+        <h3>ConstruTech</h3>
       </div>
       <p class="company-description">
-        {{ translate('footer.company_description') }}
+        {{ translate.translate("footer.company_description") }}
       </p>
       <div class="social-links">
         <button mat-icon-button class="social-btn" (click)="openWhatsApp()">
@@ -27,18 +27,34 @@
 
     <!-- Services -->
     <div class="footer-section">
-      <h4>{{ translate('footer.services') }}</h4>
+      <h4>{{ translate.translate("footer.services") }}</h4>
       <ul class="footer-links">
-        <li><a href="#" routerLink="/home/services">{{ translate('services.plumbing') }}</a></li>
-        <li><a href="#" routerLink="/home/services">{{ translate('services.electrical') }}</a></li>
-        <li><a href="#" routerLink="/home/services">{{ translate('services.renovation') }}</a></li>
-        <li><a href="#" routerLink="/home/services">{{ translate('services.painting') }}</a></li>
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            translate.translate("services.plumbing")
+          }}</a>
+        </li>
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            translate.translate("services.electrical")
+          }}</a>
+        </li>
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            translate.translate("services.renovation")
+          }}</a>
+        </li>
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            translate.translate("services.painting")
+          }}</a>
+        </li>
       </ul>
     </div>
 
     <!-- Service Areas -->
     <div class="footer-section">
-      <h4>{{ translate('footer.service_areas') }}</h4>
+      <h4>{{ translate.translate("footer.service_areas") }}</h4>
       <ul class="footer-links">
         <li><a href="#" routerLink="/home">São Miguel</a></li>
         <li><a href="#" routerLink="/home">Aveiro</a></li>
@@ -48,7 +64,7 @@
 
     <!-- Contact Info -->
     <div class="footer-section">
-      <h4>{{ translate('footer.contact') }}</h4>
+      <h4>{{ translate.translate("footer.contact") }}</h4>
       <div class="contact-info">
         <div class="contact-item">
           <mat-icon>phone</mat-icon>
@@ -56,7 +72,7 @@
         </div>
         <div class="contact-item">
           <mat-icon>email</mat-icon>
-          <span>info&#64;natan.pt</span>
+          <span>info&#64;constru.pt</span>
         </div>
         <div class="contact-item">
           <mat-icon>location_on</mat-icon>
@@ -64,7 +80,7 @@
         </div>
         <div class="contact-item">
           <mat-icon>schedule</mat-icon>
-          <span>{{ translate('footer.business_hours') }}</span>
+          <span>{{ translate.translate("footer.business_hours") }}</span>
         </div>
       </div>
     </div>
@@ -74,10 +90,17 @@
   <div class="footer-bottom">
     <div class="footer-container">
       <div class="bottom-content">
-        <p>&copy; {{ currentYear }} Natan Construtora. {{ translate('footer.rights_reserved') }}</p>
+        <p>
+          &copy; {{ currentYear }} ConstruTech.
+          {{ translate.translate("footer.rights") }}
+        </p>
         <div class="legal-links">
-          <a href="#" class="legal-link">{{ translate('footer.privacy_policy') }}</a>
-          <a href="#" class="legal-link">{{ translate('footer.terms_of_service') }}</a>
+          <a href="#" class="legal-link">{{
+            translate.translate("footer.privacy")
+          }}</a>
+          <a href="#" class="legal-link">{{
+            translate.translate("footer.terms")
+          }}</a>
         </div>
       </div>
     </div>

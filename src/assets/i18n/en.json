@@ -88,9 +88,10 @@
     "electrical": "Electrical",
     "renovation": "Renovation",
     "painting": "Painting",
+    "construction": "Construction",
     "cta": {
       "title": "Didn't find what you're looking for?",
-      "description": "Contact us directly and we'll help find the ideal solution",
+      "description": "Contact us directly and we'll help you find the ideal solution",
       "request_service": "Request Service",
       "contact_us": "Contact Us"
     }
@@ -359,14 +360,17 @@
     "coimbra_desc": "Specialized services in Coimbra region"
   },
   "footer": {
-    "company_description": "Your trusted partner for all construction and renovation projects",
+    "company_description": "Your trusted platform for construction and maintenance services",
     "services": "Services",
     "service_areas": "Service Areas",
     "contact": "Contact",
-    "rights_reserved": "All rights reserved",
-    "privacy_policy": "Privacy Policy",
-    "terms_of_service": "Terms of Service",
-    "business_hours": "Mon-Fri: 08:00-18:00"
+    "business_hours": "Monday to Friday: 9am to 6pm",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "tagline": "Quality Construction, Guaranteed Trust",
+    "company": "ConstruTech",
+    "about": "About Us"
   },
   "validation": {
     "required": "This field is required",

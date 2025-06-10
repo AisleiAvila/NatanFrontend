@@ -1,11 +1,8 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
-import { SharedModule } from "../shared/shared.module";
 import { HomeModule } from "./home/home.module";
-
-// Components
-import { ServicesComponent } from "./services/services.component";
-import { ContactComponent } from "./contact/contact.component";
+import { ContactModule } from "./contact/contact.module";
 
 const routes: Routes = [
   {
@@ -13,17 +10,19 @@ const routes: Routes = [
     loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
   },
   {
-    path: "services",
-    component: ServicesComponent,
+    path: "contact",
+    loadChildren: () =>
+      import("./contact/contact.module").then((m) => m.ContactModule),
   },
   {
-    path: "contact",
-    component: ContactComponent,
+    path: "services",
+    loadChildren: () =>
+      import("./services/services.module").then((m) => m.ServicesModule),
   },
 ];
 
 @NgModule({
-  declarations: [ServicesComponent, ContactComponent],
-  imports: [SharedModule, RouterModule.forChild(routes), HomeModule],
+  declarations: [],
+  imports: [CommonModule, RouterModule.forChild(routes), HomeModule],
 })
 export class PublicModule {}
