@@ -1,18 +1,182 @@
-.app-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
+// Global styles for the Natan Construtora Angular/Ionic app
+
+.landing-page {
+  .hero-section {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    
+    .hero-content {
+      max-width: 600px;
+      margin: 0 auto;
+      
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+      
+      .cta-button {
+        --padding-start: 20px;
+        --padding-end: 20px;
+        --padding-top: 15px;
+        --padding-bottom: 15px;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+    }
+  }
+  
+  .services-section,
+  .areas-section,
+  .contact-section {
+    padding: 40px 20px;
+    
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: #1976d2;
+    }
+  }
+  
+  .services-section {
+    background: #f8f9fa;
+    
+    ion-card {
+      height: 100%;
+      margin: 10px 0;
+      
+      ion-card-title {
+        color: #1976d2;
+        font-weight: 600;
+      }
+      
+      ion-card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        
+        p {
+          flex-grow: 1;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+  
+  .areas-section {
+    .area-card {
+      text-align: center;
+      padding: 20px;
+      
+      ion-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+      
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+  }
+  
+  .contact-section {
+    background: #f8f9fa;
+    
+    ion-item {
+      --background: transparent;
+      margin-bottom: 10px;
+      
+      ion-icon {
+        margin-right: 15px;
+      }
+      
+      ion-label {
+        font-weight: 500;
+      }
+    }
+  }
 }
 
-.main-content {
-  flex: 1;
-  padding-top: 72px; // Altura do header + espaçamento
-  position: relative;
-  width: 100%;
+.dashboard {
+  padding: 20px;
+}
 
-  @media (max-width: 768px) {
-    padding-top: 56px; // Smaller header on mobile
+// Responsive adjustments
+@media (max-width: 768px) {
+  .landing-page {
+    .hero-section {
+      padding: 40px 15px;
+      
+      .hero-content {
+        h1 {
+          font-size: 2rem;
+        }
+        
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+    
+    .services-section,
+    .areas-section,
+    .contact-section {
+      padding: 30px 15px;
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// Ionic custom CSS variables
+ion-toolbar {
+  --background: #1976d2;
+  --color: white;
+  
+  ion-title {
+    font-weight: 600;
+    
+    ion-icon {
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+  }
+  
+  ion-button {
+    --color: white;
+    font-weight: 500;
+  }
+}
+
+ion-content {
+  --background: white;
+}
+
+// Custom button styles
+.cta-button {
+  --background: #ff9800;
+  --background-hover: #f57c00;
+  --color: white;
+  --border-radius: 25px;
+  --box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+  
+  &:hover {
+    --box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+    transform: translateY(-2px);
   }
 }

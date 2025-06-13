@@ -1,40 +1,422 @@
 <!DOCTYPE html>
-<html lang="pt">
-  <head>
-    <meta charset="utf-8" />
-    <title>Natan Construtora - Serviços de Construção e Manutenção</title>
-    <base href="/" />
-    <meta
-      name="viewport"
-      content="viewport-width=device-width, initial-scale=1"
-    />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="mat-typography">
-    <app-root>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          font-family: Roboto, sans-serif;
-        "
-      >
-        <div style="text-align: center">
-          <h1>Carregando Natan Construtora...</h1>
-          <p>Se esta mensagem persistir, há um problema com a aplicação.</p>
+<html lang="pt" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>Natan Construtora - Serviços de Construção e Manutenção</title>
+  <base href="/" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  
+  <!-- Ionic Framework CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@7.5.0/css/ionic.bundle.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  
+  <!-- Ionic Core JS -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@7.5.0/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@7.5.0/dist/ionic/ionic.js"></script>
+  
+  <!-- Ionic Icons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  
+  <style>
+    /* Custom CSS Variables for Natan Construtora theme */
+    :root {
+      --ion-color-primary: #1976d2;
+      --ion-color-primary-rgb: 25, 118, 210;
+      --ion-color-primary-contrast: #ffffff;
+      --ion-color-primary-contrast-rgb: 255, 255, 255;
+      --ion-color-primary-shade: #1565c0;
+      --ion-color-primary-tint: #1e88e5;
+      
+      --ion-color-secondary: #ff9800;
+      --ion-color-secondary-rgb: 255, 152, 0;
+      --ion-color-secondary-contrast: #ffffff;
+      --ion-color-secondary-contrast-rgb: 255, 255, 255;
+      --ion-color-secondary-shade: #f57c00;
+      --ion-color-secondary-tint: #ffb74d;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    
+    .hero-section {
+      background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    
+    .service-card {
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-4px);
+    }
+    
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    
+    .area-card {
+      text-align: center;
+      padding: 30px 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .area-card ion-icon {
+      font-size: 3rem;
+      color: var(--ion-color-primary);
+      margin-bottom: 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <ion-app>
+    <!-- Header / Navigation -->
+    <ion-header translucent="true">
+      <ion-toolbar>
+        <ion-title>
+          <ion-icon name="construct-outline"></ion-icon>
+          Natan Construtora
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" onclick="toggleLanguage()">
+            <ion-icon name="language-outline"></ion-icon>
+            <span id="current-lang">PT</span>
+          </ion-button>
+          <ion-button fill="clear" onclick="showLogin()">
+            <ion-icon name="person-outline"></ion-icon>
+            <span data-translate="login">Entrar</span>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <!-- Main Content -->
+    <ion-content fullscreen="true" class="ion-padding">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="hero-content">
+          <h1 data-translate="welcome_title">Bem-vindo à Natan Construtora</h1>
+          <p data-translate="welcome_subtitle">Serviços de construção e manutenção de qualidade em Portugal</p>
+          <ion-button size="large" color="secondary" onclick="showServiceRequest()">
+            <ion-icon slot="start" name="hammer-outline"></ion-icon>
+            <span data-translate="request_service">Solicitar Serviço</span>
+          </ion-button>
         </div>
       </div>
-    </app-root>
-  </body>
+
+      <!-- Services Section -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <h2 data-translate="our_services">Nossos Serviços</h2>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="services-grid" id="services-container">
+            <!-- Services will be loaded dynamically -->
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Service Areas Section -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <h2 data-translate="service_areas">Áreas de Atendimento</h2>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="areas-grid">
+            <div class="area-card">
+              <ion-icon name="location-outline"></ion-icon>
+              <h3>São Miguel</h3>
+            </div>
+            <div class="area-card">
+              <ion-icon name="business-outline"></ion-icon>
+              <h3>Aveiro</h3>
+            </div>
+            <div class="area-card">
+              <ion-icon name="home-outline"></ion-icon>
+              <h3>Coimbra</h3>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Contact Section -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <h2 data-translate="contact_us">Contacte-nos</h2>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item button onclick="openWhatsApp()">
+              <ion-icon slot="start" name="logo-whatsapp" color="success"></ion-icon>
+              <ion-label>
+                <h3 data-translate="whatsapp_contact">Contactar via WhatsApp</h3>
+                <p>+351 234 567 890</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item>
+              <ion-icon slot="start" name="mail-outline" color="primary"></ion-icon>
+              <ion-label>
+                <h3>Email</h3>
+                <p>contato@natanconstrutora.pt</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item>
+              <ion-icon slot="start" name="call-outline" color="primary"></ion-icon>
+              <ion-label>
+                <h3>Telefone</h3>
+                <p>+351 234 567 890</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
+
+    <!-- Footer -->
+    <ion-footer>
+      <ion-toolbar>
+        <ion-title size="small">
+          © 2025 Natan Construtora - Todos os direitos reservados
+        </ion-title>
+      </ion-toolbar>
+    </ion-footer>
+  </ion-app>
+
+  <!-- JavaScript for Angular/Ionic functionality -->
+  <script>
+    let currentLanguage = 'pt';
+    let services = [];
+    let translations = {};
+
+    // Initialize the application after Ionic is ready
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Wait for Ionic to be ready
+      await customElements.whenDefined('ion-app');
+      
+      // Initialize application
+      initializeApp();
+    });
+
+    async function initializeApp() {
+      try {
+        await loadTranslations();
+        await loadServices();
+        console.log('Natan Construtora app initialized successfully');
+      } catch (error) {
+        console.error('Error initializing app:', error);
+        // Fallback initialization
+        initializeFallback();
+      }
+    }
+
+    function initializeFallback() {
+      // Set default translations
+      translations = {
+        welcome_title: 'Bem-vindo à Natan Construtora',
+        welcome_subtitle: 'Serviços de construção e manutenção de qualidade em Portugal',
+        request_service: 'Solicitar Serviço',
+        our_services: 'Nossos Serviços',
+        request_this_service: 'Solicitar Este Serviço',
+        service_areas: 'Áreas de Atendimento',
+        contact_us: 'Contacte-nos',
+        whatsapp_contact: 'Contactar via WhatsApp',
+        login: 'Entrar'
+      };
+      
+      // Set default services
+      services = [
+        {
+          id: '1',
+          name: 'Renovação de Cozinha',
+          description: 'Renovação completa de cozinhas com design moderno',
+          price: 2500,
+          duration: 7,
+          regions: ['São Miguel', 'Aveiro', 'Coimbra']
+        },
+        {
+          id: '2',
+          name: 'Reparação de Telhados',
+          description: 'Reparação e manutenção de telhados',
+          price: 800,
+          duration: 2,
+          regions: ['São Miguel', 'Aveiro']
+        },
+        {
+          id: '3',
+          name: 'Pintura Interior',
+          description: 'Pintura profissional de interiores',
+          price: 600,
+          duration: 3,
+          regions: ['São Miguel', 'Aveiro', 'Coimbra']
+        }
+      ];
+      
+      updateTranslations();
+      renderServices();
+    }
+
+    // Load translations from API
+    async function loadTranslations() {
+      try {
+        const response = await fetch(`/api/translations/${currentLanguage}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        translations = data;
+        updateTranslations();
+        return true;
+      } catch (error) {
+        console.error('Error loading translations:', error);
+        return false;
+      }
+    }
+
+    // Load services from API
+    async function loadServices() {
+      try {
+        const response = await fetch('/api/services');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        services = data;
+        renderServices();
+        return true;
+      } catch (error) {
+        console.error('Error loading services:', error);
+        return false;
+      }
+    }
+
+    // Render services in the grid
+    function renderServices() {
+      const container = document.getElementById('services-container');
+      container.innerHTML = '';
+      
+      services.forEach(service => {
+        const serviceCard = document.createElement('ion-card');
+        serviceCard.className = 'service-card';
+        serviceCard.innerHTML = `
+          <ion-card-header>
+            <ion-card-title color="primary">${service.name}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>${service.description}</p>
+            <p><strong>Preço:</strong> €${service.price}</p>
+            <p><strong>Duração:</strong> ${service.duration} dias</p>
+            <p><strong>Regiões:</strong> ${service.regions.join(', ')}</p>
+            <ion-button expand="block" color="secondary" onclick="requestService('${service.id}')">
+              <ion-icon slot="start" name="add-outline"></ion-icon>
+              <span data-translate="request_this_service">Solicitar Este Serviço</span>
+            </ion-button>
+          </ion-card-content>
+        `;
+        container.appendChild(serviceCard);
+      });
+    }
+
+    // Update all translatable elements
+    function updateTranslations() {
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[key]) {
+          element.textContent = translations[key];
+        }
+      });
+    }
+
+    // Toggle language between Portuguese and English
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'pt' ? 'en' : 'pt';
+      document.getElementById('current-lang').textContent = currentLanguage.toUpperCase();
+      loadTranslations();
+    }
+
+    // Navigation functions
+    function showLogin() {
+      alert('Funcionalidade de login será implementada na próxima fase do projeto.');
+    }
+
+    function showServiceRequest() {
+      alert('Formulário de solicitação de serviço será implementado na próxima fase do projeto.');
+    }
+
+    function requestService(serviceId) {
+      const service = services.find(s => s.id === serviceId);
+      if (service) {
+        alert(`Solicitação de serviço: ${service.name}\nEsta funcionalidade será implementada na próxima fase do projeto.`);
+      }
+    }
+
+    function openWhatsApp() {
+      const phoneNumber = '351234567890';
+      const message = encodeURIComponent('Olá! Gostaria de solicitar um serviço da Natan Construtora.');
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }
+  </script>
+</body>
 </html>
