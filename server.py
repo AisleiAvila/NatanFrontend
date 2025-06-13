@@ -6,7 +6,7 @@ import mimetypes
 import socket
 from urllib.parse import urlparse
 
-DIRECTORY = "src/assets"
+DIRECTORY = "dist/natan-construtora"
 
 def find_free_port(start_port=5000, max_attempts=50):
     """Find a free port starting from start_port"""
