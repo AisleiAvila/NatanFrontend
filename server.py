@@ -3,10 +3,22 @@ import http.server
 import socketserver
 import os
 import mimetypes
+import socket
 from urllib.parse import urlparse
 
-PORT = 5000
 DIRECTORY = "src/assets"
+
+def find_free_port(start_port=5000, max_attempts=50):
+    """Find a free port starting from start_port"""
+    for port in range(start_port, start_port + max_attempts):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+                s.bind(('0.0.0.0', port))
+                return port
+        except OSError:
+            continue
+    return None
 
 class CustomHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -38,9 +50,16 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     
-    with socketserver.TCPServer(("0.0.0.0", PORT), CustomHandler) as httpd:
-        print(f"Natan Construtora server running on http://0.0.0.0:{PORT}")
+    port = find_free_port(5000)
+    
+    if port is None:
+        print("No available port found!")
+        exit(1)
+    
+    with socketserver.TCPServer(("0.0.0.0", port), CustomHandler) as httpd:
+        print(f"Natan Construtora server running on http://0.0.0.0:{port}")
         print("Serving from branch feature/tsk-002")
+        print(f"Access the application at: http://localhost:{port}")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
