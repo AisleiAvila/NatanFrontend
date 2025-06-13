@@ -31,16 +31,16 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Natan Construtora App"
+args = "Natan App Server"
 
 [[workflows.workflow]]
-name = "Natan Construtora App"
+name = "Natan App Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node app-server.js"
-waitForPort = 5000
+args = "node start.js"
+waitForPort = 5001
 
 [deployment]
 run = ["sh", "-c", "npx ng serve --host 0.0.0.0 --port 5000 --disable-host-check"]
@@ -52,3 +52,7 @@ externalPort = 3000
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3001
