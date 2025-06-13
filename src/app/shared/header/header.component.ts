@@ -67,4 +67,9 @@ export class HeaderComponent implements OnInit {
   goToLogin(): void {
     this.router.navigate(["/auth/login"]);
   }
+
+  goToContact(): void {
+    alert("This feature is not implemented yet.");
+    this.router.navigate(["/contact"]);
+  }
 }

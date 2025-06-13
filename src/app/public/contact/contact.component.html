@@ -27,10 +27,31 @@
           </div>
 
           <div class="contact-item">
-            <mat-icon>whatsapp</mat-icon>
+            <span class="custom-icon">
+              <img
+                src="assets/images/whatsapp-icon.png"
+                alt="WhatsApp"
+                width="24"
+                height="24"
+                style="display: block"
+              />
+            </span>
             <div>
               <h3>{{ translate.translate("contact.info.whatsapp") }}</h3>
               <p>+351 912 345 678</p>
+              <a
+                href="https://wa.me/351912345678"
+                target="_blank"
+                class="whatsapp-link"
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+                  margin-top: 4px;
+                "
+              >
+                WhatsApp
+              </a>
             </div>
           </div>
 
