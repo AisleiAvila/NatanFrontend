@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Natan Construtora</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-result { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Teste de Funcionalidade - Branch feature/tsk-002</h1>
+    
+    <div id="test-results"></div>
+    
+    <script src="app.js"></script>
+    <script src="components.js"></script>
+    <script src="interactions.js"></script>
+    <script src="dashboards.js"></script>
+    <script src="admin-views.js"></script>
+    <script src="provider-views.js"></script>
+    
+    <script>
+        function runTests() {
+            const results = document.getElementById('test-results');
+            
+            // Test 1: Verificar se NatanConstrutoraApp está definido
+            try {
+                if (typeof NatanConstrutoraApp !== 'undefined') {
+                    results.innerHTML += '<div class="test-result success">✓ NatanConstrutoraApp carregado</div>';
+                } else {
+                    results.innerHTML += '<div class="test-result error">✗ NatanConstrutoraApp não encontrado</div>';
+                }
+            } catch(e) {
+                results.innerHTML += '<div class="test-result error">✗ Erro ao verificar NatanConstrutoraApp: ' + e.message + '</div>';
+            }
+            
+            // Test 2: Verificar se natanApp está inicializado
+            try {
+                if (typeof natanApp !== 'undefined') {
+                    results.innerHTML += '<div class="test-result success">✓ natanApp inicializado</div>';
+                } else {
+                    results.innerHTML += '<div class="test-result error">✗ natanApp não inicializado</div>';
+                }
+            } catch(e) {
+                results.innerHTML += '<div class="test-result error">✗ Erro ao verificar natanApp: ' + e.message + '</div>';
+            }
+            
+            // Test 3: Verificar funções principais
+            const functions = ['getServiceRequestForm', 'getClientDashboard', 'getProviderDashboard', 'getAdminDashboard'];
+            functions.forEach(func => {
+                try {
+                    if (typeof window[func] === 'function') {
+                        results.innerHTML += '<div class="test-result success">✓ Função ' + func + ' disponível</div>';
+                    } else {
+                        results.innerHTML += '<div class="test-result error">✗ Função ' + func + ' não encontrada</div>';
+                    }
+                } catch(e) {
+                    results.innerHTML += '<div class="test-result error">✗ Erro ao verificar ' + func + ': ' + e.message + '</div>';
+                }
+            });
+            
+            // Test 4: Verificar se há erros JavaScript
+            window.onerror = function(msg, url, line, col, error) {
+                results.innerHTML += '<div class="test-result error">✗ Erro JavaScript: ' + msg + ' (linha: ' + line + ')</div>';
+            };
+        }
+        
+        // Executar testes após carregamento
+        setTimeout(runTests, 100);
+    </script>
+</body>
+</html>
