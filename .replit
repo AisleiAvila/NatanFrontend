@@ -13,15 +13,33 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Natan Construtora Server"
+args = "Natan Server"
 
 [[workflows.workflow]]
-name = "Natan Construtora Server"
+name = "Run"
+mode = "sequential"
+author = 42556619
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ng serve"
+
+[[workflows.workflow]]
+name = "Npm Install"
+mode = "sequential"
+author = 42556619
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install"
+
+[[workflows.workflow]]
+name = "Natan Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node server.js"
+args = "node simple-server.js"
 waitForPort = 5000
 
 [deployment]
