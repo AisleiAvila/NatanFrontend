@@ -59,11 +59,8 @@ const server = http.createServer((req, res) => {
 
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
-    console.log(`Port ${PORT} is busy. Trying port ${PORT + 1}...`);
-    setTimeout(() => {
-      server.close();
-      server.listen(PORT + 1, '0.0.0.0');
-    }, 1000);
+    console.log(`Port ${PORT} is busy. Force killing processes...`);
+    process.exit(1);
   } else {
     console.error('Server error:', err);
   }
