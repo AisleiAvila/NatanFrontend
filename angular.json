@@ -36,12 +36,15 @@
                 "output": "/assets/"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
+            ],
             "scripts": [],
             "allowedCommonJsDependencies": ["chart.js"],
             "browser": "src/main.ts",
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules"]
+              "includePaths": ["node_modules", "src/theme"]
             }
           },
           "configurations": {
