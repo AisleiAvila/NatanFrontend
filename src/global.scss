@@ -10,23 +10,23 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@use "@ionic/angular/css/core.css" as *;
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@use "@ionic/angular/css/normalize.css" as *;
+@use "@ionic/angular/css/structure.css" as *;
+@use "@ionic/angular/css/typography.css" as *;
+@use "@ionic/angular/css/display.css" as *;
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@use "@ionic/angular/css/padding.css" as *;
+@use "@ionic/angular/css/float-elements.css" as *;
+@use "@ionic/angular/css/text-alignment.css" as *;
+@use "@ionic/angular/css/text-transformation.css" as *;
+@use "@ionic/angular/css/flex-utils.css" as *;
 
 /* Import theme variables */
-@import './theme/variables.scss';
+@use "./theme/variables.scss" as *;
 
 /* Global App Styles */
 * {
@@ -39,7 +39,8 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
   color: var(--ion-text-color, #333);
   background-color: var(--ion-background-color, #fff);
@@ -60,10 +61,14 @@ body {
 
 /* Custom Ionic Component Styling */
 ion-toolbar {
-  --background: linear-gradient(135deg, var(--construction-primary) 0%, #1565c0 100%);
+  --background: linear-gradient(
+    135deg,
+    var(--construction-primary) 0%,
+    #1565c0 100%
+  );
   --color: white;
   --border-color: transparent;
-  
+
   ion-title {
     font-weight: 600;
   }
@@ -73,24 +78,24 @@ ion-button {
   --border-radius: 8px;
   font-weight: 500;
   text-transform: none;
-  
+
   &.button-solid {
     --background: var(--construction-primary);
     --background-activated: #1565c0;
     --background-hover: #1565c0;
     --color: white;
-    
+
     &.construction-accent {
       --background: var(--construction-accent);
       --background-activated: #f57c00;
       --background-hover: #f57c00;
     }
   }
-  
+
   &.button-outline {
     --border-color: var(--construction-primary);
     --color: var(--construction-primary);
-    
+
     &.construction-accent {
       --border-color: var(--construction-accent);
       --color: var(--construction-accent);
@@ -102,7 +107,7 @@ ion-card {
   --border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   border: none;
-  
+
   &:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
@@ -113,22 +118,22 @@ ion-card {
 ion-chip {
   --border-radius: 20px;
   font-weight: 600;
-  
+
   &.chip-status {
     --color: white;
-    
+
     &.pending {
       --background: var(--construction-warning);
     }
-    
+
     &.approved {
       --background: var(--construction-success);
     }
-    
+
     &.completed {
       --background: var(--construction-primary);
     }
-    
+
     &.cancelled {
       --background: var(--construction-danger);
     }
@@ -144,13 +149,15 @@ ion-fab-button {
   box-shadow: 0 4px 16px rgba(255, 152, 0, 0.3);
 }
 
-ion-input, ion-textarea, ion-select {
+ion-input,
+ion-textarea,
+ion-select {
   --border-radius: 8px;
   --border-color: #e0e0e0;
   --border-style: solid;
   --border-width: 1px;
   --padding: 12px;
-  
+
   &.item-has-focus {
     --border-color: var(--construction-primary);
   }
@@ -160,7 +167,7 @@ ion-segment {
   --background: var(--construction-light);
   border-radius: 8px;
   padding: 4px;
-  
+
   ion-segment-button {
     --border-radius: 6px;
     --color: var(--construction-medium);
@@ -175,15 +182,15 @@ ion-tab-bar {
   --background: white;
   --border: 1px solid #e0e0e0;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  
+
   ion-tab-button {
     --color: var(--construction-medium);
     --color-selected: var(--construction-primary);
-    
+
     ion-icon {
       font-size: 24px;
     }
-    
+
     ion-label {
       font-size: 12px;
       font-weight: 500;
@@ -191,9 +198,10 @@ ion-tab-bar {
   }
 }
 
-ion-modal, ion-popover {
+ion-modal,
+ion-popover {
   --border-radius: 12px;
-  
+
   ion-backdrop {
     --opacity: 0.4;
   }
@@ -203,17 +211,17 @@ ion-toast {
   --border-radius: 8px;
   --button-color: white;
   font-weight: 500;
-  
+
   &.toast-success {
     --background: var(--construction-success);
     --color: white;
   }
-  
+
   &.toast-error {
     --background: var(--construction-danger);
     --color: white;
   }
-  
+
   &.toast-warning {
     --background: var(--construction-warning);
     --color: white;
@@ -222,11 +230,11 @@ ion-toast {
 
 ion-alert {
   --border-radius: 12px;
-  
+
   .alert-button {
     font-weight: 500;
     text-transform: none;
-    
+
     &.alert-button-confirm {
       color: var(--construction-primary) !important;
     }
@@ -237,7 +245,7 @@ ion-loading {
   --border-radius: 8px;
   --background: rgba(0, 0, 0, 0.8);
   --color: white;
-  
+
   .loading-content {
     font-weight: 500;
   }
@@ -245,11 +253,19 @@ ion-loading {
 
 /* Custom CSS Classes */
 .construction-gradient {
-  background: linear-gradient(135deg, var(--construction-primary) 0%, #1565c0 100%);
+  background: linear-gradient(
+    135deg,
+    var(--construction-primary) 0%,
+    #1565c0 100%
+  );
 }
 
 .accent-gradient {
-  background: linear-gradient(135deg, var(--construction-accent) 0%, #f57c00 100%);
+  background: linear-gradient(
+    135deg,
+    var(--construction-accent) 0%,
+    #f57c00 100%
+  );
 }
 
 .text-primary {
@@ -353,25 +369,30 @@ ion-loading {
 }
 
 @keyframes bounceIn {
-  0%, 20%, 40%, 60%, 80%, 100% {
-    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   0% {
     opacity: 0;
-    transform: scale3d(.3, .3, .3);
+    transform: scale3d(0.3, 0.3, 0.3);
   }
   20% {
     transform: scale3d(1.1, 1.1, 1.1);
   }
   40% {
-    transform: scale3d(.9, .9, .9);
+    transform: scale3d(0.9, 0.9, 0.9);
   }
   60% {
     opacity: 1;
     transform: scale3d(1.03, 1.03, 1.03);
   }
   80% {
-    transform: scale3d(.97, .97, .97);
+    transform: scale3d(0.97, 0.97, 0.97);
   }
   100% {
     opacity: 1;
@@ -384,7 +405,7 @@ ion-loading {
   .hide-mobile {
     display: none !important;
   }
-  
+
   .mobile-only {
     display: block !important;
   }
@@ -394,11 +415,11 @@ ion-loading {
   .hide-desktop {
     display: none !important;
   }
-  
+
   .desktop-only {
     display: block !important;
   }
-  
+
   .mobile-only {
     display: none !important;
   }
@@ -432,7 +453,7 @@ ion-select:focus {
   ion-card {
     border: 2px solid var(--construction-dark);
   }
-  
+
   ion-button {
     border: 2px solid currentColor;
   }
