@@ -87,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "natan-construtora:build:production"
+              "buildTarget": "natan-construtora:build:production"
             },
             "development": {
-              "browserTarget": "natan-construtora:build:development"
+              "buildTarget": "natan-construtora:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -103,7 +103,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "natan-construtora:build"
+            "buildTarget": "natan-construtora:build"
           }
         },
         "test": {
