@@ -391,9 +391,12 @@
               <div class="terms-section">
                 <mat-checkbox formControlName="agreeToTerms">
                   {{ translate("service_request.step3.agree_terms") }}
-                  <a href="#" target="_blank">{{
-                    translate("service_request.step3.terms_link")
-                  }}</a>
+                  <a
+                    href="#"
+                    (click)="openTermsDialog(); $event.preventDefault()"
+                  >
+                    {{ translate("service_request.step3.terms_link") }}
+                  </a>
                 </mat-checkbox>
                 <mat-error
                   *ngIf="serviceDetailsForm.get('agreeToTerms')?.errors?.['required'] && serviceDetailsForm.get('agreeToTerms')?.touched"

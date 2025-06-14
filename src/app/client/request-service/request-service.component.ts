@@ -10,6 +10,8 @@ import {
   ServiceRequest,
 } from "../../core/services/data.service";
 import { TranslationService } from "../../core/services/translation.service";
+import { MatDialog } from "@angular/material/dialog";
+import { TermsDialogComponent } from "./terms-dialog.component";
 
 @Component({
   selector: "app-request-service",
@@ -50,7 +52,8 @@ export class RequestServiceComponent implements OnInit {
     private translationService: TranslationService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.maxDate.setMonth(this.maxDate.getMonth() + 3); // 3 months ahead
 
@@ -269,23 +272,40 @@ export class RequestServiceComponent implements OnInit {
   }
 
   formatFileSize(bytes: number): string {
-    if (bytes < 1024) return bytes + " B";
-    if (bytes < 1048576) return Math.round(bytes / 1024) + " KB";
-    return Math.round(bytes / 1048576) + " MB";
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   }
-
-  goBack(): void {
+  openTermsDialog(): void {
+    this.dialog.open(TermsDialogComponent, {
+      width: "700px",
+      maxHeight: "80vh",
+      autoFocus: false,
+    });
+  }
+  goToLogin(): void {
+    this.router.navigate(["/auth/login"]);
+  }
+  goToDashboard(): void {
     this.router.navigate(["/client/dashboard"]);
   }
-
-  goToNextStep(): void {
-    this.showNextSteps = true;
-    this.showDetailsStep = false;
-    this.stepper.next();
+  goToContact(): void {
+    this.router.navigate(["/client/request-service"]);
   }
-
   goToDetailsStep(): void {
     this.showDetailsStep = true;
-    setTimeout(() => this.stepper.next(), 0);
+    this.stepper.selectedIndex = 1; // Move to the details step
+  }
+  goToNextStep(): void {
+    this.showNextSteps = true;
+    this.stepper.selectedIndex = 2; // Move to the next steps
+  }
+  goToHome(): void {
+    this.router.navigate(["/home"]);
+  }
+  goBack(): void {
+    this.router.navigate(["/home"]);
   }
 }

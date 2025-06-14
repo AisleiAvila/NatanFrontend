@@ -17,9 +17,11 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatDialogModule } from "@angular/material/dialog";
 
 // Components
 import { RequestServiceComponent } from "./request-service/request-service.component";
+import { TermsDialogComponent } from "./request-service/terms-dialog.component";
 
 const routes: Routes = [
   {
@@ -34,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [RequestServiceComponent],
+  declarations: [RequestServiceComponent, TermsDialogComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -54,6 +56,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatDialogModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
