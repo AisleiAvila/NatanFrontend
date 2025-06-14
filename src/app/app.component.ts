@@ -3,9 +3,10 @@ import { Title } from "@angular/platform-browser";
 import { TranslationService } from "./core/services/translation.service";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
+    standalone: false
 })
 export class AppComponent {
   constructor(

@@ -5,9 +5,10 @@ import { TranslationService } from "../../core/services/translation.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
+    selector: "app-dashboard",
+    templateUrl: "./dashboard.component.html",
+    styleUrls: ["./dashboard.component.scss"],
+    standalone: false
 })
 export class DashboardComponent implements OnInit {
   currentUser: User | null = null;

@@ -16,9 +16,10 @@ interface CalendarWeek {
 }
 
 @Component({
-  selector: "app-provider-calendar",
-  templateUrl: "./calendar.component.html",
-  styleUrls: ["./calendar.component.scss"],
+    selector: "app-provider-calendar",
+    templateUrl: "./calendar.component.html",
+    styleUrls: ["./calendar.component.scss"],
+    standalone: false
 })
 export class CalendarComponent implements OnInit {
   currentUser: User | null = null;

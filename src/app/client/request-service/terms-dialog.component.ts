@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "app-terms-dialog",
-  template: `
+    selector: "app-terms-dialog",
+    template: `
     <div class="terms-dialog-container">
       <h1>Termos de Serviço</h1>
       <p>
@@ -31,8 +31,8 @@ import { Component } from "@angular/core";
       </p>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .terms-dialog-container {
         max-width: 700px;
         padding: 24px;
@@ -55,6 +55,7 @@ import { Component } from "@angular/core";
         line-height: 1.6;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class TermsDialogComponent {}

@@ -13,17 +13,18 @@ import {
 } from "@angular/animations";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
-  animations: [
-    trigger("fadeInOut", [
-      state("in", style({ opacity: 1 })),
-      state("out", style({ opacity: 0 })),
-      transition("in => out", animate("300ms ease-out")),
-      transition("out => in", animate("300ms ease-in")),
-    ]),
-  ],
+    selector: "app-login",
+    templateUrl: "./login.component.html",
+    styleUrls: ["./login.component.scss"],
+    animations: [
+        trigger("fadeInOut", [
+            state("in", style({ opacity: 1 })),
+            state("out", style({ opacity: 0 })),
+            transition("in => out", animate("300ms ease-out")),
+            transition("out => in", animate("300ms ease-in")),
+        ]),
+    ],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

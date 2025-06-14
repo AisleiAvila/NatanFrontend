@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { TranslationService } from "../../../core/services/translation.service";
 
 @Component({
-  selector: "app-language-selector",
-  template: `
+    selector: "app-language-selector",
+    template: `
     <button
       mat-button
       [matMenuTriggerFor]="languageMenu"
@@ -27,8 +27,8 @@ import { TranslationService } from "../../../core/services/translation.service";
       </button>
     </mat-menu>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .language-selector {
         display: flex;
         align-items: center;
@@ -66,7 +66,8 @@ import { TranslationService } from "../../../core/services/translation.service";
         background: rgba(0, 0, 0, 0.04);
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class LanguageSelectorComponent implements OnInit {
   availableLanguages: { code: string; name: string; flag: string }[] = [];

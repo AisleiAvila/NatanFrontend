@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-cookie-banner",
-  template: `
+    selector: "app-cookie-banner",
+    template: `
     <div class="cookie-banner" *ngIf="!accepted">
       <div class="cookie-content">
         <p>{{ translate("cookies.message") }}</p>
@@ -17,8 +17,8 @@ import { Component, OnInit } from "@angular/core";
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .cookie-banner {
         position: fixed;
         bottom: 0;
@@ -42,7 +42,8 @@ import { Component, OnInit } from "@angular/core";
         gap: 0.5rem;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class CookieBannerComponent implements OnInit {
   accepted = false;

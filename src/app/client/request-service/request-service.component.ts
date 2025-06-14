@@ -14,9 +14,10 @@ import { MatDialog } from "@angular/material/dialog";
 import { TermsDialogComponent } from "./terms-dialog.component";
 
 @Component({
-  selector: "app-request-service",
-  templateUrl: "./request-service.component.html",
-  styleUrls: ["./request-service.component.scss"],
+    selector: "app-request-service",
+    templateUrl: "./request-service.component.html",
+    styleUrls: ["./request-service.component.scss"],
+    standalone: false
 })
 export class RequestServiceComponent implements OnInit {
   @ViewChild("stepper") stepper!: MatStepper;

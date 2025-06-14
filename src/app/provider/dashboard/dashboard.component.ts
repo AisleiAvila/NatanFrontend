@@ -6,9 +6,10 @@ import { DataService, ServiceRequest } from "../../core/services/data.service";
 import { TranslationService } from "../../core/services/translation.service";
 
 @Component({
-  selector: "app-provider-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
+    selector: "app-provider-dashboard",
+    templateUrl: "./dashboard.component.html",
+    styleUrls: ["./dashboard.component.scss"],
+    standalone: false
 })
 export class DashboardComponent implements OnInit {
   currentUser: User | null = null;

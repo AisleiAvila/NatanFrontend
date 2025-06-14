@@ -4,9 +4,10 @@ import { AuthService, User } from "../../../core/services/auth.service";
 import { TranslationService } from "../../../core/services/translation.service";
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+    selector: "app-header",
+    templateUrl: "./header.component.html",
+    styleUrls: ["./header.component.scss"],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   currentUser: User | null = null;
