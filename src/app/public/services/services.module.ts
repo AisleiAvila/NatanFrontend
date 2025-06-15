@@ -20,7 +20,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ServicesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -1,16 +1,26 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
-import { TranslationService } from "@core/services/translation.service";
 import { DataService, Service } from "@core/services/data.service";
 import { MatDialog } from "@angular/material/dialog";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { ServiceRequestComponent } from "../../shared/components/service-request/service-request.component";
+import { CommonModule } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    TranslateModule,
+  ],
 })
 export class HomeComponent implements OnInit {
   featuredServices: Service[] = [];
@@ -52,14 +62,15 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public translate: TranslationService,
     private dataService: DataService,
     private dialog: MatDialog,
-    public translateService: TranslateService
-  ) {}
+    private translate: TranslateService
+  ) {
+    translate.setDefaultLang("pt");
+    translate.use("pt");
+  }
 
   ngOnInit(): void {
-    this.translate.initTranslation();
     this.loadServices();
     this.adjustSlidesToShow();
     window.addEventListener("resize", () => this.adjustSlidesToShow());

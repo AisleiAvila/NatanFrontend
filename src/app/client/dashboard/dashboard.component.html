@@ -4,8 +4,8 @@
     <div class="container">
       <div class="header-content">
         <div class="welcome-section">
-          <h1>{{ translate("client.welcome") }}, {{ currentUser?.name }}!</h1>
-          <p>{{ translate("client.dashboard_subtitle") }}</p>
+          <h1>{{ "client.welcome" | translate }}, {{ currentUser?.name }}!</h1>
+          <p>{{ "client.dashboard_subtitle" | translate }}</p>
         </div>
         <div class="header-actions">
           <app-language-selector></app-language-selector>
@@ -15,11 +15,11 @@
             (click)="requestNewService()"
           >
             <mat-icon>add</mat-icon>
-            {{ translate("client.request_new_service") }}
+            {{ "client.request_new_service" | translate }}
           </button>
           <button mat-stroked-button color="primary" (click)="openWhatsApp()">
             <i class="fab fa-whatsapp"></i>
-            {{ translate("client.contact_support") }}
+            {{ "client.contact_support" | translate }}
           </button>
         </div>
       </div>
@@ -38,7 +38,7 @@
             <div class="stat-info">
               <div class="stat-value">{{ stats.totalRequests }}</div>
               <div class="stat-label">
-                {{ translate("client.stats.total_requests") }}
+                {{ "client.stats.total_requests" | translate }}
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@
             <div class="stat-info">
               <div class="stat-value">{{ stats.pendingRequests }}</div>
               <div class="stat-label">
-                {{ translate("client.stats.pending_requests") }}
+                {{ "client.stats.pending_requests" | translate }}
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
             <div class="stat-info">
               <div class="stat-value">{{ stats.activeQuotes }}</div>
               <div class="stat-label">
-                {{ translate("client.stats.active_quotes") }}
+                {{ "client.stats.active_quotes" | translate }}
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@
             <div class="stat-info">
               <div class="stat-value">{{ stats.completedRequests }}</div>
               <div class="stat-label">
-                {{ translate("client.stats.completed_requests") }}
+                {{ "client.stats.completed_requests" | translate }}
               </div>
             </div>
           </div>
@@ -93,9 +93,9 @@
   <section class="requests-section">
     <div class="container">
       <div class="section-header">
-        <h2>{{ translate("client.recent_requests") }}</h2>
+        <h2>{{ "client.recent_requests" | translate }}</h2>
         <button mat-button color="primary" *ngIf="serviceRequests.length > 3">
-          {{ translate("client.view_all") }}
+          {{ "client.view_all" | translate }}
           <mat-icon>arrow_forward</mat-icon>
         </button>
       </div>
@@ -103,7 +103,7 @@
       <!-- Loading State -->
       <div class="loading-container" *ngIf="loading">
         <mat-spinner></mat-spinner>
-        <p>{{ translate("common.loading") }}</p>
+        <p>{{ "common.loading" | translate }}</p>
       </div>
 
       <!-- Requests List -->
@@ -116,7 +116,7 @@
             <div class="request-info">
               <h3>{{ request.serviceName }}</h3>
               <p class="request-date">
-                {{ translate("client.requested_on") }}
+                {{ "client.requested_on" | translate }}
                 {{ formatDate(request.createdAt) }}
               </p>
             </div>
@@ -126,7 +126,7 @@
                 [style.color]="'white'"
               >
                 <mat-icon>{{ getStatusIcon(request.status) }}</mat-icon>
-                {{ translate("status." + request.status) }}
+                {{ "status." + request.status | translate }}
               </mat-chip>
             </div>
           </div>
@@ -147,7 +147,7 @@
               <div class="detail-item" *ngIf="request.providerName">
                 <mat-icon>person</mat-icon>
                 <span
-                  >{{ translate("client.assigned_to") }}:
+                  >{{ "client.assigned_to" | translate }}:
                   {{ request.providerName }}</span
                 >
               </div>
@@ -160,11 +160,11 @@
             >
               <mat-divider></mat-divider>
               <div class="quote-header">
-                <h4>{{ translate("client.quote_received") }}</h4>
+                <h4>{{ "client.quote_received" | translate }}</h4>
                 <div class="quote-amount">
                   €{{ request.quote.totalAmount.toFixed(2) }}
                   <span class="vat-info" *ngIf="request.quote.includeVat">
-                    ({{ translate("client.includes_vat") }})
+                    ({{ "client.includes_vat" | translate }})
                   </span>
                 </div>
               </div>
@@ -179,7 +179,7 @@
               (click)="viewRequestDetails(request)"
             >
               <mat-icon>visibility</mat-icon>
-              {{ translate("client.view_details") }}
+              {{ "client.view_details" | translate }}
             </button>
 
             <!-- Quote Actions -->
@@ -190,7 +190,7 @@
                 (click)="approveQuote(request)"
               >
                 <mat-icon>check</mat-icon>
-                {{ translate("client.approve_quote") }}
+                {{ "client.approve_quote" | translate }}
               </button>
               <button
                 mat-stroked-button
@@ -198,7 +198,7 @@
                 (click)="rejectQuote(request)"
               >
                 <mat-icon>close</mat-icon>
-                {{ translate("client.reject_quote") }}
+                {{ "client.reject_quote" | translate }}
               </button>
             </div>
           </mat-card-actions>
@@ -208,11 +208,11 @@
       <!-- Empty State -->
       <div class="empty-state" *ngIf="!loading && serviceRequests.length === 0">
         <mat-icon class="empty-icon">assignment</mat-icon>
-        <h3>{{ translate("client.no_requests_title") }}</h3>
-        <p>{{ translate("client.no_requests_message") }}</p>
+        <h3>{{ "client.no_requests_title" | translate }}</h3>
+        <p>{{ "client.no_requests_message" | translate }}</p>
         <button mat-raised-button color="accent" (click)="requestNewService()">
           <mat-icon>add</mat-icon>
-          {{ translate("client.request_first_service") }}
+          {{ "client.request_first_service" | translate }}
         </button>
       </div>
     </div>
@@ -224,8 +224,8 @@
       <mat-card class="quick-actions-card">
         <div class="quick-actions-content">
           <div class="actions-text">
-            <h3>{{ translate("client.quick_actions.title") }}</h3>
-            <p>{{ translate("client.quick_actions.subtitle") }}</p>
+            <h3>{{ "client.quick_actions.title" | translate }}</h3>
+            <p>{{ "client.quick_actions.subtitle" | translate }}</p>
           </div>
           <div class="actions-buttons">
             <button
@@ -234,7 +234,7 @@
               (click)="requestNewService()"
             >
               <mat-icon>build</mat-icon>
-              {{ translate("client.request_service") }}
+              {{ "client.request_service" | translate }}
             </button>
             <button
               mat-stroked-button
@@ -242,7 +242,7 @@
               routerLink="/home/services"
             >
               <mat-icon>search</mat-icon>
-              {{ translate("client.browse_services") }}
+              {{ "client.browse_services" | translate }}
             </button>
             <button
               mat-stroked-button
@@ -250,7 +250,7 @@
               routerLink="/home/contact"
             >
               <mat-icon>contact_support</mat-icon>
-              {{ translate("client.contact_us") }}
+              {{ "client.contact_us" | translate }}
             </button>
           </div>
         </div>

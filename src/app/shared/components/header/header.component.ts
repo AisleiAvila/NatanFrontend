@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDividerModule } from "@angular/material/divider";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { LanguageSelectorComponent } from "../language-selector/language-selector.component";
 import { AuthService, User } from "../../../core/services/auth.service";
-import { TranslationService } from "../../../core/services/translation.service";
 
 @Component({
   selector: "app-header",
@@ -23,49 +23,55 @@ import { TranslationService } from "../../../core/services/translation.service";
     MatMenuModule,
     MatDividerModule,
     TranslateModule,
+    LanguageSelectorComponent,
   ],
 })
 export class HeaderComponent implements OnInit {
-  currentUser: User | null = null;
   isAuthenticated = false;
-  currentLanguage = "pt";
-  availableLanguages = this.translationService.getAvailableLanguages();
+  currentUser: User | null = null;
 
   constructor(
-    private authService: AuthService,
-    private translationService: TranslationService,
-    public router: Router
-  ) {}
+    private router: Router,
+    private translateService: TranslateService,
+    private authService: AuthService
+  ) {
+    this.translateService.setDefaultLang("pt");
+    this.translateService.use(localStorage.getItem("natan_language") || "pt");
+  }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
-    this.isAuthenticated = !!this.authService.currentUserValue;
-
-    this.translationService.currentLanguage$.subscribe((lang) => {
-      this.currentLanguage = lang;
-    });
+    this.authService.isAuthenticated$.subscribe(
+      (isAuthenticated) => (this.isAuthenticated = isAuthenticated)
+    );
+    this.authService.currentUser.subscribe((user) => (this.currentUser = user));
   }
 
-  changeLanguage(language: string): void {
-    this.translationService.setLanguage(language);
+  goToHome(): void {
+    this.router.navigate(["/"]);
   }
 
-  translate(key: string): string {
-    return this.translationService.translate(key);
+  goToServices(): void {
+    this.router.navigate(["/services"]);
+  }
+
+  goToContact(): void {
+    this.router.navigate(["/contact"]);
+  }
+
+  goToLogin(): void {
+    this.router.navigate(["/login"]);
   }
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(["/thank-you"]);
+    this.router.navigate(["/"]);
   }
 
   navigateToRole(): void {
-    if (this.currentUser) {
-      this.router.navigate([`/${this.currentUser.role}`]);
+    if (this.currentUser?.role === "admin") {
+      this.router.navigate(["/admin/dashboard"]);
+    } else {
+      this.router.navigate(["/client/dashboard"]);
     }
-  }
-
-  goToLogin(): void {
-    this.router.navigate(["/auth/login"]);
   }
 }

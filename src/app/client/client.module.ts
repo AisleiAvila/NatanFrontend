@@ -36,10 +36,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [RequestServiceComponent, TermsDialogComponent],
+  declarations: [TermsDialogComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    RequestServiceComponent,
     MatNativeDateModule,
     MatButtonModule,
     MatIconModule,

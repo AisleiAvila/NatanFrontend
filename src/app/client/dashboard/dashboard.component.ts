@@ -1,17 +1,38 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { AuthService, User } from "../../core/services/auth.service";
 import { DataService, ServiceRequest } from "../../core/services/data.service";
-import { TranslationService } from "../../core/services/translation.service";
+import { CommonModule } from "@angular/common";
+import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { LanguageSelectorModule } from "../../shared/components/language-selector/language-selector.module";
 
 @Component({
-    selector: "app-client-dashboard",
-    templateUrl: "./dashboard.component.html",
-    styleUrls: ["./dashboard.component.scss"],
-    standalone: false
+  selector: "app-client-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    TranslateModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    LanguageSelectorModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DashboardComponent implements OnInit {
+export class ClientDashboardComponent implements OnInit {
   currentUser: User | null = null;
   serviceRequests: ServiceRequest[] = [];
   loading = true;
@@ -37,21 +58,21 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private dataService: DataService,
-    private translationService: TranslationService,
     private router: Router,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private translateService: TranslateService
+  ) {
+    this.translateService.setDefaultLang("pt");
+    this.translateService.use(localStorage.getItem("natan_language") || "pt");
+  }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
     this.loadServiceRequests();
   }
 
-  translate(key: string): string {
-    return this.translationService.translate(key);
-  }
-
   loadServiceRequests(): void {
+    this.loading = true;
     if (this.currentUser) {
       this.dataService
         .getServiceRequests(this.currentUser.id.toString(), "client")
@@ -62,12 +83,12 @@ export class DashboardComponent implements OnInit {
             this.loading = false;
           },
           (error) => {
-            console.error("Error loading service requests:", error);
+            console.error("Erro ao carregar pedidos:", error);
             this.loading = false;
             this.snackBar.open(
-              this.translate("common.error_loading_data"),
-              this.translate("common.close"),
-              { duration: 5000 }
+              this.translateService.instant("common.error_occurred"),
+              this.translateService.instant("common.close"),
+              { duration: 3000 }
             );
           }
         );
@@ -103,18 +124,19 @@ export class DashboardComponent implements OnInit {
         (success) => {
           if (success) {
             this.snackBar.open(
-              this.translate("client.quote_approved"),
-              this.translate("common.close"),
+              this.translateService.instant("client.quote_approved"),
+              this.translateService.instant("common.close"),
               { duration: 3000 }
             );
             this.loadServiceRequests(); // Refresh data
           }
         },
         (error) => {
+          console.error("Erro ao aprovar orçamento:", error);
           this.snackBar.open(
-            this.translate("common.error_occurred"),
-            this.translate("common.close"),
-            { duration: 5000 }
+            this.translateService.instant("common.error_occurred"),
+            this.translateService.instant("common.close"),
+            { duration: 3000 }
           );
         }
       );
@@ -127,18 +149,19 @@ export class DashboardComponent implements OnInit {
         (success) => {
           if (success) {
             this.snackBar.open(
-              this.translate("client.quote_rejected"),
-              this.translate("common.close"),
+              this.translateService.instant("client.quote_rejected"),
+              this.translateService.instant("common.close"),
               { duration: 3000 }
             );
             this.loadServiceRequests(); // Refresh data
           }
         },
         (error) => {
+          console.error("Erro ao rejeitar orçamento:", error);
           this.snackBar.open(
-            this.translate("common.error_occurred"),
-            this.translate("common.close"),
-            { duration: 5000 }
+            this.translateService.instant("common.error_occurred"),
+            this.translateService.instant("common.close"),
+            { duration: 3000 }
           );
         }
       );

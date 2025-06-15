@@ -17,16 +17,16 @@
     <!-- Navigation Menu - Desktop -->
     <div class="nav-section d-none d-md-flex">
       <button mat-button routerLink="/home" routerLinkActive="active">
-        {{ translate("nav.home") }}
+        {{ "nav.home" | translate }}
       </button>
       <button mat-button routerLink="/services" routerLinkActive="active">
-        {{ translate("nav.services") }}
+        {{ "nav.services" | translate }}
       </button>
       <button mat-button routerLink="/contact" routerLinkActive="active">
-        {{ translate("nav.contact") }}
+        {{ "nav.contact" | translate }}
       </button>
       <button mat-button routerLink="/how-it-works" routerLinkActive="active">
-        {{ translate("header.how_it_works") }}
+        {{ "header.how_it_works" | translate }}
       </button>
     </div>
 
@@ -55,30 +55,30 @@
       <div class="user-section" *ngIf="!isAuthenticated">
         <button mat-raised-button color="accent" (click)="goToLogin()">
           <mat-icon>login</mat-icon>
-          <span class="d-none d-md-inline">{{ translate("auth.login") }}</span>
+          <span class="d-none d-md-inline">{{ "auth.login" | translate }}</span>
         </button>
       </div>
 
       <div class="user-section" *ngIf="isAuthenticated && currentUser">
         <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
           <mat-icon>account_circle</mat-icon>
-          <span class="d-none d-md-inline">{{ currentUser?.name }}</span>
+          <span class="d-none d-md-inline">{{ currentUser.name }}</span>
         </button>
         <mat-menu #userMenu="matMenu">
           <div class="user-info">
-            <p class="user-name">{{ currentUser?.name }}</p>
+            <p class="user-name">{{ currentUser.name }}</p>
             <p class="user-role">
-              {{ translate("roles." + currentUser?.role) }}
+              {{ "roles." + currentUser.role | translate }}
             </p>
           </div>
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="navigateToRole()">
             <mat-icon>dashboard</mat-icon>
-            <span>{{ translate("nav.dashboard") }}</span>
+            <span>{{ "nav.dashboard" | translate }}</span>
           </button>
           <button mat-menu-item (click)="logout()">
             <mat-icon>logout</mat-icon>
-            <span>{{ translate("auth.logout") }}</span>
+            <span>{{ "auth.logout" | translate }}</span>
           </button>
         </mat-menu>
       </div>
@@ -101,28 +101,28 @@
   <div class="mobile-menu-content">
     <button mat-menu-item routerLink="/home">
       <mat-icon>home</mat-icon>
-      <span>{{ translate("nav.home") }}</span>
+      <span>{{ "nav.home" | translate }}</span>
     </button>
     <button mat-menu-item routerLink="/services">
       <mat-icon>build</mat-icon>
-      <span>{{ translate("nav.services") }}</span>
+      <span>{{ "nav.services" | translate }}</span>
     </button>
     <button mat-menu-item routerLink="/contact">
       <mat-icon>contact_mail</mat-icon>
-      <span>{{ translate("nav.contact") }}</span>
+      <span>{{ "nav.contact" | translate }}</span>
     </button>
     <button mat-menu-item routerLink="/how-it-works">
       <mat-icon>info</mat-icon>
-      <span>{{ translate("header.how_it_works") }}</span>
+      <span>{{ "header.how_it_works" | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item (click)="goToLogin()" *ngIf="!isAuthenticated">
       <mat-icon>login</mat-icon>
-      <span>{{ translate("auth.login") }}</span>
+      <span>{{ "auth.login" | translate }}</span>
     </button>
     <button mat-menu-item (click)="logout()" *ngIf="isAuthenticated">
       <mat-icon>logout</mat-icon>
-      <span>{{ translate("auth.logout") }}</span>
+      <span>{{ "auth.logout" | translate }}</span>
     </button>
   </div>
 </mat-menu>

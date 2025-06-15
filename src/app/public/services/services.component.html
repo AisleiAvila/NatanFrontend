@@ -2,8 +2,8 @@
   <!-- Header Section -->
   <section class="services-header">
     <div class="container">
-      <h1>{{ translate('services.title') }}</h1>
-      <p>{{ translate('services.subtitle') }}</p>
+      <h1>{{ "services.title" | translate }}</h1>
+      <p>{{ "services.subtitle" | translate }}</p>
     </div>
   </section>
 
@@ -14,18 +14,29 @@
         <div class="filters-content">
           <div class="filter-group">
             <mat-form-field appearance="outline">
-              <mat-label>{{ translate('services.search_placeholder') }}</mat-label>
-              <input matInput [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()" 
-                     placeholder="{{ translate('services.search_placeholder') }}">
+              <mat-label>{{
+                "services.search_placeholder" | translate
+              }}</mat-label>
+              <input
+                matInput
+                [(ngModel)]="searchTerm"
+                (ngModelChange)="applyFilters()"
+                placeholder="{{ 'services.search_placeholder' | translate }}"
+              />
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
           </div>
 
           <div class="filter-group">
             <mat-form-field appearance="outline">
-              <mat-label>{{ translate('services.filter_region') }}</mat-label>
-              <mat-select [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()">
-                <mat-option value="">{{ translate('services.all_regions') }}</mat-option>
+              <mat-label>{{ "services.filter_region" | translate }}</mat-label>
+              <mat-select
+                [(ngModel)]="selectedRegion"
+                (ngModelChange)="applyFilters()"
+              >
+                <mat-option value="">{{
+                  "services.all_regions" | translate
+                }}</mat-option>
                 <mat-option *ngFor="let region of regions" [value]="region">
                   {{ region }}
                 </mat-option>
@@ -35,10 +46,20 @@
 
           <div class="filter-group">
             <mat-form-field appearance="outline">
-              <mat-label>{{ translate('services.filter_category') }}</mat-label>
-              <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="applyFilters()">
-                <mat-option value="">{{ translate('services.all_categories') }}</mat-option>
-                <mat-option *ngFor="let category of categories" [value]="category">
+              <mat-label>{{
+                "services.filter_category" | translate
+              }}</mat-label>
+              <mat-select
+                [(ngModel)]="selectedCategory"
+                (ngModelChange)="applyFilters()"
+              >
+                <mat-option value="">{{
+                  "services.all_categories" | translate
+                }}</mat-option>
+                <mat-option
+                  *ngFor="let category of categories"
+                  [value]="category"
+                >
                   {{ category }}
                 </mat-option>
               </mat-select>
@@ -48,7 +69,7 @@
           <div class="filter-actions">
             <button mat-stroked-button (click)="clearFilters()">
               <mat-icon>clear</mat-icon>
-              {{ translate('services.clear_filters') }}
+              {{ "services.clear_filters" | translate }}
             </button>
           </div>
         </div>
@@ -60,42 +81,49 @@
   <section class="services-grid-section">
     <div class="container">
       <div class="results-info" *ngIf="!loading">
-        <p>{{ translate('services.showing_results') }}</p>
+        <p>{{ "services.showing_results" | translate }}</p>
       </div>
 
-      <div class="services-grid" *ngIf="!loading && filteredServices.length > 0">
+      <div
+        class="services-grid"
+        *ngIf="!loading && filteredServices.length > 0"
+      >
         <mat-card class="service-card" *ngFor="let service of filteredServices">
           <div class="service-image">
-            <img [src]="service.image" [alt]="service.name" mat-card-image>
+            <img [src]="service.image" [alt]="service.name" mat-card-image />
             <div class="service-price">€{{ service.price }}/h</div>
           </div>
-          
+
           <mat-card-content class="service-content">
             <div class="service-category">{{ service.category }}</div>
             <h3 class="service-name">{{ service.name }}</h3>
             <p class="service-description">{{ service.description }}</p>
-            
+
             <div class="service-details">
               <div class="detail-item">
                 <mat-icon>schedule</mat-icon>
                 <span>{{ service.duration }} min</span>
               </div>
-              
+
               <div class="detail-item">
                 <mat-icon>location_on</mat-icon>
-                <span>{{ service.regions.join(', ') }}</span>
+                <span>{{ service.regions.join(", ") }}</span>
               </div>
             </div>
           </mat-card-content>
-          
+
           <mat-card-actions class="service-actions">
             <button mat-button color="primary">
               <mat-icon>info</mat-icon>
-              {{ translate('services.view_details') }}
+              {{ "services.view_details" | translate }}
             </button>
-            <button mat-raised-button color="accent" (click)="requestService(service)">
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="requestService(service)"
+            >
               <mat-icon>build</mat-icon>
-              {{ translate('services.request_quote') }}
+              {{ "services.request_quote" | translate }}
             </button>
           </mat-card-actions>
         </mat-card>
@@ -104,17 +132,17 @@
       <!-- No Results -->
       <div class="no-results" *ngIf="!loading && filteredServices.length === 0">
         <mat-icon class="no-results-icon">search_off</mat-icon>
-        <h3>{{ translate('services.no_results_title') }}</h3>
-        <p>{{ translate('services.no_results_message') }}</p>
+        <h3>{{ "services.no_results_title" | translate }}</h3>
+        <p>{{ "services.no_results_message" | translate }}</p>
         <button mat-stroked-button color="primary" (click)="clearFilters()">
-          {{ translate('services.clear_filters') }}
+          {{ "services.clear_filters" | translate }}
         </button>
       </div>
 
       <!-- Loading -->
       <div class="loading-container" *ngIf="loading">
         <mat-spinner></mat-spinner>
-        <p>{{ translate('common.loading') }}</p>
+        <p>{{ "common.loading" | translate }}</p>
       </div>
     </div>
   </section>
@@ -124,16 +152,24 @@
     <div class="container">
       <mat-card class="cta-card">
         <div class="cta-content">
-          <h2>{{ translate('services.cta.title') }}</h2>
-          <p>{{ translate('services.cta.description') }}</p>
+          <h2>{{ "services.cta.title" | translate }}</h2>
+          <p>{{ "services.cta.description" | translate }}</p>
           <div class="cta-actions">
-            <button mat-raised-button color="accent" routerLink="/client/request-service">
+            <button
+              mat-raised-button
+              color="accent"
+              routerLink="/client/request-service"
+            >
               <mat-icon>phone</mat-icon>
-              {{ translate('services.cta.request_service') }}
+              {{ "services.cta.request_service" | translate }}
             </button>
-            <button mat-stroked-button color="primary" routerLink="/home/contact">
+            <button
+              mat-stroked-button
+              color="primary"
+              routerLink="/home/contact"
+            >
               <mat-icon>contact_support</mat-icon>
-              {{ translate('services.cta.contact_us') }}
+              {{ "services.cta.contact_us" | translate }}
             </button>
           </div>
         </div>

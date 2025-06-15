@@ -8,8 +8,8 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { DashboardComponent } from "./dashboard.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { DashboardComponent } from "./dashboard.component";
 
 const routes: Routes = [
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -31,6 +31,7 @@ const routes: Routes = [
     MatDividerModule,
     MatProgressBarModule,
     TranslateModule.forChild(),
+    DashboardComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

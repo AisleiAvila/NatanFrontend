@@ -3,18 +3,18 @@
   <section class="hero-section">
     <div class="container">
       <div class="hero-content">
-        <h1>{{ translate.translate("home.hero.title") }}</h1>
-        <p>{{ translate.translate("home.hero.subtitle") }}</p>
+        <h1>{{ "home.hero.title" | translate }}</h1>
+        <p>{{ "home.hero.subtitle" | translate }}</p>
         <div class="hero-actions">
           <button
             mat-raised-button
             color="primary"
             routerLink="/client/request-service"
           >
-            {{ translate.translate("home.hero.request_service") }}
+            {{ "home.hero.request_service" | translate }}
           </button>
           <button mat-stroked-button color="primary" routerLink="/contact">
-            {{ translate.translate("contact.title") }}
+            {{ "contact.title" | translate }}
           </button>
         </div>
       </div>
@@ -100,16 +100,15 @@
         </div>
         <div class="about-text improved-about-text">
           <h2 class="about-title">
-            {{ translate.translate("home.about.title") }}
+            {{ "home.about.title" | translate }}
           </h2>
           <h4
             class="about-subtitle"
             *ngIf="
-              translate.translate('home.about.subtitle') !==
-              'home.about.subtitle'
+              ('home.about.subtitle' | translate) !== 'home.about.subtitle'
             "
           >
-            {{ translate.translate("home.about.subtitle") }}
+            {{ "home.about.subtitle" | translate }}
           </h4>
           <p class="about-description">
             <!-- Texto removido conforme solicitado -->
@@ -117,15 +116,15 @@
           <ul class="features-list improved-features-list">
             <li>
               <mat-icon color="primary">check_circle</mat-icon>
-              <span>{{ translate.translate("home.about.feature1") }}</span>
+              <span>{{ "home.about.feature1" | translate }}</span>
             </li>
             <li>
               <mat-icon color="primary">check_circle</mat-icon>
-              <span>{{ translate.translate("home.about.feature2") }}</span>
+              <span>{{ "home.about.feature2" | translate }}</span>
             </li>
             <li>
               <mat-icon color="primary">check_circle</mat-icon>
-              <span>{{ translate.translate("home.about.feature3") }}</span>
+              <span>{{ "home.about.feature3" | translate }}</span>
             </li>
           </ul>
         </div>
@@ -138,7 +137,7 @@
     <mat-card class="download-app-card">
       <div class="download-app-content">
         <div class="download-app-text">
-          <h2>Faça o download do nosso aplicativo</h2>
+          <h2>{{ "home.download_app.title" | translate }}</h2>
           <div class="store-cards">
             <a
               href="https://play.google.com/store/apps/details?id=com.natan.app"
@@ -147,7 +146,7 @@
             >
               <mat-card class="store-card google-play">
                 <mat-icon>android</mat-icon>
-                <span>Disponível na Google Play</span>
+                <span>{{ "home.download_app.google_play" | translate }}</span>
               </mat-card>
             </a>
             <a
@@ -157,7 +156,7 @@
             >
               <mat-card class="store-card apple-store">
                 <mat-icon>apple</mat-icon>
-                <span>Disponível na Apple Store</span>
+                <span>{{ "home.download_app.apple_store" | translate }}</span>
               </mat-card>
             </a>
           </div>

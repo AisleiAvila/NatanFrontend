@@ -51,6 +51,15 @@
       "request_service": "Solicitar Serviço",
       "whatsapp": "WhatsApp"
     },
+    "download_app": {
+      "title": "Baixe Nosso Aplicativo",
+      "google_play": "Disponível no Google Play",
+      "apple_store": "Disponível na App Store"
+    },
+    "services": {
+      "title": "Nossos Serviços",
+      "subtitle": "Encontre o serviço perfeito para o seu projeto"
+    },
     "featured_services": {
       "title": "Serviços em Destaque",
       "subtitle": "Oferecemos uma ampla gama de serviços de construção e renovação"
@@ -390,6 +399,9 @@
     "error_occurred": "Ocorreu um erro"
   },
   "header": {
-    "how_it_works": "Como funciona?"
+    "how_it_works": "Como Funciona",
+    "services": {
+      "request": "Solicitar Serviço"
+    }
   }
 }

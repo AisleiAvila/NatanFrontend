@@ -1,13 +1,12 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./home.component";
-import { TranslateModule } from "@ngx-translate/core";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatDividerModule } from "@angular/material/divider";
+import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
+import { MatDialogModule } from "@angular/material/dialog";
+import { TranslateModule } from "@ngx-translate/core";
 
 const routes: Routes = [
   {
@@ -17,17 +16,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    TranslateModule.forChild(),
-    MatToolbarModule,
-    MatIconModule,
+    HomeComponent,
     MatButtonModule,
-    MatMenuModule,
-    MatDividerModule,
+    MatIconModule,
+    MatCardModule,
+    MatDialogModule,
+    TranslateModule,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeModule {}

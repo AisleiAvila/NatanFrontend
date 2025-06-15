@@ -6,7 +6,7 @@
         <mat-icon class="brand-icon">construction</mat-icon>
         <h1>Natan Construtora</h1>
       </div>
-      <p class="brand-subtitle">{{ translate("auth.welcome_message") }}</p>
+      <p class="brand-subtitle">{{ "auth.welcome_message" | translate }}</p>
     </div>
 
     <!-- Demo Credentials Section -->
@@ -17,9 +17,9 @@
     >
       <mat-card class="demo-card">
         <mat-card-header>
-          <mat-card-title>{{ translate("auth.demo.title") }}</mat-card-title>
+          <mat-card-title>{{ "auth.demo.title" | translate }}</mat-card-title>
           <mat-card-subtitle>{{
-            translate("auth.demo.subtitle")
+            "auth.demo.subtitle" | translate
           }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
@@ -33,7 +33,7 @@
               <div class="demo-info">
                 <span class="demo-email">{{ cred.email }}</span>
                 <span class="demo-role">{{
-                  translate("roles." + cred.role)
+                  "roles." + cred.role | translate
                 }}</span>
               </div>
             </button>
@@ -49,9 +49,9 @@
       [@fadeInOut]="animationState"
     >
       <mat-card-header>
-        <mat-card-title>{{ translate("auth.login_title") }}</mat-card-title>
+        <mat-card-title>{{ "auth.login_title" | translate }}</mat-card-title>
         <mat-card-subtitle>{{
-          translate("auth.login_subtitle")
+          "auth.login_subtitle" | translate
         }}</mat-card-subtitle>
       </mat-card-header>
 
@@ -59,12 +59,12 @@
         <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
           <!-- Email Field -->
           <mat-form-field appearance="outline">
-            <mat-label>{{ translate("auth.email") }}</mat-label>
+            <mat-label>{{ "auth.email" | translate }}</mat-label>
             <input
               matInput
               type="email"
               formControlName="email"
-              placeholder="{{ translate('auth.email_placeholder') }}"
+              placeholder="{{ 'auth.email_placeholder' | translate }}"
             />
             <mat-icon matSuffix>email</mat-icon>
             <mat-error>{{ getFieldError("email", loginForm) }}</mat-error>
@@ -72,12 +72,12 @@
 
           <!-- Password Field -->
           <mat-form-field appearance="outline">
-            <mat-label>{{ translate("auth.password") }}</mat-label>
+            <mat-label>{{ "auth.password" | translate }}</mat-label>
             <input
               matInput
               [type]="hidePassword ? 'password' : 'text'"
               formControlName="password"
-              placeholder="{{ translate('auth.password_placeholder') }}"
+              placeholder="{{ 'auth.password_placeholder' | translate }}"
             />
             <button
               mat-icon-button
@@ -104,7 +104,9 @@
             <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
             <mat-icon *ngIf="!isLoading">login</mat-icon>
             {{
-              isLoading ? translate("auth.logging_in") : translate("auth.login")
+              isLoading
+                ? ("auth.logging_in" | translate)
+                : ("auth.login" | translate)
             }}
           </button>
         </form>
@@ -113,7 +115,7 @@
       <mat-card-actions>
         <button mat-button color="accent" (click)="toggleAuthMethod()">
           <mat-icon>email</mat-icon>
-          {{ translate("auth.use_magic_link") }}
+          {{ "auth.use_magic_link" | translate }}
         </button>
       </mat-card-actions>
     </mat-card>
@@ -126,10 +128,10 @@
     >
       <mat-card-header>
         <mat-card-title>{{
-          translate("auth.magic_link_title")
+          "auth.magic_link_title" | translate
         }}</mat-card-title>
         <mat-card-subtitle>{{
-          translate("auth.magic_link_subtitle")
+          "auth.magic_link_subtitle" | translate
         }}</mat-card-subtitle>
       </mat-card-header>
 
@@ -141,12 +143,12 @@
         >
           <!-- Email Field -->
           <mat-form-field appearance="outline">
-            <mat-label>{{ translate("auth.email") }}</mat-label>
+            <mat-label>{{ "auth.email" | translate }}</mat-label>
             <input
               matInput
               type="email"
               formControlName="email"
-              placeholder="{{ translate('auth.email_placeholder') }}"
+              placeholder="{{ 'auth.email_placeholder' | translate }}"
             />
             <mat-icon matSuffix>email</mat-icon>
             <mat-error>{{ getFieldError("email", magicLinkForm) }}</mat-error>
@@ -164,8 +166,8 @@
             <mat-icon *ngIf="!isLoading">send</mat-icon>
             {{
               isLoading
-                ? translate("auth.sending")
-                : translate("auth.send_magic_link")
+                ? ("auth.sending" | translate)
+                : ("auth.send_magic_link" | translate)
             }}
           </button>
         </form>
@@ -174,7 +176,7 @@
       <mat-card-actions>
         <button mat-button color="accent" (click)="toggleAuthMethod()">
           <mat-icon>password</mat-icon>
-          {{ translate("auth.use_password") }}
+          {{ "auth.use_password" | translate }}
         </button>
       </mat-card-actions>
     </mat-card>
@@ -183,12 +185,12 @@
     <div class="additional-actions" [@fadeInOut]="animationState">
       <button mat-button routerLink="/home" class="back-btn">
         <mat-icon>arrow_back</mat-icon>
-        {{ translate("auth.back_to_home") }}
+        {{ "auth.back_to_home" | translate }}
       </button>
 
       <button mat-button routerLink="/home/contact" class="help-btn">
         <mat-icon>help</mat-icon>
-        {{ translate("auth.need_help") }}
+        {{ "auth.need_help" | translate }}
       </button>
     </div>
   </div>

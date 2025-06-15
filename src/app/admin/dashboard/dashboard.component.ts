@@ -1,14 +1,26 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService, User } from "../../core/services/auth.service";
 import { DataService, ServiceRequest } from "../../core/services/data.service";
-import { TranslationService } from "../../core/services/translation.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { CommonModule } from "@angular/common";
+import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-dashboard",
-    templateUrl: "./dashboard.component.html",
-    styleUrls: ["./dashboard.component.scss"],
-    standalone: false
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    TranslateModule,
+  ],
 })
 export class DashboardComponent implements OnInit {
   currentUser: User | null = null;
@@ -50,9 +62,12 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private dataService: DataService,
-    private translationService: TranslationService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private translateService: TranslateService
+  ) {
+    this.translateService.setDefaultLang("pt");
+    this.translateService.use(localStorage.getItem("natan_language") || "pt");
+  }
 
   ngOnInit(): void {
     this.authService.currentUser.subscribe((user: User | null) => {
@@ -60,10 +75,6 @@ export class DashboardComponent implements OnInit {
     });
 
     this.loadDashboardData();
-  }
-
-  translate(key: string): string {
-    return this.translationService.translate(key);
   }
 
   loadDashboardData(): void {
@@ -77,9 +88,11 @@ export class DashboardComponent implements OnInit {
       error: (error) => {
         console.error("Error loading dashboard data:", error);
         this.loading = false;
-        this.snackBar.open("Error loading dashboard data", "Close", {
-          duration: 3000,
-        });
+        this.snackBar.open(
+          this.translateService.instant("common.error_occurred"),
+          this.translateService.instant("common.close"),
+          { duration: 3000 }
+        );
       },
     });
   }

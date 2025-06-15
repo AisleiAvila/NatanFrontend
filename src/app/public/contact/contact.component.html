@@ -1,19 +1,19 @@
 <div class="contact-page">
   <div class="container">
     <div class="contact-header">
-      <h1>{{ translate.translate("contact.title") }}</h1>
-      <p>{{ translate.translate("contact.subtitle") }}</p>
+      <h1>{{ "contact.title" | translate }}</h1>
+      <p>{{ "contact.subtitle" | translate }}</p>
     </div>
 
     <div class="contact-content">
       <div class="contact-info">
         <div class="info-card">
-          <h2>{{ translate.translate("contact.info.quick_contact") }}</h2>
+          <h2>{{ "contact.info.quick_contact" | translate }}</h2>
 
           <div class="contact-item">
             <mat-icon>phone</mat-icon>
             <div>
-              <h3>{{ translate.translate("contact.info.phone") }}</h3>
+              <h3>{{ "contact.info.phone" | translate }}</h3>
               <p>+351 912 345 678</p>
             </div>
           </div>
@@ -21,7 +21,7 @@
           <div class="contact-item">
             <mat-icon>email</mat-icon>
             <div>
-              <h3>{{ translate.translate("contact.info.email") }}</h3>
+              <h3>{{ "contact.info.email" | translate }}</h3>
               <p>natanconstrucoes&#64;gmail.com</p>
             </div>
           </div>
@@ -37,7 +37,7 @@
               />
             </span>
             <div>
-              <h3>{{ translate.translate("contact.info.whatsapp") }}</h3>
+              <h3>{{ "contact.info.whatsapp" | translate }}</h3>
               <p>+351 912 345 678</p>
               <a
                 href="https://wa.me/351912345678"
@@ -58,23 +58,19 @@
           <div class="contact-item">
             <mat-icon>schedule</mat-icon>
             <div>
-              <h3>{{ translate.translate("contact.info.business_hours") }}</h3>
-              <p>
-                {{ translate.translate("contact.info.weekdays") }}: 9h - 18h
-              </p>
-              <p>
-                {{ translate.translate("contact.info.saturday") }}: 9h - 13h
-              </p>
-              <p>{{ translate.translate("contact.info.sunday") }}: Fechado</p>
+              <h3>{{ "contact.info.business_hours" | translate }}</h3>
+              <p>{{ "contact.info.weekdays" | translate }}: 9h - 18h</p>
+              <p>{{ "contact.info.saturday" | translate }}: 9h - 13h</p>
+              <p>{{ "contact.info.sunday" | translate }}: Fechado</p>
             </div>
           </div>
         </div>
 
         <div class="emergency-card">
-          <h2>{{ translate.translate("contact.emergency.title") }}</h2>
-          <p>{{ translate.translate("contact.emergency.description") }}</p>
+          <h2>{{ "contact.emergency.title" | translate }}</h2>
+          <p>{{ "contact.emergency.description" | translate }}</p>
           <button mat-raised-button color="warn" (click)="openWhatsApp()">
-            {{ translate.translate("contact.emergency.call_now") }}
+            {{ "contact.emergency.call_now" | translate }}
           </button>
         </div>
       </div>
@@ -82,59 +78,49 @@
       <div class="contact-form">
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline">
-            <mat-label>{{
-              translate.translate("contact.form.name")
-            }}</mat-label>
+            <mat-label>{{ "contact.form.name" | translate }}</mat-label>
             <input matInput formControlName="name" required />
             <mat-error *ngIf="contactForm.get('name')?.errors?.['required']">
-              {{ translate.translate("validation.required") }}
+              {{ "validation.required" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>{{
-              translate.translate("contact.form.email")
-            }}</mat-label>
+            <mat-label>{{ "contact.form.email" | translate }}</mat-label>
             <input matInput type="email" formControlName="email" required />
             <mat-error *ngIf="contactForm.get('email')?.errors?.['required']">
-              {{ translate.translate("validation.required") }}
+              {{ "validation.required" | translate }}
             </mat-error>
             <mat-error *ngIf="contactForm.get('email')?.errors?.['email']">
-              {{ translate.translate("validation.email") }}
+              {{ "validation.email" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>{{
-              translate.translate("contact.form.phone")
-            }}</mat-label>
+            <mat-label>{{ "contact.form.phone" | translate }}</mat-label>
             <input matInput formControlName="phone" required />
             <mat-error *ngIf="contactForm.get('phone')?.errors?.['required']">
-              {{ translate.translate("validation.required") }}
+              {{ "validation.required" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>{{
-              translate.translate("contact.form.subject")
-            }}</mat-label>
+            <mat-label>{{ "contact.form.subject" | translate }}</mat-label>
             <mat-select formControlName="subject" required>
               <mat-option
                 *ngFor="let subject of getSubjects()"
                 [value]="subject"
               >
-                {{ translate.translate(subject) }}
+                {{ subject | translate }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="contactForm.get('subject')?.errors?.['required']">
-              {{ translate.translate("validation.required") }}
+              {{ "validation.required" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>{{
-              translate.translate("contact.form.message")
-            }}</mat-label>
+            <mat-label>{{ "contact.form.message" | translate }}</mat-label>
             <textarea
               matInput
               formControlName="message"
@@ -142,23 +128,23 @@
               required
             ></textarea>
             <mat-error *ngIf="contactForm.get('message')?.errors?.['required']">
-              {{ translate.translate("validation.required") }}
+              {{ "validation.required" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{
-              translate.translate("contact.form.preferred_contact")
+              "contact.form.preferred_contact" | translate
             }}</mat-label>
             <mat-select formControlName="preferredContact" required>
               <mat-option value="email">{{
-                translate.translate("contact.form.contact_email")
+                "contact.form.contact_email" | translate
               }}</mat-option>
               <mat-option value="phone">{{
-                translate.translate("contact.form.contact_phone")
+                "contact.form.contact_phone" | translate
               }}</mat-option>
               <mat-option value="whatsapp">{{
-                translate.translate("contact.form.contact_whatsapp")
+                "contact.form.contact_whatsapp" | translate
               }}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -170,9 +156,7 @@
             [disabled]="!contactForm.valid || loading"
           >
             <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
-            <span *ngIf="!loading">{{
-              translate.translate("contact.form.send")
-            }}</span>
+            <span *ngIf="!loading">{{ "contact.form.send" | translate }}</span>
           </button>
         </form>
       </div>

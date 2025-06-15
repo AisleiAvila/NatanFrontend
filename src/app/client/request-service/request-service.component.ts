@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatStepper } from "@angular/material/stepper";
 import { AuthService, User } from "../../core/services/auth.service";
 import {
@@ -9,15 +9,50 @@ import {
   Service,
   ServiceRequest,
 } from "../../core/services/data.service";
-import { TranslationService } from "../../core/services/translation.service";
 import { MatDialog } from "@angular/material/dialog";
 import { TermsDialogComponent } from "./terms-dialog.component";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
-    selector: "app-request-service",
-    templateUrl: "./request-service.component.html",
-    styleUrls: ["./request-service.component.scss"],
-    standalone: false
+  selector: "app-request-service",
+  templateUrl: "./request-service.component.html",
+  styleUrls: ["./request-service.component.scss"],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
+    TranslateModule,
+    MatStepperModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+  ],
 })
 export class RequestServiceComponent implements OnInit {
   @ViewChild("stepper") stepper!: MatStepper;
@@ -50,13 +85,15 @@ export class RequestServiceComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private dataService: DataService,
-    private translationService: TranslationService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private translateService: TranslateService
   ) {
     this.maxDate.setMonth(this.maxDate.getMonth() + 3); // 3 months ahead
+    this.translateService.setDefaultLang("pt");
+    this.translateService.use(localStorage.getItem("natan_language") || "pt");
 
     this.serviceSelectionForm = this.fb.group({
       serviceId: ["", Validators.required],
@@ -87,10 +124,6 @@ export class RequestServiceComponent implements OnInit {
     this.checkPreselectedService();
   }
 
-  translate(key: string): string {
-    return this.translationService.translate(key);
-  }
-
   loadServices(): void {
     this.dataService.getServices().subscribe(
       (services) => {
@@ -99,8 +132,8 @@ export class RequestServiceComponent implements OnInit {
       (error) => {
         console.error("Error loading services:", error);
         this.snackBar.open(
-          this.translate("common.error_loading_data"),
-          this.translate("common.close"),
+          this.translateService.instant("common.error_loading_data"),
+          this.translateService.instant("common.close"),
           { duration: 5000 }
         );
       }
@@ -159,8 +192,8 @@ export class RequestServiceComponent implements OnInit {
     for (const file of files) {
       if (this.uploadedFiles.length >= this.maxFiles) {
         this.snackBar.open(
-          this.translate("service_request.max_files_error"),
-          this.translate("common.close"),
+          this.translateService.instant("service_request.max_files_error"),
+          this.translateService.instant("common.close"),
           { duration: 3000 }
         );
         break;
@@ -168,8 +201,8 @@ export class RequestServiceComponent implements OnInit {
 
       if (file.size > this.maxFileSize) {
         this.snackBar.open(
-          this.translate("service_request.file_size_error"),
-          this.translate("common.close"),
+          this.translateService.instant("service_request.file_size_error"),
+          this.translateService.instant("common.close"),
           { duration: 3000 }
         );
         continue;
@@ -179,8 +212,8 @@ export class RequestServiceComponent implements OnInit {
         this.uploadedFiles.push(file);
       } else {
         this.snackBar.open(
-          this.translate("service_request.file_type_error"),
-          this.translate("common.close"),
+          this.translateService.instant("service_request.file_type_error"),
+          this.translateService.instant("common.close"),
           { duration: 3000 }
         );
       }
@@ -227,8 +260,8 @@ export class RequestServiceComponent implements OnInit {
         (success) => {
           this.isSubmitting = false;
           this.snackBar.open(
-            this.translate("service_request.success_message"),
-            this.translate("common.close"),
+            this.translateService.instant("service_request.success_message"),
+            this.translateService.instant("common.close"),
             { duration: 5000 }
           );
           this.router.navigate(["/client/dashboard"]);
@@ -236,8 +269,8 @@ export class RequestServiceComponent implements OnInit {
         (error) => {
           this.isSubmitting = false;
           this.snackBar.open(
-            this.translate("service_request.error_message"),
-            this.translate("common.close"),
+            this.translateService.instant("service_request.error_message"),
+            this.translateService.instant("common.close"),
             { duration: 5000 }
           );
         }
@@ -257,16 +290,16 @@ export class RequestServiceComponent implements OnInit {
     const field = form.get(fieldName);
     if (field?.errors && field.touched) {
       if (field.errors["required"]) {
-        return this.translate("validation.required");
+        return this.translateService.instant("validation.required");
       }
       if (field.errors["email"]) {
-        return this.translate("validation.email");
+        return this.translateService.instant("validation.email");
       }
       if (field.errors["minlength"]) {
-        return this.translate("validation.minlength");
+        return this.translateService.instant("validation.minlength");
       }
       if (field.errors["requiredTrue"]) {
-        return this.translate("validation.required");
+        return this.translateService.instant("validation.required");
       }
     }
     return "";
@@ -308,5 +341,9 @@ export class RequestServiceComponent implements OnInit {
   }
   goBack(): void {
     this.router.navigate(["/home"]);
+  }
+
+  translate(key: string): string {
+    return this.translateService.instant(key);
   }
 }

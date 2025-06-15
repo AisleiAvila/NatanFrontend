@@ -24,7 +24,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ContactComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -41,6 +40,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatMenuModule,
     MatDividerModule,
+    ContactComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,101 +1,45 @@
 import { Component, OnInit } from "@angular/core";
-import { TranslationService } from "../../../core/services/translation.service";
+import { CommonModule } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { TranslateService } from "@ngx-translate/core";
+
+interface Language {
+  code: string;
+  name: string;
+  flag: string;
+}
 
 @Component({
-    selector: "app-language-selector",
-    template: `
-    <button
-      mat-button
-      [matMenuTriggerFor]="languageMenu"
-      class="language-selector"
-    >
-      <span class="current-language">
-        {{ getCurrentLanguageFlag() }} {{ getCurrentLanguageName() }}
-      </span>
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-
-    <mat-menu #languageMenu="matMenu">
-      <button
-        mat-menu-item
-        *ngFor="let lang of availableLanguages"
-        (click)="changeLanguage(lang.code)"
-        [class.active]="lang.code === currentLanguage"
-      >
-        <span class="language-flag">{{ lang.flag }}</span>
-        <span>{{ lang.name }}</span>
-      </button>
-    </mat-menu>
-  `,
-    styles: [
-        `
-      .language-selector {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        padding: 0 16px;
-        height: 40px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background: rgba(255, 255, 255, 0.2);
-        }
-
-        .current-language {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        mat-icon {
-          font-size: 20px;
-          width: 20px;
-          height: 20px;
-        }
-      }
-
-      .language-flag {
-        margin-right: 8px;
-        font-size: 1.2em;
-      }
-
-      button.active {
-        background: rgba(0, 0, 0, 0.04);
-      }
-    `,
-    ],
-    standalone: false
+  selector: "app-language-selector",
+  templateUrl: "./language-selector.component.html",
+  styleUrls: ["./language-selector.component.scss"],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule],
 })
 export class LanguageSelectorComponent implements OnInit {
-  availableLanguages: { code: string; name: string; flag: string }[] = [];
   currentLanguage: string = "pt";
+  availableLanguages: Language[] = [
+    { code: "pt", name: "Português", flag: "🇧🇷" },
+    { code: "en", name: "English", flag: "🇺🇸" },
+  ];
 
-  constructor(private translationService: TranslationService) {}
-
-  ngOnInit() {
-    this.availableLanguages = this.translationService.getAvailableLanguages();
-    this.currentLanguage = this.translationService.getCurrentLanguage();
+  constructor(private translateService: TranslateService) {
+    this.translateService.setDefaultLang("pt");
+    this.currentLanguage = localStorage.getItem("natan_language") || "pt";
+    this.translateService.use(this.currentLanguage);
   }
 
-  changeLanguage(language: string) {
-    this.translationService.setLanguage(language);
-    this.currentLanguage = language;
+  ngOnInit(): void {}
+
+  getCurrentLanguage(): Language | undefined {
+    return this.availableLanguages.find((l) => l.code === this.currentLanguage);
   }
 
-  getCurrentLanguageFlag(): string {
-    const lang = this.availableLanguages.find(
-      (l) => l.code === this.currentLanguage
-    );
-    return lang ? lang.flag : "🇵🇹";
-  }
-
-  getCurrentLanguageName(): string {
-    const lang = this.availableLanguages.find(
-      (l) => l.code === this.currentLanguage
-    );
-    return lang ? lang.name : "Português";
+  setLanguage(langCode: string): void {
+    this.currentLanguage = langCode;
+    localStorage.setItem("natan_language", langCode);
+    this.translateService.use(langCode);
   }
 }

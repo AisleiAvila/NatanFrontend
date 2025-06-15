@@ -1,0 +1,20 @@
+<button mat-button [matMenuTriggerFor]="languageMenu" class="language-selector">
+  <span class="current-language">
+    <ng-container *ngIf="getCurrentLanguage() as currentLang">
+      {{ currentLang.flag }} {{ currentLang.name }}
+    </ng-container>
+  </span>
+  <mat-icon>arrow_drop_down</mat-icon>
+</button>
+
+<mat-menu #languageMenu="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let lang of availableLanguages"
+    (click)="setLanguage(lang.code)"
+    [class.active]="lang.code === currentLanguage"
+  >
+    <span class="language-flag">{{ lang.flag }}</span>
+    <span>{{ lang.name }}</span>
+  </button>
+</mat-menu>

@@ -14,11 +14,12 @@ import { TranslateModule } from "@ngx-translate/core";
 import { LoginRoutingModule } from "./login-routing.module";
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     LoginRoutingModule,
+    LoginComponent,
     MatIconModule,
     MatButtonModule,
     MatCardModule,

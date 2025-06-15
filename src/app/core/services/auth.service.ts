@@ -21,6 +21,8 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
   public isLoggedIn$: Observable<boolean>;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User | null>(
@@ -28,6 +30,7 @@ export class AuthService {
     );
     this.currentUser = this.currentUserSubject.asObservable();
     this.isLoggedIn$ = this.currentUser.pipe(map((user) => !!user));
+    this.checkAuthStatus();
   }
 
   public get currentUserValue(): User | null {
@@ -49,6 +52,7 @@ export class AuthService {
       map((user) => {
         localStorage.setItem("currentUser", JSON.stringify(user));
         this.currentUserSubject.next(user);
+        this.isAuthenticatedSubject.next(true);
         return user;
       })
     );
@@ -57,6 +61,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
+    this.isAuthenticatedSubject.next(false);
     this.router.navigate(["/home"]);
   }
 
@@ -75,6 +80,7 @@ export class AuthService {
       map((newUser) => {
         localStorage.setItem("currentUser", JSON.stringify(newUser));
         this.currentUserSubject.next(newUser);
+        this.isAuthenticatedSubject.next(true);
         return newUser;
       })
     );
@@ -85,6 +91,7 @@ export class AuthService {
     if (userData) {
       const user = JSON.parse(userData);
       this.currentUserSubject.next(user);
+      this.isAuthenticatedSubject.next(true);
     }
   }
 
@@ -106,5 +113,15 @@ export class AuthService {
   hasRole(role: string): boolean {
     const user = this.currentUserValue;
     return user?.role === role;
+  }
+
+  getCurrentUser(): User | null {
+    const userStr = localStorage.getItem("currentUser");
+    return userStr ? JSON.parse(userStr) : null;
+  }
+
+  isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user?.role === "admin";
   }
 }

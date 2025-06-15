@@ -50,6 +50,15 @@
       "request_service": "Request Service",
       "whatsapp": "WhatsApp"
     },
+    "download_app": {
+      "title": "Download Our App",
+      "google_play": "Available on Google Play",
+      "apple_store": "Available on App Store"
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Find the perfect service for your project"
+    },
     "featured_services": {
       "title": "Featured Services",
       "subtitle": "We offer a wide range of construction and renovation services"
@@ -389,6 +398,9 @@
     "error_occurred": "An error occurred"
   },
   "header": {
-    "how_it_works": "How it works?"
+    "how_it_works": "How It Works",
+    "services": {
+      "request": "Request Service"
+    }
   }
 }
