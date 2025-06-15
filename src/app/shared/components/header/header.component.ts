@@ -1,13 +1,29 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatDividerModule } from "@angular/material/divider";
+import { TranslateModule } from "@ngx-translate/core";
 import { AuthService, User } from "../../../core/services/auth.service";
 import { TranslationService } from "../../../core/services/translation.service";
 
 @Component({
-    selector: "app-header",
-    templateUrl: "./header.component.html",
-    styleUrls: ["./header.component.scss"],
-    standalone: false
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatDividerModule,
+    TranslateModule,
+  ],
 })
 export class HeaderComponent implements OnInit {
   currentUser: User | null = null;
