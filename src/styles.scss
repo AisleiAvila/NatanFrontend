@@ -1,5 +1,11 @@
-/* Importa variáveis globais */
-@use "theme/ionic.variables.scss";
+// Tema escolhido durante a instalação
+@use "@angular/material" as mat;
+
+// Inclui estilos comuns para o Material
+@include mat.core();
+
+// Usa o tema predefinido (ex: indigo-pink)
+@include mat.all-component-themes(mat.$indigo-pink-palette);
 
 /* Reset e estilos base */
 * {
