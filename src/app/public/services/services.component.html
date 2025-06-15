@@ -156,15 +156,8 @@
           <p>{{ "services.cta.description" | translate }}</p>
           <div class="cta-actions">
             <button
-              mat-raised-button
-              color="accent"
-              routerLink="/client/request-service"
-            >
-              <mat-icon>phone</mat-icon>
-              {{ "services.cta.request_service" | translate }}
-            </button>
-            <button
               mat-stroked-button
+              (click)="goToContact()"
               color="primary"
               routerLink="/home/contact"
             >

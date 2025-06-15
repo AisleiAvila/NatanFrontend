@@ -105,4 +105,8 @@ export class ServicesComponent implements OnInit {
       queryParams: { serviceId: service.id },
     });
   }
+
+  goToContact(): void {
+    this.router.navigate(["/contact"]);
+  }
 }
