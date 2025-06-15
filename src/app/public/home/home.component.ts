@@ -1,17 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslationService } from "@core/services/translation.service";
 import { DataService, Service } from "@core/services/data.service";
+import { MatDialog } from "@angular/material/dialog";
+import { TranslateService } from "@ngx-translate/core";
+import { ServiceRequestComponent } from "../../shared/components/service-request/service-request.component";
 
 @Component({
-    selector: "app-home",
-    templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.scss"],
-    standalone: false
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
+  standalone: false,
 })
 export class HomeComponent implements OnInit {
   featuredServices: Service[] = [];
   loading = true;
+  currentSlide = 0;
+  slidesToShow = 3;
 
   // Company statistics
   stats = [
@@ -48,12 +53,21 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     public translate: TranslationService,
-    private dataService: DataService
+    private dataService: DataService,
+    private dialog: MatDialog,
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.translate.initTranslation();
     this.loadServices();
+    this.adjustSlidesToShow();
+    window.addEventListener("resize", () => this.adjustSlidesToShow());
+  }
+
+  @HostListener("window:resize")
+  onResize(): void {
+    this.adjustSlidesToShow();
   }
 
   loadServices(): void {
@@ -71,8 +85,9 @@ export class HomeComponent implements OnInit {
 
   requestService(service?: Service): void {
     if (service) {
-      this.router.navigate(["/client/request-service"], {
-        queryParams: { serviceId: service.id },
+      this.dialog.open(ServiceRequestComponent, {
+        width: "600px",
+        data: service,
       });
     } else {
       this.router.navigate(["/client/request-service"]);
@@ -107,5 +122,38 @@ export class HomeComponent implements OnInit {
     } else {
       carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
+  }
+
+  adjustSlidesToShow(): void {
+    if (window.innerWidth <= 480) {
+      this.slidesToShow = 1;
+    } else if (window.innerWidth <= 768) {
+      this.slidesToShow = 2;
+    } else {
+      this.slidesToShow = 3;
+    }
+  }
+
+  nextSlide(): void {
+    if (this.currentSlide < this.services.length - this.slidesToShow) {
+      this.currentSlide++;
+    } else {
+      this.currentSlide = 0;
+    }
+  }
+
+  prevSlide(): void {
+    if (this.currentSlide > 0) {
+      this.currentSlide--;
+    } else {
+      this.currentSlide = this.services.length - this.slidesToShow;
+    }
+  }
+
+  getVisibleServices(): Service[] {
+    return this.services.slice(
+      this.currentSlide,
+      this.currentSlide + this.slidesToShow
+    );
   }
 }

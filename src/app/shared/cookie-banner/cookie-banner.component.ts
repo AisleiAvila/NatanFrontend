@@ -1,24 +1,27 @@
 import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-cookie-banner",
-    template: `
+  selector: "app-cookie-banner",
+  template: `
     <div class="cookie-banner" *ngIf="!accepted">
       <div class="cookie-content">
-        <p>{{ translate("cookies.message") }}</p>
+        <p>{{ "cookies.message" | translate }}</p>
         <div class="cookie-actions">
           <button mat-button color="primary" (click)="acceptCookies()">
-            {{ translate("cookies.accept") }}
+            {{ "cookies.accept" | translate }}
           </button>
           <button mat-button (click)="declineCookies()">
-            {{ translate("cookies.decline") }}
+            {{ "cookies.decline" | translate }}
           </button>
         </div>
       </div>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .cookie-banner {
         position: fixed;
         bottom: 0;
@@ -42,8 +45,9 @@ import { Component, OnInit } from "@angular/core";
         gap: 0.5rem;
       }
     `,
-    ],
-    standalone: false
+  ],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, TranslateModule],
 })
 export class CookieBannerComponent implements OnInit {
   accepted = false;
@@ -62,16 +66,5 @@ export class CookieBannerComponent implements OnInit {
   declineCookies(): void {
     localStorage.setItem("cookiesAccepted", "false");
     this.accepted = true;
-  }
-
-  translate(key: string): string {
-    // TODO: Implementar serviço de tradução
-    const translations: { [key: string]: string } = {
-      "cookies.message":
-        "Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com o uso de cookies.",
-      "cookies.accept": "Aceitar",
-      "cookies.decline": "Recusar",
-    };
-    return translations[key] || key;
   }
 }

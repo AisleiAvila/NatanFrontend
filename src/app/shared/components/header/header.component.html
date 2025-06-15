@@ -14,7 +14,7 @@
       <span class="brand-name">Natan Construtora</span>
     </div>
 
-    <!-- Navigation Menu -->
+    <!-- Navigation Menu - Desktop -->
     <div class="nav-section d-none d-md-flex">
       <button mat-button routerLink="/home" routerLinkActive="active">
         {{ translate("nav.home") }}
@@ -55,7 +55,7 @@
       <div class="user-section" *ngIf="!isAuthenticated">
         <button mat-raised-button color="accent" (click)="goToLogin()">
           <mat-icon>login</mat-icon>
-          {{ translate("auth.login") }}
+          <span class="d-none d-md-inline">{{ translate("auth.login") }}</span>
         </button>
       </div>
 
@@ -83,32 +83,46 @@
         </mat-menu>
       </div>
 
-      <!-- Mobile Menu -->
+      <!-- Mobile Menu Button -->
       <button
         mat-icon-button
-        class="d-md-none"
+        class="mobile-menu-btn d-md-none"
         [matMenuTriggerFor]="mobileMenu"
+        aria-label="Menu"
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <mat-menu #mobileMenu="matMenu">
-        <button mat-menu-item routerLink="/home">
-          <mat-icon>home</mat-icon>
-          <span>{{ translate("nav.home") }}</span>
-        </button>
-        <button mat-menu-item routerLink="/services">
-          <mat-icon>build</mat-icon>
-          <span>{{ translate("nav.services") }}</span>
-        </button>
-        <button mat-menu-item routerLink="/contact">
-          <mat-icon>contact_mail</mat-icon>
-          <span>{{ translate("nav.contact") }}</span>
-        </button>
-        <button mat-menu-item routerLink="/how-it-works">
-          <mat-icon>info</mat-icon>
-          <span>{{ translate("header.how_it_works") }}</span>
-        </button>
-      </mat-menu>
     </div>
   </div>
 </mat-toolbar>
+
+<!-- Mobile Menu -->
+<mat-menu #mobileMenu="matMenu" class="mobile-menu">
+  <div class="mobile-menu-content">
+    <button mat-menu-item routerLink="/home">
+      <mat-icon>home</mat-icon>
+      <span>{{ translate("nav.home") }}</span>
+    </button>
+    <button mat-menu-item routerLink="/services">
+      <mat-icon>build</mat-icon>
+      <span>{{ translate("nav.services") }}</span>
+    </button>
+    <button mat-menu-item routerLink="/contact">
+      <mat-icon>contact_mail</mat-icon>
+      <span>{{ translate("nav.contact") }}</span>
+    </button>
+    <button mat-menu-item routerLink="/how-it-works">
+      <mat-icon>info</mat-icon>
+      <span>{{ translate("header.how_it_works") }}</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="goToLogin()" *ngIf="!isAuthenticated">
+      <mat-icon>login</mat-icon>
+      <span>{{ translate("auth.login") }}</span>
+    </button>
+    <button mat-menu-item (click)="logout()" *ngIf="isAuthenticated">
+      <mat-icon>logout</mat-icon>
+      <span>{{ translate("auth.logout") }}</span>
+    </button>
+  </div>
+</mat-menu>

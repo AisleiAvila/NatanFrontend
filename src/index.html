@@ -6,7 +6,7 @@
     <base href="/" />
     <meta
       name="viewport"
-      content="viewport-width=device-width, initial-scale=1"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -18,19 +18,148 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <style>
+      /* Reset e estilos base */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f5f5f5;
+      }
+
+      /* Container de carregamento */
+      .loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .loading-content {
+        max-width: 600px;
+        width: 100%;
+        padding: 40px 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .loading-content h1 {
+        font-size: 2rem;
+        color: #1976d2;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .loading-content p {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border: 3px solid #e3f2fd;
+        border-radius: 50%;
+        border-top-color: #1976d2;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .loading-content {
+          padding: 30px 15px;
+        }
+
+        .loading-content h1 {
+          font-size: 1.75rem;
+        }
+
+        .loading-content p {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .loading-content {
+          padding: 20px 15px;
+        }
+
+        .loading-content h1 {
+          font-size: 1.5rem;
+        }
+
+        .loading-content p {
+          font-size: 0.95rem;
+        }
+
+        .loading-spinner {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      /* Suporte a modo escuro */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #121212;
+          color: #fff;
+        }
+
+        .loading-content {
+          background: #1e1e1e;
+        }
+
+        .loading-content h1 {
+          color: #90caf9;
+        }
+
+        .loading-content p {
+          color: #b0b0b0;
+        }
+
+        .loading-spinner {
+          border-color: #1a1a1a;
+          border-top-color: #90caf9;
+        }
+      }
+
+      /* Suporte a redução de movimento */
+      @media (prefers-reduced-motion: reduce) {
+        .loading-spinner {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body class="mat-typography">
     <app-root>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          font-family: Roboto, sans-serif;
-        "
-      >
-        <div style="text-align: center">
+      <div class="loading-container">
+        <div class="loading-content">
+          <div class="loading-spinner"></div>
           <h1>Carregando Natan Construtora...</h1>
           <p>Se esta mensagem persistir, há um problema com a aplicação.</p>
         </div>

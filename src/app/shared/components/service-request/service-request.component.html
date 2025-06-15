@@ -1,0 +1,133 @@
+<div class="service-request-dialog">
+  <h2 mat-dialog-title>Solicitar Serviço</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome Completo</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Digite seu nome"
+          />
+          <mat-error *ngIf="requestForm.get('name')?.hasError('required')">
+            Nome é obrigatório
+          </mat-error>
+          <mat-error *ngIf="requestForm.get('name')?.hasError('minlength')">
+            Nome deve ter pelo menos 3 caracteres
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="Digite seu e-mail"
+          />
+          <mat-error *ngIf="requestForm.get('email')?.hasError('required')">
+            E-mail é obrigatório
+          </mat-error>
+          <mat-error *ngIf="requestForm.get('email')?.hasError('email')">
+            E-mail inválido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Telefone</mat-label>
+          <input
+            matInput
+            formControlName="phone"
+            placeholder="(00) 00000-0000"
+          />
+          <mat-error *ngIf="requestForm.get('phone')?.hasError('required')">
+            Telefone é obrigatório
+          </mat-error>
+          <mat-error *ngIf="requestForm.get('phone')?.hasError('pattern')">
+            Formato inválido. Use (00) 00000-0000
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Endereço</mat-label>
+          <input
+            matInput
+            formControlName="address"
+            placeholder="Digite o endereço do serviço"
+          />
+          <mat-error *ngIf="requestForm.get('address')?.hasError('required')">
+            Endereço é obrigatório
+          </mat-error>
+          <mat-error *ngIf="requestForm.get('address')?.hasError('minlength')">
+            Endereço deve ter pelo menos 10 caracteres
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Data Preferencial</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="preferredDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error
+            *ngIf="requestForm.get('preferredDate')?.hasError('required')"
+          >
+            Data é obrigatória
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Descrição do Serviço</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            rows="4"
+            placeholder="Descreva o serviço que você precisa"
+          ></textarea>
+          <mat-error
+            *ngIf="requestForm.get('description')?.hasError('required')"
+          >
+            Descrição é obrigatória
+          </mat-error>
+          <mat-error
+            *ngIf="requestForm.get('description')?.hasError('minlength')"
+          >
+            Descrição deve ter pelo menos 20 caracteres
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()" [disabled]="loading">
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="requestForm.invalid || loading"
+    >
+      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <span *ngIf="!loading">Solicitar</span>
+    </button>
+  </mat-dialog-actions>
+</div>

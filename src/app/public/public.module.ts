@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { RequestServiceComponent } from "../client/request-service/request-service.component";
-import { HomeModule } from "./home/home.module";
 import { ContactModule } from "./contact/contact.module";
 import { TranslateModule } from "@ngx-translate/core";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -47,7 +46,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    HomeModule,
     TranslateModule.forChild(),
     MatToolbarModule,
     MatIconModule,
