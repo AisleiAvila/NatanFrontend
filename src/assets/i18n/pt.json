@@ -58,7 +58,8 @@
     },
     "services": {
       "title": "Nossos Serviços",
-      "subtitle": "Encontre o serviço perfeito para o seu projeto"
+      "subtitle": "Encontre o serviço perfeito para o seu projeto",
+      "request": "Solicitar Serviço"
     },
     "featured_services": {
       "title": "Serviços em Destaque",

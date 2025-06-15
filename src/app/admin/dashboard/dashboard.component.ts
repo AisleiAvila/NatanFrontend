@@ -1,12 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService, User } from "../../core/services/auth.service";
-import { DataService, ServiceRequest } from "../../core/services/data.service";
-import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { AuthService, User } from "../../core/services/auth.service";
+import { DataService, ServiceRequest } from "../../core/services/data.service";
 
 @Component({
   selector: "app-dashboard",
@@ -18,6 +21,9 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
     MatSnackBarModule,
     TranslateModule,
   ],

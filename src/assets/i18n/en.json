@@ -57,7 +57,8 @@
     },
     "services": {
       "title": "Our Services",
-      "subtitle": "Find the perfect service for your project"
+      "subtitle": "Find the perfect service for your project",
+      "request": "Request Service"
     },
     "featured_services": {
       "title": "Featured Services",

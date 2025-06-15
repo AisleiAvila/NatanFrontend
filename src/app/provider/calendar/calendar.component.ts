@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AuthService, User } from "../../core/services/auth.service";
 import { DataService, ServiceRequest } from "../../core/services/data.service";
-import { TranslationService } from "../../core/services/translation.service";
+import { TranslateService } from "@ngx-translate/core";
 
 interface CalendarDay {
   date: Date;
@@ -16,10 +16,10 @@ interface CalendarWeek {
 }
 
 @Component({
-    selector: "app-provider-calendar",
-    templateUrl: "./calendar.component.html",
-    styleUrls: ["./calendar.component.scss"],
-    standalone: false
+  selector: "app-provider-calendar",
+  templateUrl: "./calendar.component.html",
+  styleUrls: ["./calendar.component.scss"],
+  standalone: false,
 })
 export class CalendarComponent implements OnInit {
   currentUser: User | null = null;
@@ -70,9 +70,12 @@ export class CalendarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private dataService: DataService,
-    private translationService: TranslationService,
+    private translateService: TranslateService,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    this.translateService.setDefaultLang("pt");
+    this.translateService.use(localStorage.getItem("natan_language") || "pt");
+  }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
@@ -81,7 +84,7 @@ export class CalendarComponent implements OnInit {
   }
 
   translate(key: string): string {
-    return this.translationService.translate(key);
+    return this.translateService.instant(key);
   }
 
   loadProviderRequests(): void {

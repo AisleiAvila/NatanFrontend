@@ -1,19 +1,17 @@
 import { Component, OnInit } from "@angular/core";
-import { TranslationService } from "../../../core/services/translation.service";
+import { CommonModule } from "@angular/common"; // Importar CommonModule
 
 @Component({
-    selector: "app-footer",
-    templateUrl: "./footer.component.html",
-    styleUrls: ["./footer.component.scss"],
-    standalone: false
+  selector: "app-footer",
+  templateUrl: "./footer.component.html",
+  styleUrls: ["./footer.component.scss"],
+  standalone: true, // Alterar para true
+  imports: [CommonModule], // Adicionar CommonModule aos imports
 })
 export class FooterComponent implements OnInit {
   currentYear = new Date().getFullYear();
-  translate: TranslationService;
 
-  constructor(private translationService: TranslationService) {
-    this.translate = translationService;
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 

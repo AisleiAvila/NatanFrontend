@@ -34,8 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
   imports: [
+    AppComponent,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -68,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatNativeDateModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+  // Removed bootstrap array as AppComponent is standalone
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

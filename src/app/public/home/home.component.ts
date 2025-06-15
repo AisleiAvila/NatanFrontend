@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewAllServices(): void {
-    this.router.navigate(["/home/services"]);
+    this.router.navigate(["/services"]);
   }
 
   openWhatsApp(): void {

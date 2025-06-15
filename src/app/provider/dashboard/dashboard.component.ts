@@ -3,13 +3,13 @@ import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AuthService, User } from "../../core/services/auth.service";
 import { DataService, ServiceRequest } from "../../core/services/data.service";
-import { TranslationService } from "../../core/services/translation.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-    selector: "app-provider-dashboard",
-    templateUrl: "./dashboard.component.html",
-    styleUrls: ["./dashboard.component.scss"],
-    standalone: false
+  selector: "app-provider-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
+  standalone: false,
 })
 export class DashboardComponent implements OnInit {
   currentUser: User | null = null;
@@ -40,10 +40,13 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private dataService: DataService,
-    private translationService: TranslationService,
+    private translateService: TranslateService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    this.translateService.setDefaultLang("pt");
+    this.translateService.use(localStorage.getItem("natan_language") || "pt");
+  }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
@@ -51,7 +54,7 @@ export class DashboardComponent implements OnInit {
   }
 
   translate(key: string): string {
-    return this.translationService.translate(key);
+    return this.translateService.instant(key);
   }
 
   loadProviderData(): void {

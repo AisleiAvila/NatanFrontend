@@ -1,15 +1,15 @@
 import { Component } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { RouterOutlet, RouterModule } from "@angular/router";
-import { HeaderComponent } from "./shared/components/header/header.component";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { HeaderComponent } from "./shared/components/header/header.component";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
   standalone: true,
-  imports: [RouterOutlet, RouterModule, HeaderComponent, TranslateModule],
+  imports: [RouterModule, HeaderComponent, TranslateModule],
 })
 export class AppComponent {
   constructor(

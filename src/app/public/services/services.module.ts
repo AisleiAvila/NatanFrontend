@@ -33,6 +33,7 @@ const routes: Routes = [
     MatSelectModule,
     MatProgressSpinnerModule,
     LanguageSelectorModule,
+    ServicesComponent,
   ],
 })
 export class ServicesModule {}
