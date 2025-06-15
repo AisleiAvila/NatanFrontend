@@ -1,11 +1,5 @@
-// Tema escolhido durante a instalação
-@use "@angular/material" as mat;
-
-// Inclui estilos comuns para o Material
-@include mat.core();
-
-// Usa o tema predefinido (ex: indigo-pink)
-@include mat.all-component-themes(mat.$indigo-pink-palette);
+/* Importa o tema predefinido do Material */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 /* Reset e estilos base */
 * {
