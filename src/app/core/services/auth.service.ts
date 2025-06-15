@@ -44,7 +44,8 @@ export class AuthService {
       id: "1",
       name: "Usuário Teste",
       email: email,
-      role: "client",
+      //      role: "client",
+      role: "admin",
       phone: "+351 912 345 678",
     };
 

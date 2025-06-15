@@ -33,6 +33,7 @@ interface Language {
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated = false;
+  isAdmin = false;
   currentUser: User | null = null;
   currentLanguage: string = "pt";
   availableLanguages: Language[] = [
@@ -55,6 +56,7 @@ export class HeaderComponent implements OnInit {
       (isAuthenticated) => (this.isAuthenticated = isAuthenticated)
     );
     this.authService.currentUser.subscribe((user) => (this.currentUser = user));
+    this.isAdmin = this.currentUser?.role === "admin";
   }
 
   changeLanguage(langCode: string): void {
@@ -69,6 +71,10 @@ export class HeaderComponent implements OnInit {
 
   goToServices(): void {
     this.router.navigate(["/services"]);
+  }
+
+  goToCategories(): void {
+    this.router.navigate(["admin/categories"]);
   }
 
   goToContact(): void {

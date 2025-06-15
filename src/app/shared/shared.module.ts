@@ -4,7 +4,6 @@ import { TranslateModule } from "@ngx-translate/core";
 import { LanguageSelectorModule } from "./components/language-selector/language-selector.module";
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule, LanguageSelectorModule, TranslateModule],
   exports: [CommonModule, LanguageSelectorModule, TranslateModule],
 })

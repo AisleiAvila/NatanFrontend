@@ -30,6 +30,13 @@
       <button mat-button routerLink="/how-it-works" routerLinkActive="active">
         {{ "header.how_it_works" | translate }}
       </button>
+      <button
+        mat-button
+        *ngIf="isAdmin && isAuthenticated"
+        (click)="goToCategories()"
+      >
+        {{ "nav.categories" | translate }}
+      </button>
     </div>
 
     <div class="right-section">

@@ -31,6 +31,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: "admin/categories",
+    loadChildren: () =>
+      import("./admin/categories/categories.module").then(
+        (m) => m.CategoriesModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: "**",
     redirectTo: "",
   },
