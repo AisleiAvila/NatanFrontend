@@ -85,10 +85,21 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToRole(): void {
-    if (this.currentUser?.role === "admin") {
-      this.router.navigate(["/admin/dashboard"]);
+    console.log("navigateToRole chamado");
+    console.log("CurrentUser:", this.currentUser);
+    if (this.currentUser?.role) {
+      console.log("CurrentUser Role:", this.currentUser.role);
+      if (this.currentUser.role === "admin") {
+        console.log("Navegando para /admin/dashboard");
+        this.router.navigate(["/admin/dashboard"]);
+      } else {
+        console.log("Navegando para /client/dashboard");
+        this.router.navigate(["/client/dashboard"]);
+      }
     } else {
-      this.router.navigate(["/client/dashboard"]);
+      console.log(
+        "CurrentUser ou CurrentUser.role não definido. Navegação não ocorrerá."
+      );
     }
   }
 }

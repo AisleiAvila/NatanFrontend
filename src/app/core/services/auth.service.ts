@@ -39,6 +39,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<User> {
     // Mock temporário para desenvolvimento
+    console.log("Login chamado com email:", email);
     const mockUser: User = {
       id: "1",
       name: "Usuário Teste",
@@ -59,6 +60,7 @@ export class AuthService {
   }
 
   logout(): void {
+    console.log("Logout chamado");
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
     this.isAuthenticatedSubject.next(false);
@@ -66,6 +68,7 @@ export class AuthService {
   }
 
   register(user: Partial<User>): Observable<User> {
+    console.log("Register chamado com usuário:", user);
     // Mock temporário para desenvolvimento
     const mockUser: User = {
       id: "1",
@@ -87,6 +90,7 @@ export class AuthService {
   }
 
   checkAuthStatus(): void {
+    console.log("Checking authentication status...");
     const userData = localStorage.getItem("currentUser");
     if (userData) {
       const user = JSON.parse(userData);
@@ -96,6 +100,7 @@ export class AuthService {
   }
 
   sendMagicLink(email: string): Observable<boolean> {
+    console.log("Sending magic link to:", email);
     return new Observable((observer) => {
       // Simulate sending magic link
       setTimeout(() => {
@@ -107,20 +112,25 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
+    console.log("Checking if user is authenticated...");
     return !!this.currentUserValue;
   }
 
   hasRole(role: string): boolean {
+    console.log("Checking role:", role);
+    console.log("Current user:", this.currentUserValue);
     const user = this.currentUserValue;
     return user?.role === role;
   }
 
   getCurrentUser(): User | null {
+    console.log("Getting current user from localStorage...");
     const userStr = localStorage.getItem("currentUser");
     return userStr ? JSON.parse(userStr) : null;
   }
 
   isAdmin(): boolean {
+    console.log("Checking if user is admin...");
     const user = this.getCurrentUser();
     return user?.role === "admin";
   }

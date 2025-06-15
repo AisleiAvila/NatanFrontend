@@ -9,6 +9,12 @@ const routes: Routes = [
     loadChildren: () =>
       import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
+  {
+    // NOVA ROTA ADICIONADA
+    path: "dashboard",
+    loadChildren: () =>
+      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
+  },
 ];
 
 @NgModule({

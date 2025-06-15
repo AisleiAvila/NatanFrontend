@@ -19,6 +19,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ClientDashboardComponent,
     MatCardModule,
     MatIconModule,
     MatButtonModule,

@@ -14,8 +14,11 @@
     </div>
 
     <div class="nav-section d-none d-md-flex">
-      <button mat-button routerLink="/home" routerLinkActive="active">
+      <button mat-button (click)="goToHome()" routerLinkActive="active">
         {{ "nav.home" | translate }}
+      </button>
+      <button mat-button (click)="navigateToRole()">
+        {{ "nav.dashboard" | translate }}
       </button>
       <button mat-button (click)="goToServices()">
         {{ "nav.services" | translate }}
@@ -93,15 +96,15 @@
 
 <mat-menu #mobileMenu="matMenu" class="mobile-menu">
   <div class="mobile-menu-content">
-    <button mat-menu-item routerLink="/home">
+    <button mat-menu-item (click)="goToHome()">
       <mat-icon>home</mat-icon>
       <span>{{ "nav.home" | translate }}</span>
     </button>
-    <button mat-menu-item routerLink="/services">
+    <button mat-menu-item (click)="goToServices()">
       <mat-icon>build</mat-icon>
       <span>{{ "nav.services" | translate }}</span>
     </button>
-    <button mat-menu-item routerLink="/contact">
+    <button mat-menu-item (click)="goToContact()">
       <mat-icon>contact_mail</mat-icon>
       <span>{{ "nav.contact" | translate }}</span>
     </button>

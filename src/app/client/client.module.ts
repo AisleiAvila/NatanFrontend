@@ -30,6 +30,12 @@ const routes: Routes = [
       import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
   {
+    // NOVA ROTA ADICIONADA
+    path: "dashboard",
+    loadChildren: () =>
+      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
+  },
+  {
     path: "request-service",
     component: RequestServiceComponent,
   },
