@@ -17,10 +17,11 @@
       <button mat-button routerLink="/home" routerLinkActive="active">
         {{ "nav.home" | translate }}
       </button>
-      <button mat-button routerLink="/services" routerLinkActive="active">
+      <button mat-button (click)="goToServices()">
         {{ "nav.services" | translate }}
       </button>
-      <button mat-button routerLink="/contact" routerLinkActive="active">
+
+      <button mat-button (click)="goToContact()">
         {{ "nav.contact" | translate }}
       </button>
       <button mat-button routerLink="/how-it-works" routerLinkActive="active">

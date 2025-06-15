@@ -11,12 +11,15 @@ import { AuthService } from "../services/auth.service";
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    alert("AuthGuard constructor called");
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
+    alert("AuthGuard canActivate called 2");
     // Permite acesso à rota de solicitação de serviço sem autenticação
     if (state.url.includes("/client/request-service")) {
       return true;
@@ -40,6 +43,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private getRequiredRole(url: string): string | null {
+    alert(url);
     if (url.startsWith("/client")) return "client";
     if (url.startsWith("/provider")) return "provider";
     if (url.startsWith("/admin")) return "admin";
