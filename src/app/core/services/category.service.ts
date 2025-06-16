@@ -26,8 +26,8 @@ export class CategoryService {
 
   create(category: CategoryFormData): Observable<Category> {
     const newCategory: Category = {
-      ...category,
       id: this.mockData.length + 1,
+      ...category,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -37,37 +37,37 @@ export class CategoryService {
 
   update(id: number, category: CategoryFormData): Observable<Category> {
     const index = this.mockData.findIndex((c) => c.id === id);
-    if (index !== -1) {
-      this.mockData[index] = {
-        ...this.mockData[index],
-        ...category,
-        updatedAt: new Date(),
-      };
-      return of(this.mockData[index]);
+    if (index === -1) {
+      throw new Error("Categoria não encontrada");
     }
-    throw new Error("Categoria não encontrada");
+    this.mockData[index] = {
+      ...this.mockData[index],
+      ...category,
+      updatedAt: new Date(),
+    };
+    return of(this.mockData[index]);
   }
 
   delete(id: number): Observable<void> {
     const index = this.mockData.findIndex((c) => c.id === id);
-    if (index !== -1) {
-      this.mockData.splice(index, 1);
-      return of(void 0);
+    if (index === -1) {
+      throw new Error("Categoria não encontrada");
     }
-    throw new Error("Categoria não encontrada");
+    this.mockData.splice(index, 1);
+    return of(void 0);
   }
 
   toggleStatus(id: number, isActive: boolean): Observable<Category> {
     const index = this.mockData.findIndex((c) => c.id === id);
-    if (index !== -1) {
-      this.mockData[index] = {
-        ...this.mockData[index],
-        isActive,
-        updatedAt: new Date(),
-      };
-      return of(this.mockData[index]);
+    if (index === -1) {
+      throw new Error("Categoria não encontrada");
     }
-    throw new Error("Categoria não encontrada");
+    this.mockData[index] = {
+      ...this.mockData[index],
+      isActive,
+      updatedAt: new Date(),
+    };
+    return of(this.mockData[index]);
   }
 
   updateFeaturedStatus(
@@ -76,15 +76,15 @@ export class CategoryService {
     featuredOrder?: number
   ): Observable<Category> {
     const index = this.mockData.findIndex((c) => c.id === id);
-    if (index !== -1) {
-      this.mockData[index] = {
-        ...this.mockData[index],
-        isFeatured,
-        featuredOrder,
-        updatedAt: new Date(),
-      };
-      return of(this.mockData[index]);
+    if (index === -1) {
+      throw new Error("Categoria não encontrada");
     }
-    throw new Error("Categoria não encontrada");
+    this.mockData[index] = {
+      ...this.mockData[index],
+      isFeatured,
+      featuredOrder,
+      updatedAt: new Date(),
+    };
+    return of(this.mockData[index]);
   }
 }

@@ -77,6 +77,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["admin/categories"]);
   }
 
+  goToSubcategories(): void {
+    this.router.navigate(["admin/subcategories"]);
+  }
+
   goToContact(): void {
     this.router.navigate(["/contact"]);
   }

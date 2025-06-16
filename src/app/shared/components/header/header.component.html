@@ -37,6 +37,13 @@
       >
         {{ "nav.categories" | translate }}
       </button>
+      <button
+        mat-button
+        *ngIf="isAdmin && isAuthenticated"
+        (click)="goToSubcategories()"
+      >
+        {{ "nav.subcategories" | translate }}
+      </button>
     </div>
 
     <div class="right-section">

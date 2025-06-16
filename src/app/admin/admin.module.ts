@@ -24,6 +24,14 @@ const routes: Routes = [
       ),
     canActivate: [AdminGuard],
   },
+  {
+    path: "subcategories",
+    loadChildren: () =>
+      import("../admin/subcategories/subcategories.module").then(
+        (m) => m.SubcategoriesModule
+      ),
+    canActivate: [AdminGuard],
+  },
 ];
 
 @NgModule({
