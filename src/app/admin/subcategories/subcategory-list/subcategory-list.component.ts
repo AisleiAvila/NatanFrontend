@@ -37,6 +37,7 @@ export class SubcategoryListComponent implements OnInit {
     "description",
     "category",
     "status",
+    "featured",
     "actions",
   ];
   loading = false;
@@ -106,6 +107,46 @@ export class SubcategoryListComponent implements OnInit {
           );
         },
       });
+  }
+
+  toggleFeatured(subcategory: Subcategory): void {
+    this.subcategoryService
+      .update(subcategory.id!, {
+        ...subcategory,
+        isFeatured: !subcategory.isFeatured,
+        featuredOrder: !subcategory.isFeatured
+          ? this.getNextFeaturedOrder()
+          : undefined,
+      })
+      .subscribe({
+        next: () => {
+          this.loadSubcategories();
+          this.snackBar.open(
+            `Subcategoria ${
+              subcategory.isFeatured ? "removida dos" : "adicionada aos"
+            } destaques com sucesso`,
+            "Fechar",
+            { duration: 3000 }
+          );
+        },
+        error: (error) => {
+          console.error("Erro ao alterar destaque:", error);
+          this.snackBar.open(
+            "Erro ao alterar destaque da subcategoria",
+            "Fechar",
+            {
+              duration: 3000,
+            }
+          );
+        },
+      });
+  }
+
+  private getNextFeaturedOrder(): number {
+    const featuredSubcategories = this.subcategories.filter(
+      (s) => s.isFeatured
+    );
+    return featuredSubcategories.length + 1;
   }
 
   deleteSubcategory(subcategory: Subcategory): void {

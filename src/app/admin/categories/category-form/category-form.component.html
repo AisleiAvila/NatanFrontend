@@ -19,7 +19,15 @@
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Descrição</mat-label>
-        <textarea matInput formControlName="description" rows="3"></textarea>
+        <textarea
+          matInput
+          formControlName="description"
+          rows="3"
+          maxlength="500"
+        ></textarea>
+        <mat-hint align="end">
+          {{ form.get("description")?.value?.length || 0 }}/500
+        </mat-hint>
         <mat-error *ngIf="form.get('description')?.hasError('maxlength')">
           Descrição deve ter no máximo 500 caracteres
         </mat-error>
@@ -29,21 +37,7 @@
         <mat-slide-toggle formControlName="isActive" color="primary">
           Ativo
         </mat-slide-toggle>
-
-        <mat-slide-toggle formControlName="isFeatured" color="accent">
-          Em destaque
-        </mat-slide-toggle>
       </div>
-
-      <mat-form-field
-        appearance="outline"
-        class="full-width"
-        *ngIf="form.get('isFeatured')?.value"
-      >
-        <mat-label>Ordem do destaque</mat-label>
-        <input matInput type="number" formControlName="featuredOrder" min="1" />
-        <mat-hint>Defina a ordem de exibição da categoria em destaque</mat-hint>
-      </mat-form-field>
     </div>
   </mat-dialog-content>
 
@@ -57,7 +51,11 @@
       type="submit"
       [disabled]="form.invalid || loading"
     >
-      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <mat-spinner
+        *ngIf="loading"
+        diameter="20"
+        class="spinner-button"
+      ></mat-spinner>
       <span *ngIf="!loading">{{ isEditMode ? "Atualizar" : "Criar" }}</span>
     </button>
   </mat-dialog-actions>

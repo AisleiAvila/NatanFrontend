@@ -18,7 +18,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 // Components
 import { CategoryListComponent } from "./category-list/category-list.component";
-import { CategoryFormComponent } from "./category-form/category-form.component";
 
 // Guards
 import { AdminGuard } from "../../core/guards/admin.guard";
@@ -47,8 +46,6 @@ const routes: Routes = [
     MatMenuModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    CategoryListComponent,
-    CategoryFormComponent,
   ],
 })
 export class CategoriesModule {}

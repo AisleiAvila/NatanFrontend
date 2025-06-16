@@ -3,6 +3,8 @@ export interface Subcategory {
   name: string;
   description?: string;
   isActive: boolean;
+  isFeatured: boolean;
+  featuredOrder?: number;
   categoryId: number;
   category?: Category;
   createdAt?: Date;
@@ -13,6 +15,8 @@ export interface SubcategoryFormData {
   name: string;
   description?: string;
   isActive: boolean;
+  isFeatured: boolean;
+  featuredOrder?: number;
   categoryId: number;
 }
 

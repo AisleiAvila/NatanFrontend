@@ -17,10 +17,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import {
-  Category,
-  CategoryFormData,
-} from "../../../core/models/category.model";
+import { Category } from "../../../core/models/category.model";
 import { CategoryService } from "../../../core/services/category.service";
 
 @Component({
@@ -63,8 +60,6 @@ export class CategoryFormComponent implements OnInit {
       ],
       description: ["", [Validators.maxLength(500)]],
       isActive: [true],
-      isFeatured: [false],
-      featuredOrder: [null],
     });
   }
 
@@ -74,8 +69,6 @@ export class CategoryFormComponent implements OnInit {
         name: this.data.name,
         description: this.data.description,
         isActive: this.data.isActive,
-        isFeatured: this.data.isFeatured,
-        featuredOrder: this.data.featuredOrder,
       });
     }
   }
@@ -83,7 +76,7 @@ export class CategoryFormComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       this.loading = true;
-      const formData: CategoryFormData = this.form.value;
+      const formData = this.form.value;
 
       const request = this.isEditMode
         ? this.categoryService.update(this.data!.id!, formData)

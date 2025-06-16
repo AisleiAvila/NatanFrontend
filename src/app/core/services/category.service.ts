@@ -69,22 +69,4 @@ export class CategoryService {
     };
     return of(this.mockData[index]);
   }
-
-  updateFeaturedStatus(
-    id: number,
-    isFeatured: boolean,
-    featuredOrder?: number
-  ): Observable<Category> {
-    const index = this.mockData.findIndex((c) => c.id === id);
-    if (index === -1) {
-      throw new Error("Categoria não encontrada");
-    }
-    this.mockData[index] = {
-      ...this.mockData[index],
-      isFeatured,
-      featuredOrder,
-      updatedAt: new Date(),
-    };
-    return of(this.mockData[index]);
-  }
 }

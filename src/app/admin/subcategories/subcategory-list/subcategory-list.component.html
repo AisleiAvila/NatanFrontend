@@ -47,6 +47,20 @@
           </td>
         </ng-container>
 
+        <!-- Featured Column -->
+        <ng-container matColumnDef="featured">
+          <th mat-header-cell *matHeaderCellDef>Destaque</th>
+          <td mat-cell *matCellDef="let subcategory">
+            <mat-slide-toggle
+              [checked]="subcategory.isFeatured"
+              (change)="toggleFeatured(subcategory)"
+              color="accent"
+            >
+              {{ subcategory.isFeatured ? "Em Destaque" : "Normal" }}
+            </mat-slide-toggle>
+          </td>
+        </ng-container>
+
         <!-- Actions Column -->
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Ações</th>

@@ -32,13 +32,7 @@ import { ConfirmDialogComponent } from "../../../shared/components/confirm-dialo
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[] = [];
-  displayedColumns: string[] = [
-    "name",
-    "description",
-    "status",
-    "featured",
-    "actions",
-  ];
+  displayedColumns: string[] = ["name", "description", "status", "actions"];
   loading = false;
 
   constructor(
@@ -100,36 +94,6 @@ export class CategoryListComponent implements OnInit {
           this.snackBar.open("Erro ao alterar status da categoria", "Fechar", {
             duration: 3000,
           });
-        },
-      });
-  }
-
-  toggleFeatured(category: Category): void {
-    const newFeaturedOrder = category.isFeatured ? undefined : 1;
-    this.categoryService
-      .updateFeaturedStatus(
-        category.id!,
-        !category.isFeatured,
-        newFeaturedOrder
-      )
-      .subscribe({
-        next: () => {
-          this.loadCategories();
-          this.snackBar.open(
-            `Categoria ${
-              category.isFeatured ? "removida do" : "adicionada ao"
-            } destaque`,
-            "Fechar",
-            { duration: 3000 }
-          );
-        },
-        error: (error) => {
-          console.error("Erro ao alterar destaque:", error);
-          this.snackBar.open(
-            "Erro ao alterar destaque da categoria",
-            "Fechar",
-            { duration: 3000 }
-          );
         },
       });
   }
