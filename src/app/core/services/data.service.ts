@@ -8,10 +8,14 @@ export interface Service {
   name: string;
   description: string;
   category: string;
+  subcategory: string;
   price: number;
   duration: number;
   regions: string[];
   image: string;
+  client: string;
+  provider: string;
+  status: "available" | "busy" | "unavailable";
 }
 
 export interface ServiceRequest {
@@ -83,40 +87,56 @@ export class DataService {
         name: "Plumbing Services",
         description: "Professional plumbing installation and repair services",
         category: "Plumbing",
+        subcategory: "Installation",
         price: 50,
         duration: 120,
         regions: ["São Miguel", "Aveiro", "Coimbra"],
         image: this.placeholderImage("Hidráulica"),
+        client: "João Silva",
+        provider: "Maria Santos",
+        status: "available",
       },
       {
         id: "2",
         name: "Electrical Work",
         description: "Complete electrical installation and maintenance",
         category: "Electrical",
+        subcategory: "Maintenance",
         price: 60,
         duration: 150,
         regions: ["São Miguel", "Aveiro"],
         image: this.placeholderImage("Elétrica"),
+        client: "Pedro Costa",
+        provider: "António Oliveira",
+        status: "available",
       },
       {
         id: "3",
         name: "Home Renovation",
         description: "Complete home renovation and remodeling services",
         category: "Renovation",
+        subcategory: "Full Renovation",
         price: 200,
         duration: 480,
         regions: ["Aveiro", "Coimbra"],
         image: this.placeholderImage("Reforma"),
+        client: "Ana Martins",
+        provider: "Carlos Ferreira",
+        status: "available",
       },
       {
         id: "4",
         name: "Painting Services",
         description: "Interior and exterior painting services",
         category: "Painting",
+        subcategory: "Interior",
         price: 35,
         duration: 240,
         regions: ["São Miguel", "Aveiro", "Coimbra"],
         image: this.placeholderImage("Pintura"),
+        client: "Sofia Rodrigues",
+        provider: "Miguel Sousa",
+        status: "available",
       },
     ];
 

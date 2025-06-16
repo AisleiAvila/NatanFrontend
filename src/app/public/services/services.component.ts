@@ -10,8 +10,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatListModule } from "@angular/material/list";
 import { LanguageSelectorModule } from "../../shared/components/language-selector/language-selector.module";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: "app-services",
@@ -29,8 +31,10 @@ import { TranslateModule, TranslateService } from "@ngx-translate/core";
     MatInputModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatListModule,
     LanguageSelectorModule,
     TranslateModule,
+    RouterModule,
   ],
 })
 export class ServicesComponent implements OnInit {
