@@ -1,0 +1,421 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "categories": "Categories",
+    "subcategories": "Subcategories",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "about": "About",
+    "login": "Login",
+    "request_service": "Request Service",
+    "my_requests": "My Requests"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "login_title": "Sign In",
+    "login_subtitle": "Sign in to your account to access your dashboard",
+    "magic_link_title": "Magic Link",
+    "magic_link_subtitle": "Receive an access link via email",
+    "email": "Email",
+    "password": "Password",
+    "email_placeholder": "your-email@example.com",
+    "password_placeholder": "Your password",
+    "login_success": "Login successful!",
+    "login_error": "Login error. Please check your credentials.",
+    "logging_in": "Signing in...",
+    "use_magic_link": "Use Magic Link",
+    "use_password": "Use Password",
+    "send_magic_link": "Send Link",
+    "magic_link_sent": "Magic link sent to your email!",
+    "magic_link_error": "Error sending magic link",
+    "sending": "Sending...",
+    "back_to_home": "Back to Home",
+    "need_help": "Need Help?",
+    "welcome_message": "Welcome to the most trusted construction platform",
+    "demo": {
+      "title": "Demo Accounts",
+      "subtitle": "Click on an account to automatically log in"
+    },
+    "logout_success": "Logged out successfully!"
+  },
+  "roles": {
+    "client": "Client",
+    "provider": "Provider",
+    "admin": "Administrator"
+  },
+  "home": {
+    "hero": {
+      "title": "Quality Services, Guaranteed Trust",
+      "subtitle": "We connect clients to qualified providers for all your construction and renovation projects",
+      "request_service": "Request Service",
+      "whatsapp": "WhatsApp"
+    },
+    "download_app": {
+      "title": "Download Our App",
+      "google_play": "Available on Google Play",
+      "apple_store": "Available on App Store"
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Find the perfect service for your project",
+      "request": "Request Service"
+    },
+    "featured_services": {
+      "title": "Featured Services",
+      "subtitle": "We offer a wide range of construction and renovation services"
+    },
+    "request_quote": "Request Quote",
+    "view_all_services": "View All Services",
+    "service_areas": {
+      "title": "Service Areas",
+      "subtitle": "We provide services in the following regions"
+    },
+    "learn_more": "Learn More",
+    "about": {
+      "title": "About Natan Construction",
+      "description": "Natan Construction connects clients with experienced professionals, offering complete solutions in construction, renovation, and maintenance. We are committed to quality, transparency, and personalized service.",
+      "feature1": "Certified and Reviewed Professionals",
+      "feature2": "Fast Response & 24h Support",
+      "feature3": "Satisfaction Guarantee on All Services"
+    },
+    "cta": {
+      "title": "Ready to Start Your Project?",
+      "subtitle": "Get free quotes from qualified providers",
+      "get_quote": "Get Quote",
+      "contact_us": "Contact Us"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Find the perfect service for your project",
+    "search_placeholder": "Search services...",
+    "filter_region": "Filter by region",
+    "filter_category": "Filter by category",
+    "all_regions": "All regions",
+    "all_categories": "All categories",
+    "clear_filters": "Clear Filters",
+    "showing_results": "Showing {{count}} of {{total}} services",
+    "no_results_title": "No services found",
+    "no_results_message": "Try adjusting your search criteria",
+    "view_details": "View Details",
+    "request_quote": "Request Quote",
+    "category": "Category",
+    "subcategory": "Subcategory",
+    "client": "Client",
+    "provider": "Provider",
+    "region": "Region",
+    "price": "Price",
+    "budget": "Budget",
+    "status": "Status",
+    "actions": "Actions",
+    "status_available": "Available",
+    "status_busy": "Busy",
+    "status_unavailable": "Unavailable",
+    "plumbing": "Plumbing",
+    "electrical": "Electrical",
+    "renovation": "Renovation",
+    "painting": "Painting",
+    "construction": "Construction",
+    "cta": {
+      "title": "Didn't find what you're looking for?",
+      "description": "Contact us directly and we'll help you find the ideal solution",
+      "request_service": "Request Service",
+      "contact_us": "Contact Us"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help with your project",
+    "form": {
+      "title": "Send Us a Message",
+      "subtitle": "We'll respond within 24 hours",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Message",
+      "name_placeholder": "Your name",
+      "email_placeholder": "your-email@example.com",
+      "phone_placeholder": "+351 9XX XXX XXX",
+      "message_placeholder": "Describe your project or question...",
+      "preferred_contact": "Preferred contact method",
+      "contact_email": "Email",
+      "contact_phone": "Phone",
+      "contact_whatsapp": "WhatsApp",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success_message": "Message sent successfully! We'll get back to you soon.",
+      "subjects": {
+        "general": "General Information",
+        "quote": "Quote Request",
+        "support": "Technical Support",
+        "complaint": "Complaint"
+      }
+    },
+    "info": {
+      "quick_contact": "Quick Contact",
+      "phone": "Phone",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "instant_support": "Instant Support",
+      "business_hours": "Business Hours",
+      "weekdays": "Monday to Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "address": "Address",
+      "view_map": "View on Map"
+    },
+    "service_areas": {
+      "title": "Service Areas",
+      "subtitle": "We provide services in these regions"
+    },
+    "emergency": {
+      "title": "Emergency?",
+      "description": "For urgent situations, contact us directly",
+      "call_now": "Call Now"
+    }
+  },
+  "client": {
+    "welcome": "Welcome",
+    "dashboard_subtitle": "Track your service requests and quotes",
+    "request_new_service": "New Request",
+    "contact_support": "Support",
+    "stats": {
+      "total_requests": "Total Requests",
+      "pending_requests": "Pending",
+      "active_quotes": "Active Quotes",
+      "completed_requests": "Completed"
+    },
+    "recent_requests": "Recent Requests",
+    "view_all": "View All",
+    "requested_on": "Requested on",
+    "assigned_to": "Assigned to",
+    "quote_received": "Quote Received",
+    "includes_vat": "includes VAT",
+    "view_details": "View Details",
+    "approve_quote": "Approve",
+    "reject_quote": "Reject",
+    "quote_approved": "Quote approved successfully!",
+    "quote_rejected": "Quote rejected",
+    "no_requests_title": "No requests yet",
+    "no_requests_message": "Start by requesting a service",
+    "request_first_service": "First Request",
+    "quick_actions": {
+      "title": "Quick Actions",
+      "subtitle": "What would you like to do?"
+    },
+    "request_service": "Request Service",
+    "browse_services": "Browse Services",
+    "contact_us": "Contact Us"
+  },
+  "provider": {
+    "welcome": "Welcome",
+    "dashboard_subtitle": "Manage your services and schedule",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "availability_enabled": "Availability enabled",
+    "availability_disabled": "Availability disabled",
+    "view_calendar": "View Calendar",
+    "stats": {
+      "total_assigned": "Assigned Services",
+      "completed_today": "Completed Today",
+      "avg_rating": "Average Rating",
+      "total_earnings": "Total Earnings"
+    },
+    "today_schedule": "Today's Schedule",
+    "pending_requests": "Pending Requests",
+    "pending": "pending",
+    "requested_on": "Requested on",
+    "open_maps": "Open in Maps",
+    "view_details": "View Details",
+    "start_service": "Start Service",
+    "complete_service": "Complete Service",
+    "no_schedule_today": "No schedule today",
+    "no_schedule_message": "Take time to rest or check pending requests",
+    "client_photos": "Client Photos",
+    "preferred_dates": "Preferred Dates",
+    "decline": "Decline",
+    "accept": "Accept",
+    "request_accepted": "Request accepted successfully!",
+    "request_declined": "Request declined",
+    "service_started": "Service started!",
+    "service_completed": "Service completed!",
+    "quick_actions": {
+      "title": "Quick Actions",
+      "subtitle": "Quick access to main features"
+    },
+    "service_history": "Service History",
+    "my_ratings": "My Ratings",
+    "calendar": {
+      "title": "Service Calendar",
+      "subtitle": "View and manage your schedule",
+      "week_view": "Week View",
+      "month_view": "Month View",
+      "today": "Today",
+      "appointments": "appointment(s)",
+      "no_appointments": "No appointments this day",
+      "client_photos": "Client Photos"
+    }
+  },
+  "admin": {
+    "welcome": "Welcome",
+    "dashboard_subtitle": "Platform control and management panel",
+    "export_report": "Export Report",
+    "system_settings": "Settings",
+    "metrics": {
+      "monthly_revenue": "Monthly Revenue",
+      "total_requests": "Total Requests",
+      "pending": "pending",
+      "active_providers": "Active Providers",
+      "online_now": "online now",
+      "satisfaction_rate": "Satisfaction Rate",
+      "new_clients": "new clients"
+    },
+    "charts": {
+      "revenue_trend": "Revenue Trend",
+      "last_6_months": "Last 6 months",
+      "requests_status": "Request Status",
+      "current_distribution": "Current distribution",
+      "services_popularity": "Service Popularity",
+      "requests_by_service": "Requests by service"
+    },
+    "recent_requests": "Recent Requests",
+    "view_all_requests": "View All Requests",
+    "table": {
+      "id": "ID",
+      "service": "Service",
+      "client": "Client",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "view_details": "View Details",
+    "assign_provider": "Assign Provider",
+    "provider_assigned": "Provider assigned successfully!",
+    "recent_activities": "Recent Activities",
+    "quick_actions": "Quick Actions",
+    "add_provider": "Add Provider",
+    "add_service": "Add Service",
+    "send_notification": "Send Notification",
+    "view_analytics": "View Analytics",
+    "revenue": "Revenue",
+    "requests_count": "Requests Count"
+  },
+  "service_request": {
+    "title": "Request Service",
+    "subtitle": "Describe your project and receive quotes",
+    "step1": {
+      "title": "Select Service",
+      "select_service": "Choose Service Type",
+      "description": "Select the service that best fits your project"
+    },
+    "step2": {
+      "title": "Contact Information",
+      "client_info": "Your Information",
+      "description": "Required data for contact and quotes",
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "name_placeholder": "Your full name",
+      "email_placeholder": "your-email@example.com",
+      "phone_placeholder": "+351 9XX XXX XXX",
+      "whatsapp_placeholder": "+351 9XX XXX XXX (optional)",
+      "include_nif": "Include VAT number in quote (for invoice)",
+      "nif": "VAT Number",
+      "nif_placeholder": "123456789"
+    },
+    "step3": {
+      "title": "Service Details",
+      "service_details": "Project Details",
+      "intro": "Provide information about location and required work",
+      "region": "Region",
+      "location": "Location",
+      "location_placeholder": "Complete address of service location",
+      "description": "Work Description",
+      "description_placeholder": "Describe in detail the required work...",
+      "preferred_dates": "Preferred Dates",
+      "preferred_dates_help": "Select up to 3 preferred dates",
+      "select_date": "Select Date",
+      "dates_required": "You must select at least one date",
+      "photos_videos": "Photos/Videos (Optional)",
+      "photos_help": "Add photos to help understand the required work",
+      "upload_files": "Upload Files",
+      "file_limit": "Max. 3 files, 5MB each",
+      "agree_terms": "I agree to the",
+      "terms_link": "terms of service",
+      "terms_required": "You must accept the terms of service"
+    },
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit Request",
+    "submitting": "Submitting...",
+    "success_message": "Request submitted successfully! You'll receive a quote soon.",
+    "error_message": "Error submitting request. Please try again.",
+    "max_files_error": "Maximum of 3 files allowed",
+    "file_size_error": "File too large (max. 5MB)",
+    "file_type_error": "Unsupported file type"
+  },
+  "status": {
+    "pending": "Pending",
+    "quoted": "Quoted",
+    "approved": "Approved",
+    "in_progress": "In Progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "calendar": {
+    "days": {
+      "sunday": "Sun",
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "saturday": "Sat"
+    }
+  },
+  "stats": {
+    "projects_completed": "Projects Completed",
+    "avg_rating": "Average Rating",
+    "support": "Support",
+    "professionals": "Professionals"
+  },
+  "service_areas": {
+    "sao_miguel_desc": "Complete coverage of São Miguel region",
+    "aveiro_desc": "Main headquarters with all services available",
+    "coimbra_desc": "Specialized services in Coimbra region"
+  },
+  "footer": {
+    "company_description": "Your trusted platform for construction and maintenance services",
+    "services": "Services",
+    "service_areas": "Service Areas",
+    "contact": "Contact",
+    "business_hours": "Monday to Friday: 9am to 6pm",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "tagline": "Quality Construction, Guaranteed Trust",
+    "company": "Natan Construction",
+    "about": "About Us"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "minlength": "Text too short"
+  },
+  "common": {
+    "loading": "Loading...",
+    "close": "Close",
+    "error_loading_data": "Error loading data",
+    "error_occurred": "An error occurred"
+  },
+  "header": {
+    "how_it_works": "How It Works",
+    "services": {
+      "request": "Request Service"
+    }
+  }
+}

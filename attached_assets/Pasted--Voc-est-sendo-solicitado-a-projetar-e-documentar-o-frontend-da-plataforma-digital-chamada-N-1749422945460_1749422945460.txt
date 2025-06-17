@@ -1,0 +1,120 @@
+
+Você está sendo solicitado a projetar e documentar o **frontend** da plataforma digital chamada **Natan Construtora**, acessível via site e aplicativo. A interface deve permitir aos usuários (visitantes, clientes, prestadores e administradores) interagir com os recursos da plataforma de forma intuitiva e responsiva. A aplicação deverá ser hibrida (web e mobile). Os dados a serem exibidos na aplicação deverão simular retorno de endpoints oriundos da aplicação natan-backend
+
+## 1. Público-Alvo
+- Visitantes: visualizam informações da empresa e podem solicitar um serviço inicialmente.
+- Clientes: acompanham solicitações, orçamentos e avaliam serviços.
+- Prestadores: gerenciam sua agenda, visualizam detalhes de serviços e fazem upload de fotos.
+- Administradores: gerenciam todos os aspectos da plataforma.
+
+## 2. Requisitos Funcionais - Frontend
+
+### 2.1 Área Pública
+- Página inicial com:
+  - Breve descrição institucional da empresa
+  - Lista de serviços em destaque
+  - Ícone de solicitação de serviço
+  - Escolha de idioma (Português / Inglês)
+  - Dados de contato da empresa
+  - Ícone de login para clientes
+
+### 2.2 Área do Cliente
+#### 2.2.1 Autenticação Simplificada
+- Acesso via link "mágico" enviado por e-mail ou SMS
+- Opção de criar senha após primeiro acesso
+
+#### 2.2.2 Serviços Disponíveis
+- Listagem completa de serviços com filtros:
+  - Por nome
+  - Por região de atendimento
+
+#### 2.2.3 Histórico de Solicitações
+- Visualização de todas as solicitações com:
+  - Tipo de serviço
+  - Data
+  - Status atualizado
+  - Última atualização
+
+#### 2.2.4 Formulário de Solicitação de Serviço
+- Campos obrigatórios:
+  - Nome
+  - E-mail
+  - Telefone
+  - WhatsApp (opcional)
+- Detalhes do serviço:
+  - Localidade (São Miguel / Aveiro / Coimbra)
+  - Tipo de serviço (dropdown)
+  - Até 3 datas/horários preferenciais (calendário interativo)
+  - Descrição detalhada do problema
+  - Upload opcional de fotos/vídeos
+- Consentimentos:
+  - Termos de serviço
+  - Inclusão do NIF no orçamento (solicita NIF caso marcado)
+- Finalização:
+  - Botão “Solicitar Orçamento”
+  - Confirmação visual após envio
+
+#### 2.2.5 Gestão de Orçamentos
+- Visualizar orçamento na lista de solicitações
+- Para orçamentos com status “Aguardando Aprovação”:
+  - Botão “Aprovar Orçamento”
+  - Botão “Recusar Orçamento” (com motivo opcional)
+  - Botão “Solicitar Revisão/Contato”
+
+#### 2.2.6 Áreas de Atendimento
+- Seção com:
+  - Ícones customizados por região
+  - Destaque visual das cidades cobertas
+
+#### 2.2.7 Contato
+- Formulário geral de contato
+- Integração direta com WhatsApp Business
+- Exibição de:
+  - E-mail
+  - Telefone
+  - Endereço
+
+#### 2.2.8 Avaliação Pós-Serviço
+- Tela de avaliação com:
+  - Nota (1 a 5 estrelas)
+  - Comentário opcional
+  - Exibição de fotos antes/depois
+- Histórico de avaliações do cliente
+
+### 2.3 Área do Prestador
+- Login seguro
+- Visualização de agenda em calendário/semanal
+- Acesso a detalhes da solicitação:
+  - Endereço com link para Google Maps
+  - Fotos e descrição do cliente
+- Confirmação/recusa de agendamentos
+- Modo Indisponível (temporário/global)
+- Upload obrigatório de foto “antes” e “depois”
+- Marcar serviço como “Concluído”
+- Histórico de serviços e avaliações
+
+### 2.4 Área Administrativa
+- Login seguro
+- Dashboard com métricas:
+  - Solicitações totais
+  - Serviços em andamento
+  - Receita estimada
+- Gestão de serviços, prestadores e solicitações
+- Criação de orçamentos com cálculo automático de IVA
+- Atribuição de prestadores com sugestão inteligente
+- Visualização de avaliações e imagens antes/depois
+
+## 3. Requisitos Não Funcionais
+- Design responsivo (Mobile-first)
+- Multilíngua (Português e Inglês)
+- Carregamento rápido (<2 segundos)
+- Interface amigável e intuitiva
+- Suporte offline parcial (cache de agenda)
+- Push notifications (Firebase)
+
+## 4. Tecnologias
+- Frontend Web: Angular
+- Aplicativo Mobile: Angular + Ionic/Capacitor
+- Geolocalização: Google Maps API
+- Armazenamento de imagens: Base64 ou Blob no banco
+- Geração de PDF: Exibição e download de orçamentos

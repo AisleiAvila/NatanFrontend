@@ -1,0 +1,349 @@
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import { Router, ActivatedRoute } from "@angular/router";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatStepper } from "@angular/material/stepper";
+import { AuthService, User } from "../../core/services/auth.service";
+import {
+  DataService,
+  Service,
+  ServiceRequest,
+} from "../../core/services/data.service";
+import { MatDialog } from "@angular/material/dialog";
+import { TermsDialogComponent } from "./terms-dialog.component";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+
+@Component({
+  selector: "app-request-service",
+  templateUrl: "./request-service.component.html",
+  styleUrls: ["./request-service.component.scss"],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
+    TranslateModule,
+    MatStepperModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+  ],
+})
+export class RequestServiceComponent implements OnInit {
+  @ViewChild("stepper") stepper!: MatStepper;
+  currentUser: User | null = null;
+  services: Service[] = [];
+  selectedService: Service | null = null;
+
+  // Stepper forms
+  serviceSelectionForm: FormGroup;
+  clientInfoForm: FormGroup;
+  serviceDetailsForm: FormGroup;
+
+  isSubmitting = false;
+  isLinear = true;
+  showNextSteps = false;
+  showDetailsStep = false;
+
+  // Configuration options
+  regions = ["São Miguel", "Aveiro", "Coimbra"];
+  uploadedFiles: File[] = [];
+  maxFiles = 3;
+  maxFileSize = 5 * 1024 * 1024; // 5MB
+
+  // Preferred dates
+  preferredDates: string[] = [];
+  minDate = new Date();
+  maxDate = new Date();
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private dataService: DataService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private translateService: TranslateService
+  ) {
+    this.maxDate.setMonth(this.maxDate.getMonth() + 3); // 3 months ahead
+    this.translateService.setDefaultLang("pt");
+    this.translateService.use(localStorage.getItem("natan_language") || "pt");
+
+    this.serviceSelectionForm = this.fb.group({
+      serviceId: ["", Validators.required],
+    });
+
+    this.clientInfoForm = this.fb.group({
+      name: ["", [Validators.required, Validators.minLength(2)]],
+      email: ["", [Validators.required, Validators.email]],
+      phone: ["", [Validators.required]],
+      whatsapp: [""],
+      nif: [""],
+      includeNifInQuote: [false],
+    });
+
+    this.serviceDetailsForm = this.fb.group({
+      region: ["", Validators.required],
+      location: ["", [Validators.required, Validators.minLength(10)]],
+      description: ["", [Validators.required, Validators.minLength(20)]],
+      preferredDates: this.fb.array([], Validators.required),
+      agreeToTerms: [false, [Validators.required, Validators.requiredTrue]],
+    });
+  }
+
+  ngOnInit(): void {
+    this.currentUser = this.authService.currentUserValue;
+    this.loadServices();
+    this.prefillClientInfo();
+    this.checkPreselectedService();
+  }
+
+  loadServices(): void {
+    this.dataService.getServices().subscribe(
+      (services) => {
+        this.services = services;
+      },
+      (error) => {
+        console.error("Error loading services:", error);
+        this.snackBar.open(
+          this.translateService.instant("common.error_loading_data"),
+          this.translateService.instant("common.close"),
+          { duration: 5000 }
+        );
+      }
+    );
+  }
+
+  prefillClientInfo(): void {
+    if (this.currentUser) {
+      this.clientInfoForm.patchValue({
+        name: this.currentUser.name,
+        email: this.currentUser.email,
+        phone: this.currentUser.phone,
+        whatsapp: this.currentUser.whatsapp,
+      });
+    }
+  }
+
+  checkPreselectedService(): void {
+    this.route.queryParams.subscribe((params) => {
+      if (params["serviceId"]) {
+        this.serviceSelectionForm.patchValue({
+          serviceId: params["serviceId"],
+        });
+        this.onServiceSelected(params["serviceId"]);
+      }
+    });
+  }
+
+  onServiceSelected(serviceId: string): void {
+    this.selectedService =
+      this.services.find((s) => s.id === serviceId) || null;
+  }
+
+  get preferredDatesArray(): FormArray {
+    return this.serviceDetailsForm.get("preferredDates") as FormArray;
+  }
+
+  addPreferredDate(date: Date): void {
+    if (this.preferredDates.length < 3) {
+      const dateString = date.toISOString().split("T")[0];
+      if (!this.preferredDates.includes(dateString)) {
+        this.preferredDates.push(dateString);
+        this.preferredDatesArray.push(this.fb.control(dateString));
+      }
+    }
+  }
+
+  removePreferredDate(index: number): void {
+    this.preferredDates.splice(index, 1);
+    this.preferredDatesArray.removeAt(index);
+  }
+
+  onFileSelected(event: any): void {
+    const files = Array.from(event.target.files) as File[];
+
+    for (const file of files) {
+      if (this.uploadedFiles.length >= this.maxFiles) {
+        this.snackBar.open(
+          this.translateService.instant("service_request.max_files_error"),
+          this.translateService.instant("common.close"),
+          { duration: 3000 }
+        );
+        break;
+      }
+
+      if (file.size > this.maxFileSize) {
+        this.snackBar.open(
+          this.translateService.instant("service_request.file_size_error"),
+          this.translateService.instant("common.close"),
+          { duration: 3000 }
+        );
+        continue;
+      }
+
+      if (this.isValidFileType(file)) {
+        this.uploadedFiles.push(file);
+      } else {
+        this.snackBar.open(
+          this.translateService.instant("service_request.file_type_error"),
+          this.translateService.instant("common.close"),
+          { duration: 3000 }
+        );
+      }
+    }
+  }
+
+  removeFile(index: number): void {
+    this.uploadedFiles.splice(index, 1);
+  }
+
+  private isValidFileType(file: File): boolean {
+    const validTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "video/mp4",
+      "video/quicktime",
+    ];
+    return validTypes.includes(file.type);
+  }
+
+  onSubmit(): void {
+    if (this.serviceDetailsForm.valid) {
+      this.isSubmitting = true;
+
+      const requestData: Partial<ServiceRequest> = {
+        clientId: this.currentUser?.id.toString(),
+        serviceId: this.serviceSelectionForm.value.serviceId,
+        serviceName: this.selectedService?.name,
+        description: this.serviceDetailsForm.value.description,
+        location: this.serviceDetailsForm.value.location,
+        region: this.serviceDetailsForm.value.region,
+        preferredDates: this.preferredDates,
+        photos: this.uploadedFiles.map((file) => URL.createObjectURL(file)), // Mock photo URLs
+        clientInfo: {
+          ...this.clientInfoForm.value,
+          nif: this.clientInfoForm.value.includeNifInQuote
+            ? this.clientInfoForm.value.nif
+            : undefined,
+        },
+      };
+
+      this.dataService.createServiceRequest(requestData).subscribe(
+        (success) => {
+          this.isSubmitting = false;
+          this.snackBar.open(
+            this.translateService.instant("service_request.success_message"),
+            this.translateService.instant("common.close"),
+            { duration: 5000 }
+          );
+          this.router.navigate(["/client/dashboard"]);
+        },
+        (error) => {
+          this.isSubmitting = false;
+          this.snackBar.open(
+            this.translateService.instant("service_request.error_message"),
+            this.translateService.instant("common.close"),
+            { duration: 5000 }
+          );
+        }
+      );
+    } else {
+      this.markAllFormsAsTouched();
+    }
+  }
+
+  private markAllFormsAsTouched(): void {
+    this.serviceSelectionForm.markAllAsTouched();
+    this.clientInfoForm.markAllAsTouched();
+    this.serviceDetailsForm.markAllAsTouched();
+  }
+
+  getFieldError(fieldName: string, form: FormGroup): string {
+    const field = form.get(fieldName);
+    if (field?.errors && field.touched) {
+      if (field.errors["required"]) {
+        return this.translateService.instant("validation.required");
+      }
+      if (field.errors["email"]) {
+        return this.translateService.instant("validation.email");
+      }
+      if (field.errors["minlength"]) {
+        return this.translateService.instant("validation.minlength");
+      }
+      if (field.errors["requiredTrue"]) {
+        return this.translateService.instant("validation.required");
+      }
+    }
+    return "";
+  }
+
+  formatFileSize(bytes: number): string {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  }
+  openTermsDialog(): void {
+    this.dialog.open(TermsDialogComponent, {
+      width: "700px",
+      maxHeight: "80vh",
+      autoFocus: false,
+    });
+  }
+  goToLogin(): void {
+    this.router.navigate(["/auth/login"]);
+  }
+  goToDashboard(): void {
+    this.router.navigate(["/client/dashboard"]);
+  }
+  goToContact(): void {
+    this.router.navigate(["/client/request-service"]);
+  }
+  goToDetailsStep(): void {
+    this.showDetailsStep = true;
+    this.stepper.selectedIndex = 1; // Move to the details step
+  }
+  goToNextStep(): void {
+    this.showNextSteps = true;
+    this.stepper.selectedIndex = 2; // Move to the next steps
+  }
+  goToHome(): void {
+    this.router.navigate(["/home"]);
+  }
+  goBack(): void {
+    this.router.navigate(["/home"]);
+  }
+
+  translate(key: string): string {
+    return this.translateService.instant(key);
+  }
+}

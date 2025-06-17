@@ -1,0 +1,186 @@
+<div class="provider-dashboard">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="welcome-section">
+          <h1>Welcome Provider!</h1>
+          <p>Manage your services and schedule</p>
+        </div>
+        <div class="header-actions">
+          <button mat-raised-button color="primary">
+            <mat-icon>calendar_today</mat-icon>
+            View Calendar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">{{ stats.totalAssigned }}</div>
+            <div class="stat-label">Assigned Services</div>
+          </div>
+          <mat-icon class="stat-icon">assignment</mat-icon>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">{{ stats.completedToday }}</div>
+            <div class="stat-label">Completed Today</div>
+          </div>
+          <mat-icon class="stat-icon">done_all</mat-icon>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">{{ stats.avgRating }}</div>
+            <div class="stat-label">Average Rating</div>
+          </div>
+          <mat-icon class="stat-icon">star</mat-icon>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-value">€{{ stats.totalEarnings }}</div>
+            <div class="stat-label">Total Earnings</div>
+          </div>
+          <mat-icon class="stat-icon">euro</mat-icon>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Today's Schedule Section -->
+  <section class="schedule-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Today's Schedule</h2>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-container" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <p>Loading...</p>
+      </div>
+
+      <!-- Schedule Cards -->
+      <div class="schedule-grid" *ngIf="!loading && todaySchedule.length > 0">
+        <mat-card class="schedule-card" *ngFor="let request of todaySchedule">
+          <div class="schedule-header">
+            <h3>{{ request.serviceName }}</h3>
+            <mat-chip [class]="'chip-status ' + request.status">
+              {{ request.status }}
+            </mat-chip>
+          </div>
+          
+          <div class="schedule-details">
+            <div class="detail-item">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ request.location }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>person</mat-icon>
+              <span>{{ request.clientInfo.name }}</span>
+            </div>
+          </div>
+
+          <div class="schedule-actions">
+            <button mat-button color="primary">
+              <mat-icon>place</mat-icon>
+              Open Maps
+            </button>
+            <button mat-raised-button color="primary" *ngIf="request.status === 'approved'">
+              <mat-icon>play_arrow</mat-icon>
+              Start Service
+            </button>
+            <button mat-raised-button color="primary" *ngIf="request.status === 'in_progress'">
+              <mat-icon>done</mat-icon>
+              Complete
+            </button>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!loading && todaySchedule.length === 0">
+        <mat-icon>event_available</mat-icon>
+        <h3>No schedule today</h3>
+        <p>Take time to rest or check pending requests</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pending Requests Section -->
+  <section class="requests-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Pending Requests</h2>
+      </div>
+
+      <div class="requests-grid" *ngIf="!loading && assignedRequests.length > 0">
+        <mat-card class="request-card" *ngFor="let request of assignedRequests.slice(0, 3)">
+          <div class="request-header">
+            <h3>{{ request.serviceName }}</h3>
+            <span class="request-status">{{ request.status }}</span>
+          </div>
+          
+          <div class="request-details">
+            <p><strong>Client:</strong> {{ request.clientInfo.name }}</p>
+            <p><strong>Location:</strong> {{ request.location }}</p>
+            <p><strong>Description:</strong> {{ request.description }}</p>
+          </div>
+
+          <div class="request-actions">
+            <button mat-stroked-button color="warn">
+              Decline
+            </button>
+            <button mat-raised-button color="primary">
+              Accept
+            </button>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!loading && assignedRequests.length === 0">
+        <mat-icon>inbox</mat-icon>
+        <h3>No pending requests</h3>
+        <p>All caught up! Check back later for new requests.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Actions Section -->
+  <section class="quick-actions-section">
+    <div class="container">
+      <mat-card class="quick-actions-card">
+        <div class="quick-actions-content">
+          <div class="actions-text">
+            <h3>Quick Actions</h3>
+            <p>Quick access to main features</p>
+          </div>
+          <div class="actions-buttons">
+            <button mat-raised-button color="primary">
+              <mat-icon>calendar_today</mat-icon>
+              View Calendar
+            </button>
+            <button mat-stroked-button color="primary">
+              <mat-icon>history</mat-icon>
+              Service History
+            </button>
+            <button mat-stroked-button color="primary">
+              <mat-icon>star</mat-icon>
+              My Ratings
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+</div>

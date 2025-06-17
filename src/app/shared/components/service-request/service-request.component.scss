@@ -1,0 +1,64 @@
+.service-request-dialog {
+  padding: 1rem;
+
+  h2 {
+    color: #1976d2;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-row {
+    margin-bottom: 1rem;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  mat-dialog-content {
+    max-height: 70vh;
+    padding: 1rem 0;
+  }
+
+  mat-dialog-actions {
+    padding: 1rem 0 0;
+    margin: 0;
+
+    button {
+      min-width: 100px;
+      margin-left: 1rem;
+
+      mat-spinner {
+        display: inline-block;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-request-dialog {
+    padding: 0.5rem;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-row {
+      margin-bottom: 0.5rem;
+    }
+
+    mat-dialog-actions {
+      padding: 0.5rem 0 0;
+
+      button {
+        min-width: 80px;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

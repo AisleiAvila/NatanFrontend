@@ -1,0 +1,25 @@
+{
+  "name": "natan-construtora",
+  "integrations": {
+    "angular": {},
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "natan-construtora",
+  "defaultProject": "natan-construtora",
+  "projects": {
+    "natan-construtora": {
+      "name": "natan-construtora",
+      "integrations": {
+        "angular": {},
+        "capacitor": {}
+      },
+      "type": "angular",
+      "root": "."
+    }
+  },
+  "hooks": {
+    "build:before": "npm run ionic:build:before",
+    "serve:before": "npm run ionic:serve:before"
+  }
+}

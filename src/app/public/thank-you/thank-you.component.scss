@@ -1,0 +1,19 @@
+.thank-you-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.thank-you-container h1 {
+  color: #1976d2;
+  margin-bottom: 1rem;
+}
+
+.thank-you-container p {
+  color: #444;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}

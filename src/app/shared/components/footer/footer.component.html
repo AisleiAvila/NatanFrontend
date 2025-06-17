@@ -1,0 +1,104 @@
+<footer class="app-footer">
+  <div class="footer-container">
+    <!-- Company Info -->
+    <div class="footer-section">
+      <div class="footer-brand">
+        <mat-icon class="brand-icon">construction</mat-icon>
+        <h3>Natan Construtora</h3>
+      </div>
+      <p class="company-description">
+        {{ "footer.company_description" | translate }}
+      </p>
+      <div class="social-links">
+        <button mat-icon-button class="social-btn" (click)="openWhatsApp()">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <button mat-icon-button class="social-btn">
+          <i class="fab fa-facebook"></i>
+        </button>
+        <button mat-icon-button class="social-btn">
+          <i class="fab fa-instagram"></i>
+        </button>
+        <button mat-icon-button class="social-btn">
+          <i class="fab fa-linkedin"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <div class="footer-section">
+      <h4>{{ "footer.services" | translate }}</h4>
+      <ul class="footer-links">
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            "services.plumbing" | translate
+          }}</a>
+        </li>
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            "services.electrical" | translate
+          }}</a>
+        </li>
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            "services.renovation" | translate
+          }}</a>
+        </li>
+        <li>
+          <a href="#" routerLink="/home/services">{{
+            "services.painting" | translate
+          }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Service Areas -->
+    <div class="footer-section">
+      <h4>{{ "footer.service_areas" | translate }}</h4>
+      <ul class="footer-links">
+        <li><a href="#" routerLink="/home">São Miguel</a></li>
+        <li><a href="#" routerLink="/home">Aveiro</a></li>
+        <li><a href="#" routerLink="/home">Coimbra</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h4>{{ "footer.contact" | translate }}</h4>
+      <div class="contact-info">
+        <div class="contact-item">
+          <mat-icon>phone</mat-icon>
+          <span>+351 912 345 678</span>
+        </div>
+        <div class="contact-item">
+          <mat-icon>email</mat-icon>
+          <span>info&#64;constru.pt</span>
+        </div>
+        <div class="contact-item">
+          <mat-icon>location_on</mat-icon>
+          <span>Aveiro, Portugal</span>
+        </div>
+        <div class="contact-item">
+          <mat-icon>schedule</mat-icon>
+          <span>{{ "footer.business_hours" | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="footer-container">
+      <div class="bottom-content">
+        <p>
+          &copy; {{ currentYear }} Natan Construtora.
+          {{ "footer.rights" | translate }}
+        </p>
+        <div class="legal-links">
+          <a href="#" class="legal-link">{{ "footer.privacy" | translate }}</a>
+          <a href="#" class="legal-link">{{ "footer.terms" | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

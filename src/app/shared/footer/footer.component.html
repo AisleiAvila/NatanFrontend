@@ -1,0 +1,48 @@
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Natan Construtora</h3>
+        <p>{{ translate.translate("footer.tagline") }}</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>{{ translate.translate("footer.services") }}</h3>
+        <ul>
+          <li>{{ translate.translate("services.construction") }}</li>
+          <li>{{ translate.translate("services.maintenance") }}</li>
+          <li>{{ translate.translate("services.renovation") }}</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>{{ translate.translate("footer.company") }}</h3>
+        <ul>
+          <li>
+            <a routerLink="/about">{{ translate.translate("footer.about") }}</a>
+          </li>
+          <li>
+            <a routerLink="/contact">{{
+              translate.translate("footer.contact")
+            }}</a>
+          </li>
+          <li>
+            <a routerLink="/privacy">{{
+              translate.translate("footer.privacy")
+            }}</a>
+          </li>
+          <li>
+            <a routerLink="/terms">{{ translate.translate("footer.terms") }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        &copy; {{ currentYear }} Natan Construtora.
+        {{ translate.translate("footer.rights") }}
+      </p>
+    </div>
+  </div>
+</footer>

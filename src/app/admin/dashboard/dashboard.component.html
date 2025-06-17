@@ -1,0 +1,219 @@
+<div class="admin-dashboard">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="welcome-section">
+          <h1>{{ "admin.welcome" | translate }}, {{ currentUser?.name }}!</h1>
+          <p>{{ "admin.dashboard_subtitle" | translate }}</p>
+        </div>
+        <div class="header-actions">
+          <button mat-raised-button color="primary">
+            <mat-icon>assessment</mat-icon>
+            Export Report
+          </button>
+          <button mat-stroked-button color="primary">
+            <mat-icon>settings</mat-icon>
+            Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metrics Section -->
+  <section class="metrics-section">
+    <div class="container">
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <div class="metric-content">
+            <div class="metric-icon">
+              <mat-icon>attach_money</mat-icon>
+            </div>
+            <div class="metric-info">
+              <div class="metric-value">
+                {{ metrics.monthlyRevenue | currency }}
+              </div>
+              <div class="metric-label">
+                {{ "admin.metrics.monthly_revenue" | translate }}
+              </div>
+              <div
+                class="metric-change"
+                [class.positive]="metrics.revenueChange > 0"
+              >
+                {{ metrics.revenueChange }}%
+              </div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <div class="metric-content">
+            <div class="metric-icon">
+              <mat-icon>assignment</mat-icon>
+            </div>
+            <div class="metric-info">
+              <div class="metric-value">{{ metrics.totalRequests }}</div>
+              <div class="metric-label">
+                {{ "admin.metrics.total_requests" | translate }}
+              </div>
+              <div class="metric-subtext">
+                {{ metrics.pendingRequests }}
+                {{ "admin.metrics.pending" | translate }}
+              </div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <div class="metric-content">
+            <div class="metric-icon">
+              <mat-icon>people</mat-icon>
+            </div>
+            <div class="metric-info">
+              <div class="metric-value">{{ metrics.activeProviders }}</div>
+              <div class="metric-label">
+                {{ "admin.metrics.active_providers" | translate }}
+              </div>
+              <div class="metric-subtext">
+                {{ metrics.onlineProviders }}
+                {{ "admin.metrics.online" | translate }}
+              </div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <div class="metric-content">
+            <div class="metric-icon">
+              <mat-icon>sentiment_satisfied</mat-icon>
+            </div>
+            <div class="metric-info">
+              <div class="metric-value">{{ metrics.satisfactionRate }}%</div>
+              <div class="metric-label">
+                {{ "admin.metrics.satisfaction_rate" | translate }}
+              </div>
+              <div class="metric-subtext">
+                {{ metrics.newClients }}
+                {{ "admin.metrics.new_clients" | translate }}
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Requests Section -->
+  <section class="requests-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Recent Requests</h2>
+        <button mat-stroked-button color="primary">View All Requests</button>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-container" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <p>Loading...</p>
+      </div>
+
+      <!-- Requests Table -->
+      <mat-card class="table-card" *ngIf="!loading">
+        <div class="requests-list">
+          <div
+            class="request-item"
+            *ngFor="let request of serviceRequests.slice(0, 5)"
+          >
+            <div class="request-info">
+              <h4>{{ request.serviceName }}</h4>
+              <p>{{ request.clientInfo.name }} - {{ request.location }}</p>
+              <span class="request-date">{{
+                formatDate(request.createdAt)
+              }}</span>
+            </div>
+            <div class="request-status">
+              <mat-chip [class]="'status-chip ' + request.status">
+                {{ request.status }}
+              </mat-chip>
+            </div>
+            <div class="request-actions">
+              <button mat-icon-button>
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="primary">
+                <mat-icon>person_add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!loading && serviceRequests.length === 0">
+        <mat-icon>inbox</mat-icon>
+        <h3>No requests found</h3>
+        <p>All requests are processed</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Activities Section -->
+  <section class="activities-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Recent Activities</h2>
+      </div>
+
+      <mat-card class="activities-card">
+        <div
+          class="activity-item"
+          *ngFor="let activity of recentActivities.slice(0, 5)"
+        >
+          <div class="activity-icon">
+            <mat-icon>{{ activity.icon }}</mat-icon>
+          </div>
+          <div class="activity-content">
+            <h4>{{ activity.type }}</h4>
+            <p>{{ activity.message }}</p>
+            <span class="activity-time">{{
+              formatDate(activity.timestamp)
+            }}</span>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Quick Actions Section -->
+  <section class="quick-actions-section">
+    <div class="container">
+      <mat-card class="quick-actions-card">
+        <div class="quick-actions-content">
+          <div class="actions-text">
+            <h3>Quick Actions</h3>
+            <p>Manage your platform efficiently</p>
+          </div>
+          <div class="actions-buttons">
+            <button mat-raised-button color="primary">
+              <mat-icon>person_add</mat-icon>
+              Add Provider
+            </button>
+            <button mat-stroked-button color="primary">
+              <mat-icon>build</mat-icon>
+              Add Service
+            </button>
+            <button mat-stroked-button color="primary">
+              <mat-icon>notifications</mat-icon>
+              Send Notification
+            </button>
+            <button mat-stroked-button color="primary">
+              <mat-icon>analytics</mat-icon>
+              View Analytics
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+</div>

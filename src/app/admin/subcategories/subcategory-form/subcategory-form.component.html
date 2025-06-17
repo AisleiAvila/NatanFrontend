@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>
+  {{ isEditMode ? "Editar Subcategoria" : "Nova Subcategoria" }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div class="form-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error *ngIf="form.get('name')?.hasError('required')">
+          Nome é obrigatório
+        </mat-error>
+        <mat-error *ngIf="form.get('name')?.hasError('minlength')">
+          Nome deve ter no mínimo 3 caracteres
+        </mat-error>
+        <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
+          Nome deve ter no máximo 100 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="description" rows="3"></textarea>
+        <mat-error *ngIf="form.get('description')?.hasError('maxlength')">
+          Descrição deve ter no máximo 500 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="categoryId" required>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('categoryId')?.hasError('required')">
+          Categoria é obrigatória
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="isActive" color="primary">
+        Ativo
+      </mat-slide-toggle>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || loading"
+    >
+      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <span *ngIf="!loading">{{ isEditMode ? "Salvar" : "Criar" }}</span>
+    </button>
+  </mat-dialog-actions>
+</form>
