@@ -1,0 +1,59 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <div class="toolbar-content">
+    <div class="logo-section">
+      <a routerLink="/" class="logo-link">
+        <img src="assets/images/logo.png" alt="Logo" class="logo-image" />
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <a
+        mat-button
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ "header.home" | translate }}
+      </a>
+      <a mat-button routerLink="/services" routerLinkActive="active">
+        {{ "header.services" | translate }}
+      </a>
+      <a mat-button routerLink="/projects" routerLinkActive="active">
+        {{ "header.projects" | translate }}
+      </a>
+      <a mat-button routerLink="/categories" routerLinkActive="active">
+        {{ "header.categories" | translate }}
+      </a>
+    </div>
+
+    <div class="actions-section">
+      <button mat-button [matMenuTriggerFor]="languageMenu">
+        <mat-icon>language</mat-icon>
+        {{ currentLang | uppercase }}
+      </button>
+      <mat-menu #languageMenu="matMenu">
+        <button mat-menu-item (click)="changeLanguage('pt-BR')">
+          <span>PT-BR</span>
+        </button>
+        <button mat-menu-item (click)="changeLanguage('en')">
+          <span>EN</span>
+        </button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+        {{ "header.account" | translate }}
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item routerLink="/login">
+          <mat-icon>login</mat-icon>
+          <span>{{ "header.login" | translate }}</span>
+        </button>
+        <button mat-menu-item routerLink="/register">
+          <mat-icon>person_add</mat-icon>
+          <span>{{ "header.register" | translate }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

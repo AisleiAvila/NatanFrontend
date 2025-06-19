@@ -1,6 +1,7 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { PUBLIC_ROUTES } from "./public.routes";
 import { RequestServiceComponent } from "../client/request-service/request-service.component";
 import { ContactModule } from "./contact/contact.module";
 import { TranslateModule } from "@ngx-translate/core";
@@ -10,42 +11,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDividerModule } from "@angular/material/divider";
 
-const routes: Routes = [
-  {
-    path: "",
-    loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
-  },
-  {
-    path: "services",
-    loadChildren: () =>
-      import("./services/services.module").then((m) => m.ServicesModule),
-  },
-  {
-    path: "request-service",
-    component: RequestServiceComponent,
-  },
-  {
-    path: "contact",
-    loadChildren: () =>
-      import("./contact/contact.module").then((m) => m.ContactModule),
-  },
-  {
-    path: "thank-you",
-    loadChildren: () =>
-      import("./thank-you/thank-you.module").then((m) => m.ThankYouModule),
-  },
-  {
-    path: "terms",
-    loadChildren: () =>
-      import("./terms/terms.module").then((m) => m.TermsModule),
-  },
-];
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(PUBLIC_ROUTES),
     TranslateModule.forChild(),
     MatToolbarModule,
     MatIconModule,
@@ -53,6 +23,5 @@ const routes: Routes = [
     MatMenuModule,
     MatDividerModule,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PublicModule {}

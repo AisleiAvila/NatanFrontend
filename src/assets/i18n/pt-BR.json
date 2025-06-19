@@ -1,0 +1,54 @@
+{
+  "projects": {
+    "title": "Projetos",
+    "subtitle": "Encontre os melhores projetos para você",
+    "search": "Buscar projetos...",
+    "filters": {
+      "title": "Filtros",
+      "category": "Categoria",
+      "region": "Região",
+      "clear": "Limpar filtros"
+    },
+    "list": {
+      "category": "Categoria",
+      "subcategory": "Subcategoria",
+      "client": "Cliente",
+      "provider": "Prestador",
+      "region": "Região",
+      "budget": "Orçamento",
+      "status": "Status",
+      "actions": "Ações"
+    },
+    "status": {
+      "available": "Disponível",
+      "busy": "Ocupado",
+      "unavailable": "Indisponível"
+    },
+    "details": {
+      "title": "Detalhes do Projeto",
+      "category": "Categoria",
+      "subcategory": "Subcategoria",
+      "client": "Cliente",
+      "provider": "Prestador",
+      "region": "Região",
+      "budget": "Orçamento",
+      "status": "Status"
+    },
+    "noResults": {
+      "title": "Nenhum projeto encontrado",
+      "message": "Tente ajustar os filtros para encontrar mais projetos"
+    },
+    "error": {
+      "loading": "Erro ao carregar projetos"
+    }
+  },
+  "header": {
+    "home": "Início",
+    "services": "Serviços",
+    "projects": "Projetos",
+    "categories": "Categorias",
+    "account": "Conta",
+    "login": "Entrar",
+    "register": "Cadastrar"
+  }
+}

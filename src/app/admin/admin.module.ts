@@ -1,45 +1,9 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterModule, Routes } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
-import { AdminGuard } from "../core/guards/admin.guard";
-
-const routes: Routes = [
-  {
-    path: "",
-    loadChildren: () =>
-      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
-  },
-  {
-    // NOVA ROTA ADICIONADA
-    path: "dashboard",
-    loadChildren: () =>
-      import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
-  },
-  {
-    path: "categories",
-    loadChildren: () =>
-      import("../admin/categories/categories.module").then(
-        (m) => m.CategoriesModule
-      ),
-    canActivate: [AdminGuard],
-  },
-  {
-    path: "subcategories",
-    loadChildren: () =>
-      import("../admin/subcategories/subcategories.module").then(
-        (m) => m.SubcategoriesModule
-      ),
-    canActivate: [AdminGuard],
-  },
-];
+import { RouterModule } from "@angular/router";
+import { ADMIN_ROUTES } from "./admin.routes";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    TranslateModule.forChild(),
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [CommonModule, RouterModule.forChild(ADMIN_ROUTES)],
 })
 export class AdminModule {}

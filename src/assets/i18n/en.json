@@ -408,14 +408,50 @@
   },
   "common": {
     "loading": "Loading...",
-    "close": "Close",
-    "error_loading_data": "Error loading data",
-    "error_occurred": "An error occurred"
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back"
   },
   "header": {
     "how_it_works": "How It Works",
     "services": {
       "request": "Request Service"
     }
+  },
+  "projects": {
+    "title": "Available Projects",
+    "subtitle": "Find projects that match your skills and interests",
+    "search_placeholder": "Search projects...",
+    "filter_status": "Status",
+    "filter_client": "Client",
+    "filter_provider": "Provider",
+    "filter_start_date": "Start Date",
+    "filter_end_date": "End Date",
+    "filter_min_budget": "Minimum Budget",
+    "filter_max_budget": "Maximum Budget",
+    "all_status": "All status",
+    "all_clients": "All clients",
+    "all_providers": "All providers",
+    "clear_filters": "Clear filters",
+    "showing_results": "Showing {{count}} of {{total}} projects",
+    "no_results_title": "No projects found",
+    "no_results_message": "Try adjusting your filters to find more projects",
+    "project_name": "Project",
+    "client": "Client",
+    "status": "Status",
+    "provider": "Provider",
+    "period": "Period",
+    "budget": "Budget",
+    "actions": "Actions",
+    "status_available": "Available",
+    "status_busy": "In Progress",
+    "status_unavailable": "Unavailable",
+    "view_details": "View details",
+    "request_quote": "Request quote"
   }
 }

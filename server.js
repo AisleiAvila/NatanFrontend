@@ -120,6 +120,97 @@ let subcategories = [
   },
 ];
 
+// Dados mockados para regiões
+let regions = [
+  {
+    id: "1",
+    name: "São Paulo",
+    isActive: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "2",
+    name: "Rio de Janeiro",
+    isActive: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "3",
+    name: "Minas Gerais",
+    isActive: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
+
+// Dados mockados para projetos
+let projects = [
+  {
+    id: "1",
+    title: "Construção de Prédio Residencial",
+    description: "Projeto de construção de prédio com 20 andares",
+    category: {
+      id: "1",
+      name: "Construção Civil",
+    },
+    subcategory: {
+      id: "1",
+      name: "Prédios",
+    },
+    client: {
+      id: "1",
+      name: "João Silva",
+    },
+    provider: {
+      id: "1",
+      name: "Construtora XYZ",
+    },
+    region: {
+      id: "1",
+      name: "São Paulo",
+    },
+    budget: 2000000,
+    status: "busy",
+    startDate: new Date("2024-01-01"),
+    endDate: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "2",
+    title: "Reforma de Casa",
+    description: "Reforma completa de casa com 200m²",
+    category: {
+      id: "2",
+      name: "Reforma",
+    },
+    subcategory: {
+      id: "2",
+      name: "Residencial",
+    },
+    client: {
+      id: "2",
+      name: "Maria Santos",
+    },
+    provider: {
+      id: "2",
+      name: "Reformas Express",
+    },
+    region: {
+      id: "2",
+      name: "Rio de Janeiro",
+    },
+    budget: 150000,
+    status: "available",
+    startDate: new Date("2024-02-01"),
+    endDate: new Date("2024-04-01"),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
+
 // Endpoints de categorias
 app.get("/api/categories", (req, res) => {
   res.json(categories);
@@ -260,6 +351,98 @@ app.patch("/api/subcategories/:id/status", (req, res) => {
     updatedAt: new Date(),
   };
   res.json(subcategories[index]);
+});
+
+// Endpoints de regiões
+app.get("/api/regions", (req, res) => {
+  res.json(regions);
+});
+
+app.get("/api/regions/:id", (req, res) => {
+  const region = regions.find((r) => r.id === req.params.id);
+  if (!region) {
+    return res.status(404).json({ message: "Região não encontrada" });
+  }
+  res.json(region);
+});
+
+app.post("/api/regions", (req, res) => {
+  const newRegion = {
+    id: String(regions.length + 1),
+    ...req.body,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  regions.push(newRegion);
+  res.status(201).json(newRegion);
+});
+
+app.put("/api/regions/:id", (req, res) => {
+  const index = regions.findIndex((r) => r.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Região não encontrada" });
+  }
+  regions[index] = {
+    ...regions[index],
+    ...req.body,
+    updatedAt: new Date(),
+  };
+  res.json(regions[index]);
+});
+
+app.delete("/api/regions/:id", (req, res) => {
+  const index = regions.findIndex((r) => r.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Região não encontrada" });
+  }
+  regions.splice(index, 1);
+  res.status(204).send();
+});
+
+// Endpoints de projetos
+app.get("/api/projects", (req, res) => {
+  res.json(projects);
+});
+
+app.get("/api/projects/:id", (req, res) => {
+  const project = projects.find((p) => p.id === req.params.id);
+  if (!project) {
+    return res.status(404).json({ message: "Projeto não encontrado" });
+  }
+  res.json(project);
+});
+
+app.post("/api/projects", (req, res) => {
+  const newProject = {
+    id: String(projects.length + 1),
+    ...req.body,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  projects.push(newProject);
+  res.status(201).json(newProject);
+});
+
+app.put("/api/projects/:id", (req, res) => {
+  const index = projects.findIndex((p) => p.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Projeto não encontrado" });
+  }
+  projects[index] = {
+    ...projects[index],
+    ...req.body,
+    updatedAt: new Date(),
+  };
+  res.json(projects[index]);
+});
+
+app.delete("/api/projects/:id", (req, res) => {
+  const index = projects.findIndex((p) => p.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ message: "Projeto não encontrado" });
+  }
+  projects.splice(index, 1);
+  res.status(204).send();
 });
 
 app.listen(PORT, "0.0.0.0", () => {

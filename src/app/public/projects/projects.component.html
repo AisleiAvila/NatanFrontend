@@ -1,0 +1,281 @@
+<div class="projects-container">
+  <!-- Header -->
+  <div class="header">
+    <h1>{{ "projects.title" | translate }}</h1>
+    <p>{{ "projects.subtitle" | translate }}</p>
+  </div>
+
+  <!-- Filters -->
+  <mat-card class="filters-card">
+    <mat-card-content>
+      <div class="filters-row">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.search_placeholder" | translate }}</mat-label>
+          <input
+            matInput
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="applyFilters()"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.filter_status" | translate }}</mat-label>
+          <mat-select
+            [(ngModel)]="selectedStatus"
+            (ngModelChange)="applyFilters()"
+          >
+            <mat-option value="">{{
+              "projects.all_status" | translate
+            }}</mat-option>
+            <mat-option value="available">{{
+              "projects.status_available" | translate
+            }}</mat-option>
+            <mat-option value="busy">{{
+              "projects.status_busy" | translate
+            }}</mat-option>
+            <mat-option value="unavailable">{{
+              "projects.status_unavailable" | translate
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.filter_client" | translate }}</mat-label>
+          <mat-select
+            [(ngModel)]="selectedClient"
+            (ngModelChange)="applyFilters()"
+          >
+            <mat-option value="">{{
+              "projects.all_clients" | translate
+            }}</mat-option>
+            <mat-option *ngFor="let client of clients" [value]="client.id">
+              {{ client.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.filter_provider" | translate }}</mat-label>
+          <mat-select
+            [(ngModel)]="selectedProvider"
+            (ngModelChange)="applyFilters()"
+          >
+            <mat-option value="">{{
+              "projects.all_providers" | translate
+            }}</mat-option>
+            <mat-option
+              *ngFor="let provider of providers"
+              [value]="provider.id"
+            >
+              {{ provider.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="filters-row">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.filter_start_date" | translate }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startPicker"
+            [(ngModel)]="startDate"
+            (ngModelChange)="applyFilters()"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="startPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.filter_end_date" | translate }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endPicker"
+            [(ngModel)]="endDate"
+            (ngModelChange)="applyFilters()"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="endPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.filter_min_budget" | translate }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="minBudget"
+            (ngModelChange)="applyFilters()"
+          />
+          <span matPrefix>€&nbsp;</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ "projects.filter_max_budget" | translate }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="maxBudget"
+            (ngModelChange)="applyFilters()"
+          />
+          <span matPrefix>€&nbsp;</span>
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="clearFilters()">
+          <mat-icon>clear</mat-icon>
+          {{ "projects.clear_filters" | translate }}
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+    <p>{{ "common.loading" | translate }}</p>
+  </div>
+
+  <!-- Content -->
+  <div class="content" *ngIf="!loading">
+    <!-- Results Info -->
+    <div class="results-info">
+      <p>
+        {{
+          "projects.showing_results"
+            | translate
+              : { count: filteredProjects.length, total: projects.length }
+        }}
+      </p>
+    </div>
+
+    <!-- Projects Table -->
+    <mat-card *ngIf="filteredProjects.length > 0">
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Title Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "projects.project_name" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <div class="project-title">
+                <span class="title">{{ project.title }}</span>
+                <span class="description">{{ project.description }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Client Column -->
+          <ng-container matColumnDef="client">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "projects.client" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let project">
+              {{ project.client.name }}
+            </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "projects.status" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <span class="status-badge" [ngClass]="project.status">
+                {{ "projects.status_" + project.status | translate }}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Provider Column -->
+          <ng-container matColumnDef="provider">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "projects.provider" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let project">
+              {{ project.provider.name }}
+            </td>
+          </ng-container>
+
+          <!-- Period Column -->
+          <ng-container matColumnDef="period">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "projects.period" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <div class="project-period">
+                <span>{{ project.startDate | date }}</span>
+                <span *ngIf="project.endDate">
+                  - {{ project.endDate | date }}</span
+                >
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Budget Column -->
+          <ng-container matColumnDef="budget">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "projects.budget" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let project">
+              {{ project.budget | currency : "EUR" : "symbol" : "1.2-2" }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "projects.actions" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/projects', project.id]">
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{ "projects.view_details" | translate }}</span>
+                </button>
+                <button
+                  mat-menu-item
+                  *ngIf="project.status === 'available'"
+                  (click)="requestProject(project)"
+                >
+                  <mat-icon>assignment</mat-icon>
+                  <span>{{ "projects.request_quote" | translate }}</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          [length]="filteredProjects.length"
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          showFirstLastButtons
+        >
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- No Results -->
+    <div class="no-results" *ngIf="filteredProjects.length === 0">
+      <mat-icon>search_off</mat-icon>
+      <h3>{{ "projects.no_results_title" | translate }}</h3>
+      <p>{{ "projects.no_results_message" | translate }}</p>
+      <button mat-stroked-button color="primary" (click)="clearFilters()">
+        {{ "projects.clear_filters" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

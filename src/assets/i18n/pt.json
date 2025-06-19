@@ -408,15 +408,54 @@
     "minlength": "Texto demasiado curto"
   },
   "common": {
-    "loading": "A carregar...",
+    "loading": "Carregando...",
     "close": "Fechar",
     "error_loading_data": "Erro ao carregar dados",
-    "error_occurred": "Ocorreu um erro"
+    "error_occurred": "Ocorreu um erro",
+    "error": "Erro",
+    "success": "Sucesso",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "confirm": "Confirmar",
+    "back": "Voltar"
   },
   "header": {
     "how_it_works": "Como Funciona",
     "services": {
       "request": "Solicitar Serviço"
     }
+  },
+  "projects": {
+    "title": "Projetos Disponíveis",
+    "subtitle": "Encontre projetos que correspondam às suas habilidades e interesses",
+    "search_placeholder": "Buscar projetos...",
+    "filter_status": "Status",
+    "filter_client": "Cliente",
+    "filter_provider": "Prestador",
+    "filter_start_date": "Data Inicial",
+    "filter_end_date": "Data Final",
+    "filter_min_budget": "Orçamento Mínimo",
+    "filter_max_budget": "Orçamento Máximo",
+    "all_status": "Todos os status",
+    "all_clients": "Todos os clientes",
+    "all_providers": "Todos os prestadores",
+    "clear_filters": "Limpar filtros",
+    "showing_results": "Mostrando {{count}} de {{total}} projetos",
+    "no_results_title": "Nenhum projeto encontrado",
+    "no_results_message": "Tente ajustar seus filtros para encontrar mais projetos",
+    "project_name": "Projeto",
+    "client": "Cliente",
+    "status": "Status",
+    "provider": "Prestador",
+    "period": "Período",
+    "budget": "Orçamento",
+    "actions": "Ações",
+    "status_available": "Disponível",
+    "status_busy": "Em Andamento",
+    "status_unavailable": "Indisponível",
+    "view_details": "Ver detalhes",
+    "request_quote": "Solicitar orçamento"
   }
 }
