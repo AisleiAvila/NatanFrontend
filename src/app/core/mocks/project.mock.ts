@@ -1,13 +1,73 @@
 import { Client, Provider, Project } from "../models/project.model";
 import { Category } from "../models/category.model";
 import { Subcategory } from "../models/subcategory.model";
+import { Region } from "../models/region.model";
+
+export const MOCK_REGIONS: Region[] = [
+  {
+    id: "1",
+    name: "São Miguel",
+    code: "SM",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "2",
+    name: "Aveiro",
+    code: "AV",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "3",
+    name: "Coimbra",
+    code: "CB",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
 
 export const MOCK_CLIENTS: Client[] = [
-  { id: "1", name: "Empresa ABC Ltda" },
-  { id: "2", name: "Construtora XYZ" },
-  { id: "3", name: "Incorporadora 123" },
-  { id: "4", name: "Empreendimentos Silva" },
-  { id: "5", name: "Grupo Construções" },
+  {
+    id: "1",
+    name: "Empresa ABC Ltda",
+    email: "contato@abc.com",
+    telefone: "(11) 99999-1111",
+    region: MOCK_REGIONS[0],
+    status: "ativo",
+  },
+  {
+    id: "2",
+    name: "Construtora XYZ",
+    email: "contato@xyz.com",
+    telefone: "(21) 98888-2222",
+    region: MOCK_REGIONS[1],
+    status: "ativo",
+  },
+  {
+    id: "3",
+    name: "Incorporadora 123",
+    email: "contato@123.com",
+    telefone: "(31) 97777-3333",
+    region: MOCK_REGIONS[2],
+    status: "inativo",
+  },
+  {
+    id: "4",
+    name: "Empreendimentos Silva",
+    email: "contato@silva.com",
+    telefone: "(41) 96666-4444",
+    region: MOCK_REGIONS[0],
+    status: "ativo",
+  },
+  {
+    id: "5",
+    name: "Grupo Construções",
+    email: "contato@grupo.com",
+    telefone: "(51) 95555-5555",
+    region: MOCK_REGIONS[1],
+    status: "inativo",
+  },
 ];
 
 export const MOCK_PROVIDERS: Provider[] = [

@@ -1,0 +1,42 @@
+.client-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  max-width: 700px;
+  margin: 24px auto 0 auto;
+}
+
+.form-field {
+  flex: 1 1 220px;
+  min-width: 180px;
+  max-width: 320px;
+}
+
+.form-actions {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+@media (max-width: 700px) {
+  .client-form-container {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+  .form-field {
+    max-width: 100%;
+    min-width: 120px;
+  }
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+}

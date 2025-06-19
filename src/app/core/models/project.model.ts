@@ -1,9 +1,14 @@
 import { Category } from "./category.model";
 import { Subcategory } from "./subcategory.model";
+import { Region } from "./region.model";
 
 export interface Client {
   id: string;
   name: string;
+  email?: string;
+  telefone?: string;
+  region?: Region;
+  status?: "ativo" | "inativo";
 }
 
 export interface Provider {

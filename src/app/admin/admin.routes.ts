@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { ClientsPageComponent } from "./clients/clients-page/clients-page.component";
 
 export const ADMIN_ROUTES: Routes = [
   {
@@ -70,5 +71,26 @@ export const ADMIN_ROUTES: Routes = [
       import("./regions/region-form/region-form.component").then(
         (m) => m.RegionFormComponent
       ),
+  },
+  {
+    path: "clients",
+    component: ClientsPageComponent,
+    children: [
+      {
+        path: "",
+        loadComponent: () =>
+          import("./clients/client-list/client-list").then((m) => m.ClientList),
+      },
+      {
+        path: "new",
+        loadComponent: () =>
+          import("./clients/client-form/client-form").then((m) => m.ClientForm),
+      },
+      {
+        path: ":id",
+        loadComponent: () =>
+          import("./clients/client-form/client-form").then((m) => m.ClientForm),
+      },
+    ],
   },
 ];

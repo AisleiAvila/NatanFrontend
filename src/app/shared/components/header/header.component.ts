@@ -116,4 +116,8 @@ export class HeaderComponent implements OnInit {
   goToProjects(): void {
     this.router.navigate(["/projects"]);
   }
+
+  goToClients(): void {
+    this.router.navigate(["/admin/clients"]);
+  }
 }

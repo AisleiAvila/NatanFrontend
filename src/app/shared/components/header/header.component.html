@@ -44,6 +44,13 @@
       >
         {{ "nav.subcategories" | translate }}
       </button>
+      <button
+        mat-button
+        *ngIf="isAdmin && isAuthenticated"
+        (click)="goToClients()"
+      >
+        Clientes
+      </button>
       <button mat-button (click)="goToProjects()">Projetos</button>
     </div>
 
@@ -130,6 +137,14 @@
     <button mat-menu-item (click)="goToProjects()">
       <mat-icon>folder</mat-icon>
       <span>Projetos</span>
+    </button>
+    <button
+      mat-menu-item
+      *ngIf="isAdmin && isAuthenticated"
+      (click)="goToClients()"
+    >
+      <mat-icon>group</mat-icon>
+      <span>Clientes</span>
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item (click)="goToLogin()" *ngIf="!isAuthenticated">
