@@ -157,6 +157,15 @@
     <!-- Projects Table -->
     <mat-card *ngIf="filteredProjects.length > 0">
       <mat-card-content>
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="exportPDF()"
+          style="margin-bottom: 16px"
+        >
+          <mat-icon>picture_as_pdf</mat-icon>
+          Exportar PDF
+        </button>
         <table mat-table [dataSource]="dataSource" matSort>
           <!-- Title Column -->
           <ng-container matColumnDef="title">
@@ -210,10 +219,11 @@
             </th>
             <td mat-cell *matCellDef="let project">
               <div class="project-period">
-                <span>{{ project.startDate | date }}</span>
-                <span *ngIf="project.endDate">
-                  - {{ project.endDate | date }}</span
-                >
+                <span>{{ project.startDate | date : "dd/MM/yyyy" }}</span
+                ><br />
+                <span *ngIf="project.endDate">{{
+                  project.endDate | date : "dd/MM/yyyy"
+                }}</span>
               </div>
             </td>
           </ng-container>

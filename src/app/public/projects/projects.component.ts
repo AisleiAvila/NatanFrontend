@@ -18,6 +18,9 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { Project, Client, Provider } from "../../core/models/project.model";
 import { ProjectService } from "../../core/services/project.service";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import { AuthService } from "../../core/services/auth.service";
 
 @Component({
   selector: "app-projects",
@@ -74,7 +77,10 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private projectService: ProjectService) {
+  constructor(
+    private projectService: ProjectService,
+    private authService: AuthService
+  ) {
     console.log("ProjectsComponent constructor");
   }
 
@@ -224,5 +230,137 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
 
   requestProject(project: Project): void {
     console.log("Solicitar projeto:", project);
+  }
+
+  exportPDF(): void {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+
+    // Header - Primeira linha (3 blocos)
+    const usuario =
+      this.authService.getCurrentUser()?.name || "Usuário não identificado";
+    const dataHora = new Date();
+    const leftText = "Natan Construtora";
+    const centerText = `Emitido por: ${usuario}`;
+    const rightText = `Emitido em: ${dataHora.toLocaleString("pt-BR")}`;
+    doc.setFontSize(11);
+    // Esquerda
+    doc.text(leftText, 14, 14, { align: "left" });
+    // Centro
+    const centerX = pageWidth / 2;
+    doc.text(centerText, centerX, 14, { align: "center" });
+    // Direita
+    const rightX = pageWidth - 14;
+    doc.text(rightText, rightX, 14, { align: "right" });
+
+    // Header - Segunda linha (sublinhado)
+    doc.setDrawColor(150);
+    doc.setLineWidth(0.5);
+    doc.line(10, 18, pageWidth - 10, 18);
+
+    // Header - Terceira linha (título centralizado)
+    doc.setFontSize(16);
+    const title = "Projetos Disponíveis";
+    const textWidth = doc.getTextWidth(title);
+    doc.text(title, (pageWidth - textWidth) / 2, 26);
+
+    // Colunas
+    const columns = [
+      { header: "Nome", dataKey: "title" },
+      { header: "Cliente", dataKey: "client" },
+      { header: "Status", dataKey: "status" },
+      { header: "Prestador", dataKey: "provider" },
+      { header: "Região", dataKey: "region" },
+      { header: "Período", dataKey: "period" },
+      { header: "Orçamento", dataKey: "budget" },
+      { header: "IVA", dataKey: "iva" },
+    ];
+
+    // Linhas
+    const rows = this.filteredProjects.map((p) => ({
+      title: p.title,
+      client: p.client.name,
+      status: p.status,
+      provider: p.provider.name,
+      region: "", // Adapte se houver campo região
+      period: `${this.formatDate(p.startDate)}\n${
+        p.endDate ? this.formatDate(p.endDate) : ""
+      }`,
+      budget: p.budget.toLocaleString("pt-PT", {
+        style: "currency",
+        currency: "EUR",
+      }),
+      iva: (p.services
+        ? p.services.reduce((sum, s) => sum + (s.iva || 0), 0)
+        : 0
+      ).toLocaleString("pt-PT", { style: "currency", currency: "EUR" }),
+    }));
+
+    // Totais
+    const totalOrcamento = this.filteredProjects.reduce(
+      (sum, p) => sum + p.budget,
+      0
+    );
+    const totalIva = this.filteredProjects.reduce(
+      (sum, p) =>
+        sum +
+        (p.services
+          ? p.services.reduce((s, serv) => s + (serv.iva || 0), 0)
+          : 0),
+      0
+    );
+
+    autoTable(doc, {
+      columns,
+      body: rows,
+      startY: 32,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [25, 118, 210] },
+      foot: [
+        [
+          "Totais",
+          "",
+          "",
+          "",
+          "",
+          "",
+          totalOrcamento.toLocaleString("pt-PT", {
+            style: "currency",
+            currency: "EUR",
+          }),
+          totalIva.toLocaleString("pt-PT", {
+            style: "currency",
+            currency: "EUR",
+          }),
+        ],
+      ],
+      footStyles: { fillColor: [220, 220, 220], fontStyle: "bold" },
+      didDrawPage: function (data) {
+        const pageCount = doc.getNumberOfPages();
+        const pageSize = doc.internal.pageSize;
+        const pageWidth = pageSize.width ? pageSize.width : pageSize.getWidth();
+        const pageHeight = pageSize.height
+          ? pageSize.height
+          : pageSize.getHeight();
+        // Footer - linha horizontal
+        doc.setDrawColor(150);
+        doc.setLineWidth(0.5);
+        doc.line(10, pageHeight - 18, pageWidth - 10, pageHeight - 18);
+        // Footer - paginação centralizada
+        doc.setFontSize(9);
+        const footerText = `Página ${
+          doc.getCurrentPageInfo().pageNumber
+        } / ${pageCount}`;
+        const textWidth = doc.getTextWidth(footerText);
+        doc.text(footerText, (pageWidth - textWidth) / 2, pageHeight - 10);
+      },
+    });
+
+    doc.save("projetos-disponiveis.pdf");
+  }
+
+  formatDate(dateStr: string): string {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("pt-BR");
   }
 }
