@@ -17,6 +17,13 @@ export const PUBLIC_ROUTES: Routes = [
       import("./projects/projects.component").then((m) => m.ProjectsComponent),
   },
   {
+    path: "projects/:id",
+    loadComponent: () =>
+      import("./projects/project-details/project-details.component").then(
+        (m) => m.ProjectDetailsComponent
+      ),
+  },
+  {
     path: "categories",
     loadComponent: () =>
       import("./categories/category-list/category-list.component").then(

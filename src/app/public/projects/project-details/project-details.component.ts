@@ -1,4 +1,5 @@
-import { Component, Inject } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -32,55 +33,85 @@ import { ProjectService } from "../../../core/services/project.service";
     TranslateModule,
   ],
   template: `
-    <div class="project-details-container">
-      <h2 mat-dialog-title>{{ "projects.details.title" | translate }}</h2>
-
-      <mat-dialog-content>
-        <div class="project-info">
-          <div class="info-group">
-            <label>{{ "projects.details.category" | translate }}</label>
-            <p>{{ data.category.name }}</p>
-          </div>
-
-          <div class="info-group">
-            <label>{{ "projects.details.subcategory" | translate }}</label>
-            <p>{{ data.subcategory.name }}</p>
-          </div>
-
-          <div class="info-group">
-            <label>{{ "projects.details.client" | translate }}</label>
-            <p>{{ data.client.name }}</p>
-          </div>
-
-          <div class="info-group">
-            <label>{{ "projects.details.provider" | translate }}</label>
-            <p>{{ data.provider.name }}</p>
-          </div>
-
-          <div class="info-group">
-            <label>{{ "projects.details.region" | translate }}</label>
-            <p>{{ data.region.name }}</p>
-          </div>
-
-          <div class="info-group">
-            <label>{{ "projects.details.budget" | translate }}</label>
-            <p>{{ data.budget | currency : "BRL" }}</p>
-          </div>
-
-          <div class="info-group">
-            <label>{{ "projects.details.status" | translate }}</label>
-            <p [class]="'status-' + data.status">
-              {{ "projects.status." + data.status | translate }}
-            </p>
-          </div>
+    <div class="project-details-container" *ngIf="project">
+      <h1>Detalhes do Projeto</h1>
+      <h2>{{ project.title }}</h2>
+      <p class="subtitle">
+        Informações completas sobre o projeto e os serviços prestados.
+      </p>
+      <div class="project-info">
+        <div class="info-group">
+          <label>Cliente</label>
+          <p>{{ project.client.name }}</p>
         </div>
-      </mat-dialog-content>
-
-      <mat-dialog-actions align="end">
-        <button mat-button (click)="onClose()">
-          {{ "common.close" | translate }}
-        </button>
-      </mat-dialog-actions>
+        <div class="info-group">
+          <label>Prestador</label>
+          <p>{{ project.provider.name }}</p>
+        </div>
+        <div class="info-group">
+          <label>Descrição</label>
+          <p>{{ project.description }}</p>
+        </div>
+        <div class="info-group">
+          <label>Período</label>
+          <p>{{ project.startDate | date }} - {{ project.endDate | date }}</p>
+        </div>
+        <div class="info-group">
+          <label>Orçamento</label>
+          <p>{{ project.budget | currency : "BRL" }}</p>
+        </div>
+        <div class="info-group">
+          <label>Status</label>
+          <p [class]="'status-' + project.status">{{ project.status }}</p>
+        </div>
+      </div>
+      <div
+        class="services-list"
+        *ngIf="project.services && project.services.length"
+      >
+        <h3>Serviços Prestados</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Serviço</th>
+              <th>Categoria</th>
+              <th>Subcategoria</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>IVA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let serv of project.services">
+              <td>{{ serv.title }}</td>
+              <td>{{ serv.category.name }}</td>
+              <td>{{ serv.subcategory.name }}</td>
+              <td>{{ serv.description }}</td>
+              <td>{{ serv.valor | currency : "BRL" }}</td>
+              <td>{{ serv.iva | currency : "BRL" }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="totals">
+          <p>
+            <strong>Total dos valores:</strong>
+            {{ getTotalValor() | currency : "BRL" }}
+          </p>
+          <p>
+            <strong>Total do IVA:</strong>
+            {{ getTotalIva() | currency : "BRL" }}
+          </p>
+          <p>
+            <strong>Total geral (orçamento):</strong>
+            {{ project.budget | currency : "BRL" }}
+          </p>
+        </div>
+      </div>
+      <button mat-button routerLink="/projects">Voltar</button>
+    </div>
+    <div *ngIf="!project">
+      <p>Projeto não encontrado.</p>
+      <button mat-button routerLink="/projects">Voltar</button>
     </div>
   `,
   styles: [
@@ -124,16 +155,28 @@ import { ProjectService } from "../../../core/services/project.service";
     `,
   ],
 })
-export class ProjectDetailsComponent {
+export class ProjectDetailsComponent implements OnInit {
+  project: Project | undefined;
+
   constructor(
-    public dialogRef: MatDialogRef<ProjectDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Project,
-    private projectService: ProjectService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private route: ActivatedRoute,
+    private projectService: ProjectService
   ) {}
 
-  onClose(): void {
-    this.dialogRef.close();
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get("id");
+    if (id) {
+      this.projectService.getProjectById(id).subscribe((proj) => {
+        this.project = proj;
+      });
+    }
+  }
+
+  getTotalValor(): number {
+    return this.project?.services?.reduce((sum, s) => sum + s.valor, 0) ?? 0;
+  }
+
+  getTotalIva(): number {
+    return this.project?.services?.reduce((sum, s) => sum + s.iva, 0) ?? 0;
   }
 }

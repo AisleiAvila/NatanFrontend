@@ -1,3 +1,6 @@
+import { Category } from "./category.model";
+import { Subcategory } from "./subcategory.model";
+
 export interface Client {
   id: string;
   name: string;
@@ -6,6 +9,16 @@ export interface Client {
 export interface Provider {
   id: string;
   name: string;
+}
+
+export interface ProjectServiceItem {
+  id: string;
+  title: string;
+  category: Category;
+  subcategory: Subcategory;
+  description?: string;
+  valor: number;
+  iva: number;
 }
 
 export interface Project {
@@ -18,4 +31,5 @@ export interface Project {
   startDate: string;
   endDate?: string;
   budget: number;
+  services?: ProjectServiceItem[];
 }

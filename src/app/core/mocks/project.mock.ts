@@ -1,4 +1,6 @@
 import { Client, Provider, Project } from "../models/project.model";
+import { Category } from "../models/category.model";
+import { Subcategory } from "../models/subcategory.model";
 
 export const MOCK_CLIENTS: Client[] = [
   { id: "1", name: "Empresa ABC Ltda" },
@@ -16,6 +18,28 @@ export const MOCK_PROVIDERS: Provider[] = [
   { id: "5", name: "Carlos Reformas" },
 ];
 
+const MOCK_CATEGORIES: Category[] = [
+  { id: 1, name: "Montagem", isActive: true },
+  { id: 2, name: "Hidráulica", isActive: true },
+];
+
+const MOCK_SUBCATEGORIES: Subcategory[] = [
+  {
+    id: 1,
+    name: "Montagem de Móveis",
+    isActive: true,
+    isFeatured: false,
+    categoryId: 1,
+  },
+  {
+    id: 2,
+    name: "Conserto de Vazamento",
+    isActive: true,
+    isFeatured: false,
+    categoryId: 2,
+  },
+];
+
 export const MOCK_PROJECTS: Project[] = [
   {
     id: "1",
@@ -27,6 +51,26 @@ export const MOCK_PROJECTS: Project[] = [
     startDate: "2024-04-01",
     endDate: "2024-06-30",
     budget: 75000,
+    services: [
+      {
+        id: "1",
+        title: "Montagem de móvel",
+        category: MOCK_CATEGORIES[0],
+        subcategory: MOCK_SUBCATEGORIES[0],
+        description: "Montagem de armário planejado na sala.",
+        valor: 500,
+        iva: 115,
+      },
+      {
+        id: "2",
+        title: "Conserto de vazamento na pia",
+        category: MOCK_CATEGORIES[1],
+        subcategory: MOCK_SUBCATEGORIES[1],
+        description: "Reparo no encanamento da pia da cozinha.",
+        valor: 300,
+        iva: 69,
+      },
+    ],
   },
   {
     id: "2",

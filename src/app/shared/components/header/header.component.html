@@ -44,6 +44,7 @@
       >
         {{ "nav.subcategories" | translate }}
       </button>
+      <button mat-button (click)="goToProjects()">Projetos</button>
     </div>
 
     <div class="right-section">
@@ -125,6 +126,10 @@
     <button mat-menu-item routerLink="/how-it-works">
       <mat-icon>info</mat-icon>
       <span>{{ "header.how_it_works" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="goToProjects()">
+      <mat-icon>folder</mat-icon>
+      <span>Projetos</span>
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item (click)="goToLogin()" *ngIf="!isAuthenticated">
